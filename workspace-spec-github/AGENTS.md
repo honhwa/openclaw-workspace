@@ -152,6 +152,7 @@ SQLite database at `~/.openclaw/ops.db` — shared between agents and Claude Cod
 | `changelog-post` | internal | nightly | LLM → #ops-changelog |
 | `github-feed` | internal | nightly | LLM → #ops-github |
 | `nightly-report` | internal | nightly | LLM → #ops-nightly |
+| `ops-digest` | `/ops-digest` | user + nightly | LLM (reads ops-db, model-health, cron) |
 
 **Script-backed skills:** run the script, report the JSON result. No re-implementation.
 **LLM skills:** require judgment — use the LLM but keep responses concise.
@@ -166,6 +167,7 @@ On heartbeat, follow HEARTBEAT.md exactly:
 3. For recoveries: run `incident-manager.sh close`, notify Discord
 4. Check if fallback chain is degraded (2+ quarantined) → run model-auto-fallback logic
 5. Update cursor file
+6. Run `context-snapshot.sh` — keep bridge snapshot fresh for Claude Code sessions
 
 ---
 
@@ -222,19 +224,34 @@ Automated via OpenClaw cron system. Two phases:
 4. `skills-backup.sh`
 5. `repo-health.sh`
 6. `log-audit.sh`
+7. `context-snapshot.sh`
 
 **Phase 2 — Discord reporting** (post results):
-7. Send full nightly summary → `#ops-nightly` (`1477754636046831738`)
-8. Run `dashboard-update` → edit pinned message in `#ops-dashboard`
-9. Run `changelog-post` → post new entries to `#ops-changelog`
-10. Run `github-feed` → post repo activity to `#ops-github`
-11. If ANY script failed → send alert to `#ops-alerts` (`1477754571697688627`)
+8. Send full nightly summary → `#ops-nightly` (`1477754636046831738`)
+9. Run `dashboard-update` → edit pinned message in `#ops-dashboard`
+10. Run `changelog-post` → post new entries to `#ops-changelog`
+11. Run `github-feed` → post repo activity to `#ops-github`
+12. If ANY script failed → send alert to `#ops-alerts` (`1477754571697688627`)
 
 Log errors via `log-event.sh`.
 
 ---
 
-## Escalation Policy — When to Use `coding-agent`
+
+## Pre-Escalation Protocol (Auto-Context)
+
+**Before ANY escalation to Claude Code**, run:
+
+```bash
+/home/node/.openclaw/scripts/context-snapshot.sh
+```
+
+This writes a fresh snapshot to `~/.openclaw/bridge/context/current.json` — Claude Code reads it on session start for instant situational awareness.
+
+**Also run on heartbeat** (every cycle) to keep the snapshot fresh for ad-hoc Claude Code sessions.
+
+---
+## Escalation Policy — When to Use Claude Code (Bridge)
 
 **Handle yourself (scripts + skills):**
 - All script-backed skills
@@ -252,7 +269,7 @@ Log errors via `log-event.sh`.
 - Debugging host + container boundary issues
 - Any change requiring gateway restart
 
-See `CLAUDE-CODE-BRIDGE.md` for how to call effectively.
+See `~/.openclaw/bridge/BRIDGE.md` for the handoff protocol.
 
 ---
 
