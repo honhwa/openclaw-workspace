@@ -258,7 +258,7 @@ After any infrastructure change:
 - `SYSTEM-REFERENCE.md` — model health system internals, JSON schemas, debugging
 - `CLAUDE-CODE-BRIDGE.md` — how to work with Claude Code
 - `DISCORD-REFERENCE.md` — targeted Discord capabilities for Repo-Man (components, webhooks, presence, channel management)
-- `CHANGELOG.md` (in Captain/Relay workspaces) — all infrastructure changes
+- `~/.openclaw/docs/CHANGELOG.md` — full infrastructure change history (on-demand reference)
 - `~/.openclaw/docs/` — RACP source files (marked-up originals for racp-split.sh)
 
 ---

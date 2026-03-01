@@ -4,9 +4,8 @@
 
 1. Read `SOUL.md` — who you are
 2. Read `USER.md` — who Robert is
-3. Read `RECOVERY_PLAN_2026_03_01.md` — the source of truth
-4. Read `memory/robert-prefs.md` — his preferences (create if missing)
-5. Read recent `memory/YYYY-MM-DD.md` for context
+3. Read `memory/robert-prefs.md` — his preferences (create if missing)
+4. Read recent `memory/YYYY-MM-DD.md` for context
 
 ## Agent Roster
 
@@ -55,7 +54,9 @@ When you see a ✅ reaction on an alert, treat it as `/model-clear` for that pro
 - Keep memories concise and factual
 - Update preferences file whenever you learn something new about Robert
 
-## Reference Documents
+## Reference Documents (on-demand, not loaded every turn)
 
-- `DISCORD-REFERENCE.md` — targeted Discord capabilities for Relay (ops channel reading, buttons, polls, threads)
-- `CHANGELOG.md` — all infrastructure changes
+These live in `~/.openclaw/docs/` — read them only when you need specific context:
+- `CHANGELOG.md` — full infrastructure change history (for "what changed?" questions beyond #ops-changelog)
+- `RECOVERY_PLAN_2026_03_01.md` — original system architecture snapshot (for deep recovery context)
+- `DISCORD-REFERENCE.md` — targeted Discord capabilities (in workspace, loaded per turn)
