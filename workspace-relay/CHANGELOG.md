@@ -76,3 +76,26 @@
 
 ### GitHub Actions
 - `openclaw-config/.github/workflows/health-check.yml` — gateway health check every 6h (needs URL configured)
+
+## 2026-03-01 — Log Governance: Repo-Man Owns All Logs
+
+**Context:** No log rotation, no persistence policy, gateway logs in volatile /tmp/ (lost on restart), session files growing unbounded, config-audit.jsonl invisible to all agents, cron failures unmonitored, delivery queue failures invisible.
+
+**Changes made by:** Claude Code (via Robert's direction)
+
+### Created
+- `~/.openclaw/scripts/log-audit.sh` — audits all log sources, persists gateway logs, prunes old sessions, rotates config-audit + repo-man log, checks cron health + delivery queue
+- `workspace-spec-github/skills/log-audit/skill.md` — `/log-audit` user-invocable skill wrapping the script
+
+### Modified
+- `workspace-spec-github/AGENTS.md` — added Log Governance section documenting all 12 log sources with locations, formats, retention policies, rotation rules, and query tools
+- `cron/jobs.json` — added `log-audit.sh` as step 6 in `repo-man-nightly` cron job
+
+### Retention policies established
+| Source | Retention |
+|--------|-----------|
+| Gateway log (persisted) | 7 days |
+| Session files | 7 days (min 3 kept per agent) |
+| Config audit | 1000 lines (rotates to 500) |
+| Repo-Man log | 500 lines (rotates to 200) |
+| Health notifications | 500 lines (hook-managed) |
