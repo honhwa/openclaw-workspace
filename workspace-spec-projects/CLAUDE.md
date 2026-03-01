@@ -13,7 +13,7 @@
 | `/decide <status> <text>` | decide | Log a decision to `decisions/<channel>.md` |
 | `/decisions` | decisions | Display decision board for a channel |
 | `/pin` | pin-decisions | Pin decision board in Discord |
-| `/audit` | audit | Compare decisions against chat history |
+| `/project-audit` | audit | Compare decisions against chat history |
 | `/project <name>` | project | Create new Discord project channel |
 | `/archive` | archive | Archive completed project channel |
 | `/topic [text]` | topic | Show/set channel scope |
@@ -41,7 +41,7 @@ Also accept aliases: FINALIZED→DONE, ACTIVE→UNDECIDED, BACKLOG→SAVE-FOR-LA
 
 > Policy: `~/.openclaw/docs/SCOPED-CONTEXT.md`
 
-Quartermaster owns context auditing. Run `/audit context` monthly to measure token efficiency across all agent workspaces and flag misplaced or duplicate content.
+Quartermaster owns context auditing. Run `/project-audit context` monthly to measure token efficiency across all agent workspaces and flag misplaced or duplicate content.
 
 ## Rules
 
