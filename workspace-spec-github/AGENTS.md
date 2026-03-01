@@ -9,6 +9,31 @@
 
 ---
 
+## Discord Ops Channels
+
+All operational output goes to the `🔧 OPERATIONS` category. **Always use channel IDs, not names.**
+
+| Channel | ID | Purpose | Who posts |
+|---------|----|---------|-----------|
+| #ops-dashboard | `1477754431780028598` | Pinned live status summary | Nightly cron (dashboard-update) |
+| #ops-alerts | `1477754571697688627` | Failures only — high signal | Heartbeat (model-failover-notify), nightly on failure |
+| #ops-nightly | `1477754636046831738` | Full nightly cron report | Nightly cron |
+| #ops-changelog | `1477754637527290030` | Infrastructure changes | Nightly cron (changelog-post) |
+| #ops-github | `1477754638290649209` | GitHub activity feed | Nightly cron (github-feed) |
+
+**Pinned message in #ops-dashboard:** `1477754773951352903` — edit this message, never delete/recreate.
+**Category ID:** `1477754392584126675`
+**Guild ID:** `1477115265300037703`
+
+**Routing rules:**
+- Script results / nightly summary → `#ops-nightly`
+- Failures, quarantines, alerts → `#ops-alerts`
+- Dashboard refresh → edit pinned message in `#ops-dashboard`
+- New changelog entries → `#ops-changelog`
+- GitHub commits/issues/tags → `#ops-github`
+
+---
+
 ## Canonical Key List
 
 Present in `/app/.env` AND/OR runtime env vars (docker-compose injected):
@@ -90,8 +115,11 @@ This saves tokens and prevents inconsistency.
 | `model-status` | `/model-status` | user | LLM (reads JSON) |
 | `model-clear` | `/model-clear <provider>` | user | LLM + jq |
 | `log-event` | internal | internal | script |
-| `model-failover-notify` | internal | heartbeat | LLM |
+| `model-failover-notify` | internal | heartbeat | LLM → #ops-alerts |
 | `model-auto-fallback` | internal | heartbeat | LLM |
+| `dashboard-update` | internal | nightly | LLM → #ops-dashboard |
+| `changelog-post` | internal | nightly | LLM → #ops-changelog |
+| `github-feed` | internal | nightly | LLM → #ops-github |
 
 **Script-backed skills:** run the script, report the JSON result. No re-implementation.
 **LLM skills:** require judgment — use the LLM but keep responses concise.
@@ -153,7 +181,9 @@ On heartbeat, follow HEARTBEAT.md exactly:
 
 ## Nightly Cron (03:00 UTC)
 
-Automated via OpenClaw cron system. Runs:
+Automated via OpenClaw cron system. Two phases:
+
+**Phase 1 — Scripts** (collect data):
 1. `key-drift-check.sh`
 2. `ws-backup.sh`
 3. `env-backup.sh`
@@ -161,7 +191,14 @@ Automated via OpenClaw cron system. Runs:
 5. `repo-health.sh`
 6. `log-audit.sh`
 
-Sends single summary to Discord. Logs errors via `log-event.sh`.
+**Phase 2 — Discord reporting** (post results):
+7. Send full nightly summary → `#ops-nightly` (`1477754636046831738`)
+8. Run `dashboard-update` → edit pinned message in `#ops-dashboard`
+9. Run `changelog-post` → post new entries to `#ops-changelog`
+10. Run `github-feed` → post repo activity to `#ops-github`
+11. If ANY script failed → send alert to `#ops-alerts` (`1477754571697688627`)
+
+Log errors via `log-event.sh`.
 
 ---
 
@@ -231,5 +268,4 @@ After any infrastructure change:
 - Always verify after push: `gh api repos/NowThatJustMakesSense/<repo>`
 - Always update LAST_RUN.md even when a skill fails — especially when it fails.
 - If gh CLI auth fails: log FATAL, stop, notify Robert.
-- jq is installed. Use it for JSON manipulation.
-- Runtime installs (jq, etc.) vanish on container rebuild — flag for Dockerfile if critical.
+- jq is installed (in Dockerfile, persists across rebuilds). Use it for JSON manipulation.
