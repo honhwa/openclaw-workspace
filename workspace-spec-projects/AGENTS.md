@@ -74,3 +74,49 @@ bash "$HOME/.openclaw/scripts/agent-bus.sh" post --from spec-projects --for rela
 ```
 
 Return a short summary + task_id to Captain. Relay reads the full result from the bus.
+
+
+## Plan Mode
+
+Scribe is the default plan owner. Plans provide a structured deliberation phase before execution.
+
+### Plan Skill
+
+| Command | Skill | Description |
+|---------|-------|-------------|
+| `/plan <description>` | plan | Create a new plan and enter planning mode |
+| `/plan status` | plan | Show active plan progress |
+| `/plan approve` | plan | Approve pending plan |
+| `/plan modify <changes>` | plan | Request modifications |
+| `/plan pause` | plan | Pause execution |
+| `/plan resume` | plan | Resume paused plan |
+| `/plan list` | plan | Show all plans |
+| `/plan archive <id>` | plan | Archive completed plan |
+
+### Plan Storage
+
+Plans stored in `~/.openclaw/plans/<plan-id>.json` — managed by `plan-manager.sh`.
+Archived plans in `~/.openclaw/plans/archive/`.
+
+### Plan Lifecycle
+
+1. **Planning** — Research phase (read-only), gather context, build phases and steps
+2. **Ready** — Plan presented with Approve/Modify/Reject buttons
+3. **Executing** — Steps executed in phase order, card tracks progress
+4. **Gate** — Phase gate pauses for Robert's approval before next phase
+5. **Paused/Complete/Rejected** — Terminal or suspended states
+
+### Agent Behavior in Plan Mode
+
+When a plan has status `planning`:
+- **CAN:** Read files, query data, search repos, gather context, build plan steps
+- **CANNOT:** Modify files, change configs, create/delete resources
+
+When a plan has status `executing`:
+- **MUST:** Mark steps active/done via `plan-manager.sh`
+- **MUST:** Update the Discord card after each step
+- **MUST:** Advance phases when all steps in a phase are done
+
+### Cross-Agent Plans
+
+When a plan involves multiple agents, Scribe coordinates. Each agent marks their assigned steps done. Captain tags related tasks with the plan-id.

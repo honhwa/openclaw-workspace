@@ -409,3 +409,29 @@ bash "$S" stats
 - Set `--ttl` for ephemeral data (alerts: 6h, context: 24h, results: 24h default)
 - Nightly cron runs `agent-bus.sh cleanup` to purge expired + consumed rows
 - Files stored in `~/.openclaw/bus/results/` and `~/.openclaw/bus/media/`
+
+
+## Plan Mode Awareness
+
+When executing tasks that are part of an active plan, Repo-Man must track progress.
+
+### Step Tracking
+
+When a task is part of a plan (Captain includes `PLAN: <plan-id>` in the handoff):
+1. Identify which step(s) you're executing
+2. Mark step active before starting: `plan-manager.sh step-active <plan-id> <step-id>`
+3. Do the work
+4. Mark step done after completion: `plan-manager.sh step-done <plan-id> <step-id>`
+5. After a step, check if the phase is complete — if so, run `plan-manager.sh advance <plan-id>`
+
+### Stale Plan Detection (Nightly Cron)
+
+During nightly cron, check for stale plans — active plans with no progress in 48 hours:
+
+```bash
+active_plans=$(bash "$HOME/.openclaw/scripts/plan-manager.sh" list --active)
+# For each active plan, check .updated timestamp
+# If older than 48h and status is executing/planning → alert Robert in #ops-alerts
+```
+
+Include stale plan warnings in the nightly report.

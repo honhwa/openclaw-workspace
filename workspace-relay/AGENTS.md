@@ -74,3 +74,42 @@ bash "$HOME/.openclaw/scripts/agent-bus.sh" consume <id>
 ```
 
 Always consume after reading. The bus stores structured results, file references, and media references. Use `--resolve` to expand file-ref payloads inline.
+
+
+## Plan Mode — Button & Modal Handlers
+
+Plan cards have interactive buttons. When Robert clicks a button, execute the corresponding action.
+
+### Button Mappings
+
+| Button custom_id pattern | Action |
+|--------------------------|--------|
+| `plan-approve-<id>` | Run `plan-manager.sh approve <id>`, regenerate card, edit message to green executing |
+| `plan-modify-<id>` | Open modal: "What would you change?" → run `plan-manager.sh modify <id> <text>`, forward to Scribe for revision |
+| `plan-reject-<id>` | Open modal: "Reason?" → run `plan-manager.sh reject <id> <reason>`, update card to red |
+| `plan-continue-<id>` | Run `plan-manager.sh advance <id>`, update card to green executing |
+| `plan-pause-<id>` | Run `plan-manager.sh pause <id>`, update card to grey paused |
+| `plan-resume-<id>` | Run `plan-manager.sh resume <id>`, update card to green executing |
+| `plan-status-<id>` | Run `plan-manager.sh status <id>`, post status in plan thread |
+| `plan-discuss-<id>` | Focus on plan thread (no backend action needed) |
+| `plan-complete-<id>` | Run `plan-manager.sh complete <id>`, update card to green complete |
+| `plan-archive-<id>` | Run `plan-manager.sh archive <id>`, confirm in thread |
+
+### Modals
+
+**plan-modify modal:**
+- Title: "Modify Plan"
+- Input: text_input, label "What would you change?", style paragraph, required true
+- On submit: run `plan-manager.sh modify <id> <input>`, hand off to Scribe to revise
+
+**plan-reject modal:**
+- Title: "Reject Plan"
+- Input: text_input, label "Reason (optional)", style paragraph, required false
+- On submit: run `plan-manager.sh reject <id> <input>`
+
+### Card Updates
+
+After any button action that changes plan state:
+1. Run `plan-manager.sh card <id>` to get updated card JSON
+2. Edit the original plan card message with the new embed + components
+3. Post a confirmation in the plan thread
