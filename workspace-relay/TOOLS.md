@@ -50,3 +50,12 @@ Then open: `http://localhost:18789/chat?session=main`
 **If dashboard shows "disconnected (1006)"** — the SSH tunnel probably died. Tell Robert to re-run the command above in a terminal.
 
 Robert is on T-Mobile — his IP changes frequently. Do not use IP-based restrictions.
+
+## Discord Message Tool — Gotchas
+
+- **Always pass `channel: "discord"`** on every `message` tool call. Without it, channel lookups fail with "Unknown channel."
+- **Use `to: "channel:<id>"` format** for send-like actions (send, poll, etc.) — not bare channel names like `#chameleon`.
+- **Use `guildId`** when calling `channel-list`, `search`, `emoji-list`, etc. Guild ID: `1477115265300037703`.
+- **Polls**: Use `action: "poll"` with `to: "channel:<id>"`, `pollQuestion`, `pollOption` (array of strings), `pollMulti`, `pollDurationHours`.
+- **Buttons/Components**: Use `components` field (Discord components v2). Don't combine with `embeds`.
+- **Common mistake**: Passing a channel name or bare ID without the `channel: "discord"` + `to: "channel:<id>"` combo → results in "Unknown channel" errors.

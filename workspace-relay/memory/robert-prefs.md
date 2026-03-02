@@ -16,5 +16,6 @@
 - **Context Protocol**: Use RACP (Recipient-Aware Context Protocol).
 - **Markers**: 👤 (Human), ⚙️ (Agent), 📡 (Shared).
 - **Audit Protocol**: Use Sonnet for deep architectural audits; use Flash for routine synchronization.
+- **Interactive UI**: When presenting multiple choices, use Discord polls or buttons instead of text-based A/B/C options. Robert prefers the native Discord interaction model.
 - **Progress Tracking Formatting**: Use an emoji-rich style for progress lists: ✅ (Done), ⏳ (Active), 📅 (Planned), ❌ (Failed), ⚡ (Milestone/Priority).
 - **Emoji Compatibility Awareness**: Be aware of emoji conflicts. Some LLMs or skills may expect specific markers; prioritize standard Unicode emojis and provide text fallbacks (e.g., `✅ (Done)`) in logic-critical contexts to prevent misinterpretation.
