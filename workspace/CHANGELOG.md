@@ -1,4 +1,40 @@
+time="2026-03-03T01:26:24Z" level=warning msg="The \"CLAUDE_AI_SESSION_KEY\" variable is not set. Defaulting to a blank string."
+time="2026-03-03T01:26:24Z" level=warning msg="The \"CLAUDE_WEB_SESSION_KEY\" variable is not set. Defaulting to a blank string."
+time="2026-03-03T01:26:24Z" level=warning msg="The \"CLAUDE_WEB_COOKIE\" variable is not set. Defaulting to a blank string."
+time="2026-03-03T01:26:24Z" level=warning msg="The \"CLAUDE_WEB_COOKIE\" variable is not set. Defaulting to a blank string."
+time="2026-03-03T01:26:24Z" level=warning msg="The \"CLAUDE_AI_SESSION_KEY\" variable is not set. Defaulting to a blank string."
+time="2026-03-03T01:26:24Z" level=warning msg="The \"CLAUDE_WEB_SESSION_KEY\" variable is not set. Defaulting to a blank string."
 # CHANGELOG.md — Infrastructure Changes
+
+---
+
+## 2026-03-03 — Status Reactions, Memory Seeding, Dynamic Agent Discovery
+
+**Context:** CHAMELEON emoji protocol was 100% documentation with zero runtime implementation. Status reactions were silently disabled by config gate conflict. Agent rosters hardcoded across multiple workspace files.
+
+**Changes made by:** Claude Code (via Robert's direction)
+
+### Fixed
+- **Status reactions enabled globally** — `ackReactionScope` changed from `group-mentions` to `all`. The `group-mentions` scope required `requireMention=true` but guild config had `requireMention=false`, silently disabling all reactions.
+- **Custom emoji set** — done: ✅, error: ❌, stall soft: ⏳, stall hard: ⚠️
+- **Reactions auto-clear** — `removeAckAfterReply: true` keeps channels clean
+
+### Created
+- **19 knowledge entries seeded into lancedb** — troubleshooting, procedures, architecture, decisions, operational knowledge. Agents can now search memory before routing or troubleshooting.
+
+### Updated
+- **Captain SOUL.md** — removed hardcoded agent roster, replaced with dynamic skill router discovery. Added memory_recall instruction.
+- **Captain AGENTS.md** — removed hardcoded roster, added memory_recall and Claude Code escalation path.
+- **Relay AGENTS.md** — removed hardcoded agent commands table, replaced with skill router discovery. Core agents (Captain, Relay) still listed as always-present.
+- **Relay CHAMELEON_FINAL_STATE.md** — replaced with retirement notice pointing to built-in status reactions.
+
+### Retired
+- **CHAMELEON emoji protocol** — never had runtime implementation. Built-in status-reactions system at `src/channels/status-reactions.ts` provides real-time emoji feedback (agent emoji → thinking → tool use → done/error + stall detection). No separate protocol needed.
+
+### Architecture Decision
+- **lancedb = knowledge, GitHub = versioning** — don't cross-pollinate. Agents search memory for insights, use Repo-Man for file access.
+- **Workspace files stay lean** — identity and behavior only. Detailed knowledge goes in lancedb (zero per-turn cost) or skills (loaded on demand).
+- **Dynamic agent discovery** — skill-router.sh is the source of truth for agent capabilities. New agents/skills are discovered automatically after `skill-router.sh build`. No manual roster updates needed in Captain or Relay.
 
 > This file is maintained by Claude Code and tracks all infrastructure changes made to the OpenClaw deployment.
 > OpenClaw agents: reference this when troubleshooting or understanding system history.

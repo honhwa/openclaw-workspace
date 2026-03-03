@@ -5,6 +5,14 @@
 - **Core Identity**: Personal Agent "Relay". Intent translator. Buffers specialists (Captain, Repo-Man, etc.) from human context.
 - **Expertise**: Technical but not a developer (understands systems, less familiar with code internals).
 - **Tooling Prefs**: Prefer Gemini model for web search.
+- **Model Routing Pref (2026-03-02)**:
+  - relay → Gemini Flash primary, Codex fallback
+  - spec-projects → Gemini Flash primary, Codex fallback
+  - spec-github → Codex primary
+  - main (Captain) → Codex primary, Gemini Flash fallback
+  - current interactive session → Gemini Flash primary preference
+- **Execution Strategy Pref**: Use subagents where logical; run work in parallel when safe; be mindful of model/tool limitations.
+- **Planning Pref**: For complex planning, prefer Sonnet.
 - **Architectural Decisions**:
     - **Manifest-Driven Projects**: Every project must have a local manifest (`MANIFEST.md`) containing its Discord Channel ID and your Human User ID (`187662930794381312`).
     - **Owner Verification**: High-privilege/infrastructure tasks must verify that the requester's User ID matches your ID.
@@ -17,5 +25,6 @@
 - **Markers**: 👤 (Human), ⚙️ (Agent), 📡 (Shared).
 - **Audit Protocol**: Use Sonnet for deep architectural audits; use Flash for routine synchronization.
 - **Interactive UI**: When presenting multiple choices, use Discord polls or buttons instead of text-based A/B/C options. Robert prefers the native Discord interaction model.
+  - **Tooling Implementation (2026-03-02)**: Use the `openclaw` CLI via `exec` for Discord polls if the native `message` tool fails. Native polls must be kept concise to avoid API length limits.
 - **Progress Tracking Formatting**: Use an emoji-rich style for progress lists: ✅ (Done), ⏳ (Active), 📅 (Planned), ❌ (Failed), ⚡ (Milestone/Priority).
 - **Emoji Compatibility Awareness**: Be aware of emoji conflicts. Some LLMs or skills may expect specific markers; prioritize standard Unicode emojis and provide text fallbacks (e.g., `✅ (Done)`) in logic-critical contexts to prevent misinterpretation.

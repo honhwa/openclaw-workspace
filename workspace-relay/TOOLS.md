@@ -56,6 +56,11 @@ Robert is on T-Mobile — his IP changes frequently. Do not use IP-based restric
 - **Always pass `channel: "discord"`** on every `message` tool call. Without it, channel lookups fail with "Unknown channel."
 - **Use `to: "channel:<id>"` format** for send-like actions (send, poll, etc.) — not bare channel names like `#chameleon`.
 - **Use `guildId`** when calling `channel-list`, `search`, `emoji-list`, etc. Guild ID: `1477115265300037703`.
-- **Polls**: Use `action: "poll"` with `to: "channel:<id>"`, `pollQuestion`, `pollOption` (array of strings), `pollMulti`, `pollDurationHours`.
+- **Polls**: Use `action: "poll"` with `to: "channel:<id>"`, `pollQuestion`, `pollOption` (array of strings), `pollMulti`, `pollDurationHours`. 
+  - **Reliability Note**: The native `message` tool for polls can be flaky. If it fails, fallback to `exec` with the OpenClaw CLI:
+    ```bash
+    openclaw message poll --channel discord --target "channel:<id>" --poll-question "..." --poll-option "..." --poll-duration-hours 24
+    ```
+  - **Character Limits**: Discord native polls have strict limits. Keep questions and options short. If a poll fails, try shortening the text.
 - **Buttons/Components**: Use `components` field (Discord components v2). Don't combine with `embeds`.
 - **Common mistake**: Passing a channel name or bare ID without the `channel: "discord"` + `to: "channel:<id>"` combo → results in "Unknown channel" errors.

@@ -7,38 +7,40 @@
 3. Read `memory/robert-prefs.md` — his preferences (create if missing)
 4. Read recent `memory/YYYY-MM-DD.md` for context
 
-## Agent Roster
+## Agent Discovery
 
-You work with these agents through the Captain:
+You work with specialist agents through the Captain. To discover available agents and their skills:
+```bash
+bash ~/.openclaw/scripts/skill-router.sh route "<task keywords>"
+```
 
-| Agent | ID | Specialty | Commands |
-|-------|----|-----------|----------|
-| Captain | main | Routing, orchestration | Dispatcher |
-| Repo-Man | spec-github | Infrastructure, keys, backups, GitHub repos, model health, logs | /key-drift, /ws-backup, /env-backup, /repo-health, /rotate, /error-report, /decision, /model-status, /model-clear, /log-audit |
-| Scribe | spec-projects | Project management, decisions | /decide, /decisions, /pin, /audit, /project, /archive, /topic |
+When Robert asks what you can do or what commands are available, query the skill router instead of using a static list. The router always has the current agent roster and skill catalog.
+
+### Core Agents (always present)
+
+- **Captain** (main) — Routes tasks to the right specialist. Send all structured tasks here.
+- **Relay** (you) — Human interface. Format results, manage preferences, communicate with Robert.
+
+### Routing Rules
+
+- Any task or request → send structured task to Captain
+- Captain routes to the right specialist automatically via skill router
+- Unknown or ambiguous → ask Robert to clarify before dispatching
 
 ## Scoped Context & RACP
-
-> Policy: `~/.openclaw/docs/SCOPED-CONTEXT.md` — read before adding files to any workspace.
-
 
 Every piece of information should reach only the agents that need it.
 
 ### Markers
-- 👤 = Human-facing (Relay only)
-- ⚙️ = All agents (internal/system)
-- ⚙️:agent-id = Targeted to specific agent(s) — e.g., `⚙️:spec-github` or `⚙️:relay,spec-projects`
-- 📡 = Shared (everyone gets this)
+- Human-facing = Relay only
+- System = All agents
+- Targeted = Specific agent(s)
+- Shared = Everyone
 
 ### Usage
 - Place marker before content blocks to tier information
-- When creating shared documents, use markers so `racp-split.sh` can generate per-agent versions
+- When creating shared documents, use markers so racp-split.sh can generate per-agent versions
 - Source files live in `~/.openclaw/docs/` — split outputs go to agent workspaces
-- Any task or request → send structured task to Captain
-- Infrastructure questions → Captain routes to Repo-Man
-- Project/decision work → Captain routes to Scribe
-- Model health: `/model-status`, `/model-clear` → Captain routes to Repo-Man
-- Unknown → ask Robert to clarify before dispatching
 
 ## Interactive Alerts
 
@@ -48,7 +50,7 @@ Alerts in **#ops-alerts** have buttons:
 - **"Silence 1h"** → skip provider alerts for 1 hour
 
 When Robert clicks a button, execute the action and reply in a thread.
-When you see a ✅ reaction on an alert, treat it as `/model-clear` for that provider.
+When you see a checkmark reaction on an alert, treat it as `/model-clear` for that provider.
 
 ## Memory
 
@@ -60,8 +62,8 @@ When you see a ✅ reaction on an alert, treat it as `/model-clear` for that pro
 ## Reference Documents (on-demand, not loaded every turn)
 
 These live in `~/.openclaw/docs/` — read them only when you need specific context:
-- `CHANGELOG.md` — full infrastructure change history (for "what changed?" questions beyond #ops-changelog)
-- `RECOVERY_PLAN_2026_03_01.md` — original system architecture snapshot (for deep recovery context)
+- `CHANGELOG.md` — full infrastructure change history
+- `RECOVERY_PLAN_2026_03_01.md` — original system architecture snapshot
 - `DISCORD-REFERENCE.md` — targeted Discord capabilities (in workspace, loaded per turn)
 
 ## Agent Bus
@@ -73,8 +75,7 @@ bash "$HOME/.openclaw/scripts/agent-bus.sh" read --task "<task-id>" --resolve
 bash "$HOME/.openclaw/scripts/agent-bus.sh" consume <id>
 ```
 
-Always consume after reading. The bus stores structured results, file references, and media references. Use `--resolve` to expand file-ref payloads inline.
-
+Always consume after reading.
 
 ## Plan Mode — Button & Modal Handlers
 
@@ -91,7 +92,7 @@ Plan cards have interactive buttons. When Robert clicks a button, execute the co
 | `plan-pause-<id>` | Run `plan-manager.sh pause <id>`, update card to grey paused |
 | `plan-resume-<id>` | Run `plan-manager.sh resume <id>`, update card to green executing |
 | `plan-status-<id>` | Run `plan-manager.sh status <id>`, post status in plan thread |
-| `plan-discuss-<id>` | Focus on plan thread (no backend action needed) |
+| `plan-discuss-<id>` | Focus on plan thread |
 | `plan-complete-<id>` | Run `plan-manager.sh complete <id>`, update card to green complete |
 | `plan-archive-<id>` | Run `plan-manager.sh archive <id>`, confirm in thread |
 
