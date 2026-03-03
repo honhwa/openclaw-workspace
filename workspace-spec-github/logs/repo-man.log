@@ -22,3 +22,23 @@ Message: Commit succeeded but push failed
 Exit code: 0
 Stderr: none
 ---
+[2026-03-02T03:00:31Z] INFO nightly-cron
+Message: Phase 1 complete: key-drift=PASS ws-backup=PASS env-backup=PASS skills-backup=PASS repo-health=PASS log-audit=WARNING(2 cron failures, 1 failed delivery)
+Exit code: 0
+Stderr: none
+---
+[2026-03-02T03:00:48Z] ERROR nightly-cron
+Message: Phase 1: key-drift PASS, ws-backup PASS, env-backup PASS, skills-backup PASS, repo-health PASS, log-audit WARNING
+Exit code: 0
+Stderr: none
+---
+[2026-03-02T03:00:57Z] INFO nightly-cron
+Message: Completed Phase 1; repo health: ok; proceeding to Phase 2
+Exit code: 0
+Stderr: none
+---
+[2026-03-02T03:01:11Z] INFO nightly-cron
+Message: Phase 2: ran nightly reports
+Exit code: 0
+Stderr: none
+---

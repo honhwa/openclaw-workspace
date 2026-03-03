@@ -202,7 +202,7 @@ On heartbeat, follow HEARTBEAT.md exactly:
 | Delivery queue | `~/.openclaw/delivery-queue/` + `failed/` | JSON per message | Until delivered/investigated | Checked nightly for stuck messages |
 | ERRORS.md | openclaw-config repo `logs/ERRORS.md` | Markdown | Git history | WARN+ pushed by log-event.sh |
 | LAST_RUN.md | openclaw-config repo `logs/LAST_RUN.md` | Markdown | Git history | Updated after every skill run |
-| LanceDB | `~/.openclaw/memory/lancedb/` | Lance columnar | Permanent | Managed by OpenClaw core |
+| LanceDB | `~/.openclaw/memory/lancedb/` | Lance columnar | Permanent | Governed — see LanceDB section below |
 
 ### What log-audit.sh does automatically
 - Copies gateway logs from volatile `/tmp/` to persistent `~/.openclaw/logs/gateway/`
@@ -225,6 +225,38 @@ On heartbeat, follow HEARTBEAT.md exactly:
 
 ---
 
+## LanceDB Memory Governance
+
+Repo-Man is the operational custodian of lancedb. Claude Code owns policy and bulk seeding; Repo-Man owns monitoring and health reporting.
+
+### Your Duties
+
+| Duty | When | How |
+|------|------|-----|
+| Health check | Nightly cron | `openclaw ltm list` → report entry count in nightly summary |
+| Stale detection | Nightly cron | If entry count > 200 → warn in #ops-alerts ("lancedb review needed") |
+| Bloat alert | Nightly cron | If entry count > 500 → ERROR in #ops-alerts ("lancedb bloated") |
+| Backup | Nightly cron | `openclaw ltm search "*" --limit 999` → export JSON → commit to openclaw-config repo |
+
+### What You Do NOT Do
+- Do not add, modify, or delete lancedb entries. That's for Claude Code (bulk seeds) and agent auto-capture/manual store.
+- Do not change lancedb plugin config. Escalate config changes to Claude Code.
+- Do not try to deduplicate entries. Claude Code handles that during quarterly reviews.
+
+### Entry Standards (for awareness, not enforcement)
+- 20–500 chars per entry, one idea each
+- Categories: decision, fact, entity, preference, other
+- Importance: 0.5–1.0 (below 0.5 = shouldn't be stored)
+- Target: 30–200 entries. Red flag at 500+.
+
+### What Goes in LanceDB vs Logs vs Workspace
+- **lancedb** = knowledge (facts, decisions, procedures) — recalled by agents via vector search
+- **Logs** = events (what happened, when) — queried by scripts, pruned nightly
+- **Workspace files** = identity (who agents are, how they behave) — injected every turn
+- **Do not store log data in lancedb. Do not store knowledge in logs.**
+
+---
+
 ## Nightly Cron (03:00 UTC)
 
 Automated via OpenClaw cron system. Two phases:
@@ -237,6 +269,7 @@ Automated via OpenClaw cron system. Two phases:
 5. `repo-health.sh`
 6. `log-audit.sh`
 7. `context-snapshot.sh`
+8. `openclaw ltm list` — lancedb entry count (alert if >200, error if >500)
 
 **Phase 2 — Discord reporting** (post results):
 8. Send full nightly summary → `#ops-nightly` (`1477754636046831738`)
