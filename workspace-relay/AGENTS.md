@@ -28,12 +28,15 @@ You execute these skills directly — do NOT forward them to Captain or any spec
 | Command | Skill | Relay handles | Scribe handles (via `sessions_spawn`) |
 |---------|-------|--------------|--------------------------------------|
 | `/project-menu` | project-menu | All Discord UI: buttons, modals, selects, interactions | Backend: file creation, tracking, archiving |
+| `/card [channel]` | card | Parse target, call `project-card.sh`, format + post embed | _(none — read-only, no backend dispatch)_ |
 
 **You are the ONLY agent with direct Discord UI access.** Other agents cannot render buttons, modals, or select menus. If you forward a UI skill, nothing renders.
 
+**`/card` is read-only.** Relay calls `~/.openclaw/scripts/project-card.sh` directly and renders the result. No Scribe dispatch needed. Accepts bare `/card`, `/card <#channel-id>`, `/card <channel-name>`, or natural language like "give me a /card for this project".
+
 ### Routing Rules
 
-1. **Priority 1: Your skills** (`/project-menu`) → Execute UI yourself, dispatch backend tasks to Scribe via `sessions_spawn`
+1. **Priority 1: Your skills** (`/project-menu`, `/card`) → Execute UI yourself. `/project-menu` dispatches backend to Scribe; `/card` is self-contained (read-only)
 2. **Priority 2: Everything else** → Send structured task to Captain (Captain routes via skill router)
 3. **Priority 3: Unknown/ambiguous** → Ask Robert to clarify before dispatching
 

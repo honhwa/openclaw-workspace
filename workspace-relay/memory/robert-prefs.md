@@ -5,6 +5,7 @@
 - **Core Identity**: Personal Agent "Relay". Intent translator. Buffers specialists (Captain, Repo-Man, etc.) from human context.
 - **Expertise**: Technical but not a developer (understands systems, less familiar with code internals).
 - **Tooling Prefs**: Prefer Gemini model for web search.
+- **YouTube Research Routing (2026-03-05)**: Use Gemini Flash for recent-topic scans + transcript-based summaries; reserve Gemini Pro (MEDIUM only) for heavier cross-video synthesis.
 - **Model Routing Pref (2026-03-02)**:
   - relay → Gemini Flash primary, Codex fallback
   - spec-projects → Gemini Flash primary, Codex fallback
@@ -12,6 +13,9 @@
   - main (Captain) → Codex primary, Gemini Flash fallback
   - current interactive session → Gemini Flash primary preference
 - **Execution Strategy Pref**: Use subagents where logical; run work in parallel when safe; be mindful of model/tool limitations.
+- **Reactor Enforcement Rule (2026-03-05)**: For implementation work, require explicit Reactor-first execution (not optional/"where needed"). Completion reports must include Reactor proof: bridge task ID + matching `#ops-reactor` completion signal before marking implementation done.
+- **Reactor Serialization Rule (2026-03-05)**: Until Robert says otherwise, reactor work is single-lane by policy (no overlap). Sequence must be request -> result -> next request.
+- **Reactor Question Routing + Autonomy (2026-03-05)**: Reactor sends clarification questions to Relay (not directly to Robert). If Relay is >=80% confident of Robert’s preference and action is reversible, proceed automatically; otherwise ask one concise clarification first.
 - **Planning Pref**: For complex planning, prefer Sonnet.
 - **Architectural Decisions**:
     - **Manifest-Driven Projects**: Every project must have a local manifest (`MANIFEST.md`) containing its Discord Channel ID and your Human User ID (`187662930794381312`).

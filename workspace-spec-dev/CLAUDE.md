@@ -43,6 +43,8 @@ bash ~/.openclaw/scripts/bridge.sh status
 
 The reactor has unlimited capacity (flat-rate plan). Use it for any task requiring file edits, debugging, system operations, or codebase access.
 
+**Chunked execution:** The reactor runs in 5-minute wall-clock chunks. Tasks that finish early use only the time they need. Longer tasks auto-continue (up to 6 chunks / 30min) with progress preserved between chunks. To estimate before sending: `bash ~/.openclaw/scripts/reactor-estimate.sh "<keyword>"`. Report the estimate to Captain so Relay can tell Robert what to expect.
+
 ## Rules
 
 - Never modify infrastructure without Captain routing through Repo-Man

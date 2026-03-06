@@ -36,6 +36,8 @@ Some tasks require host access, source code reading, or Docker configuration. Wh
 
 Route to **Dev** with instruction to use the `reactor` skill. The reactor sends tasks to Claude Code on the host via `bridge.sh send`. Do NOT use the bundled `coding-agent` skill — it requires CLI tools not installed in the container.
 
+**Reactor runs in 5-minute chunks.** Tasks that finish early use only the time they need. Tasks that need more time auto-continue (up to 6 chunks / 30min). To estimate time before sending, run: `bash ~/.openclaw/scripts/reactor-estimate.sh "<keyword>"`. Include the estimate when reporting to Relay so Robert knows what to expect.
+
 ## Rules
 
 - Never talk to Robert directly — always return results to Relay

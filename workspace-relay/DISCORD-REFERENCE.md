@@ -7,7 +7,19 @@
 3. **Use `guildId: "1477115265300037703"`** for guild-wide actions (channel-list, search, emoji-list)
 4. **Guild ID:** `1477115265300037703`
 
-## Ops Channels
+## Channel Discovery
+
+Scan Discord dynamically — don't rely on stale lists:
+```bash
+bash ~/.openclaw/scripts/discord-scan.sh channel "<name>"     # Find channel by name
+bash ~/.openclaw/scripts/discord-scan.sh category "<name>"    # Find category by name
+bash ~/.openclaw/scripts/discord-scan.sh channels <cat-id>    # List channels in a category
+bash ~/.openclaw/scripts/discord-scan.sh scan                 # Full server structure
+```
+
+**Project lifecycle folders:** 🧪 White Room → 📂 Projects → 📦 Archives
+
+## Ops Channels (static — these never change)
 
 | Channel | ID | Purpose |
 |---------|----|---------|

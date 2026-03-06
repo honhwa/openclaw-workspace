@@ -86,6 +86,19 @@ Search `naming-convention` for the full prefix list.
    - Three parts: **WHAT BROKE** / **WHY** / **FIX**
    - Category: `fact`, importance: `0.8`
 
+## Deviation Rules
+
+When executing a task and something unexpected happens, classify it:
+
+| Situation | Action | Example |
+|-----------|--------|---------|
+| **Bug** (broken, erroring) | Auto-fix, note in output | Typo in variable name, wrong import path |
+| **Missing critical** (security, validation) | Auto-fix, note in output | Missing auth check, unvalidated input |
+| **Blocking dependency** (missing file, wrong type) | Auto-fix, note in output | Missing npm package, wrong Node version |
+| **Architectural** (new service, schema change, library swap) | **STOP** — escalate to Captain | "This needs a database" or "Should use Redis instead" |
+
+When unsure → classify as Architectural → escalate. The cost of pausing is low; the cost of a wrong architectural decision is high.
+
 ## Error Handling
 
 - Fail fast with clear error messages

@@ -19,6 +19,7 @@
 | `/topic [text]` | topic | Show/set channel scope |
 | `/task <subcommand>` | tasks | Task tracking: add, done, list, assign, update |
 | `/status [channel]` | status | Project health summary: decisions + tasks + activity |
+| `/card [channel]` | card | Last Run Summary card: reactor task + project health + known issues |
 
 ## Decision Statuses
 

@@ -46,13 +46,29 @@ If the router returns no matches, use broad domain rules:
 
 To find current agent IDs for these domains, check `openclaw.json` agent list.
 
+### Projectize-First Rule
+
+Before routing a complex task, check if it needs a project channel:
+
+| Condition | Action |
+|-----------|--------|
+| 3+ steps or subtasks | Route to Scribe → create project channel first |
+| Multiple agents involved | Route to Scribe → create project channel first |
+| Will take more than one session | Route to Scribe → create project channel first |
+| Simple, single-agent, quick | Route directly to specialist |
+
+**Why:** Robert needs visibility. A project channel gives him a Discord place to check progress, see decisions, and review the task board. No complex work should float around invisible.
+
+When projectizing, Scribe will: create channel → log initial decisions → create tasks with verify/done → then specialists execute with full traceability.
+
 ### Routing Flow
 
 1. Parse the TASK line from Relay's handoff
 2. Check `memory_recall` — if memory has a procedure or fix, include it
-3. Run `skill-router.sh route "<keywords>"` — pick the top result
-4. Forward with only the context the specialist needs
-5. When specialist returns results, forward to Relay for human formatting
+3. **Check complexity** — does this need a project channel? (see Projectize-First Rule)
+4. Run `skill-router.sh route "<keywords>"` — pick the top result
+5. Forward with only the context the specialist needs
+6. When specialist returns results, forward to Relay for human formatting
 
 ## Task Handoff to Specialist
 
@@ -148,6 +164,12 @@ Search `naming-convention` for the full prefix list.
 - New error → ID `error-<SYSTEM>-<name>`, format: WHAT BROKE / WHY / FIX, importance `0.8`
 - Systems: PM, SYS, BRIDGE, DISCORD, MODEL, AGENT
 - Always search first — refine existing charts, don't duplicate
+
+## Escalation Handling
+
+When a specialist reports a deviation or escalation:
+- **Bug/Missing/Blocking** reports: Note the deviation in the result forwarded to Relay. No action needed from Robert.
+- **Architectural escalation**: Forward to Relay with clear options for Robert. Include: what the specialist found, what decision is needed, and the trade-offs.
 
 ## Rules
 
