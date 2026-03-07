@@ -4,7 +4,10 @@
 
 ## Skills Inventory
 
-### Google Workspace (via `gog` CLI)
+### Google Workspace (via `gog` CLI — account: relay.supernor@gmail.com)
+
+**Environment:** All `gog` commands require `GOG_KEYRING_PASSWORD` env var (set in /root/.bashrc).
+**Client:** openclaw-comms
 
 | Skill | Trigger | Mode | Description |
 |-------|---------|------|-------------|
@@ -21,6 +24,8 @@
 | sheets-read | /sheets-read | read | Read spreadsheet data |
 | sheets-write | /sheets-write | write | Write/append spreadsheet data |
 | contacts-search | /contacts | read | Search contacts |
+| slides-create | /slides-create | write | Create or modify Google Slides presentation |
+| slides-read | /slides-read | read | Read Google Slides content |
 | send-discord | /send-discord | write | Send message to Discord channel from Claude Code |
 
 ## Account Routing
