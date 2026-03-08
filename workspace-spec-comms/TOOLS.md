@@ -1,40 +1,31 @@
-# TOOLS.md - Local Notes
+# TOOLS.md - Communications Officer
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+## Skills (16)
+| Skill | Mode | What |
+|-------|------|------|
+| gmail-search | read | Search Gmail messages |
+| gmail-draft | write | Create email draft for review |
+| gmail-send | write (gated) | Send email — requires explicit authorization |
+| calendar-view | read | List upcoming events |
+| calendar-create | write | Create calendar event |
+| calendar-update | write | Update existing event |
+| drive-search | read | Search Drive files |
+| drive-upload | write | Upload file to Drive |
+| drive-download | read | Download/export Drive file |
+| docs-read | read | Read Google Doc content |
+| sheets-read | read | Read spreadsheet data |
+| sheets-write | write | Write/append spreadsheet data |
+| contacts-search | read | Search contacts |
+| slides-create | write | Create/modify presentations |
+| slides-read | read | Read Slides content |
+| send-discord | write | Post to Discord channel |
 
-## What Goes Here
+## Google Workspace
+- CLI: `gog` — requires `GOG_KEYRING_PASSWORD` env var
+- Account: relay.supernor@gmail.com
+- Client: openclaw-comms
 
-Things like:
-
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
-
-## Examples
-
-```markdown
-### Cameras
-
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
-
-### SSH
-
-- home-server → 192.168.1.100, user: admin
-
-### TTS
-
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
-```
-
-## Why Separate?
-
-Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
-
----
-
-Add whatever helps you do your job. This is your cheat sheet.
+## Known Limitations
+- `gog` CLI not available inside container — needs bridge or bind-mount
+- Gmail defaults to draft mode; sending requires explicit authorization
+- Google API rate limits apply — batch operations when possible

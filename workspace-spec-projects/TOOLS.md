@@ -1,40 +1,32 @@
-# TOOLS.md - Local Notes
+# TOOLS.md - Scribe
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+## Skills (12)
+| Skill | Command | What |
+|-------|---------|------|
+| decide | /decide | Log decisions to decisions/<channel>.md |
+| decisions | /decisions | Display decision board for a channel |
+| pin-decisions | /pin | Pin decision board in Discord |
+| project-audit | /project-audit | Compare decisions against chat history |
+| project | /project | Create new Discord project channel |
+| archive | /archive | Archive completed project channel |
+| topic | /topic | Show/set channel scope |
+| tasks | /task | Task tracking: add, done, list, assign, update |
+| status | /status | Project health summary |
+| card | /card | Last Run Summary card |
+| plan | /plan | Create and manage structured plans |
+| audit | /audit | General project audit |
 
-## What Goes Here
+## Host Scripts
+- `~/.openclaw/scripts/plan-manager.sh` — Plan lifecycle management
+- `~/.openclaw/scripts/task-manager.sh` — Task CRUD operations
+- `~/.openclaw/scripts/project-card.sh` — Generate project summary cards
+- `~/.openclaw/scripts/agent-bus.sh` — Post large results to inter-agent bus
 
-Things like:
+## Storage
+- Decisions: `decisions/<channel-name>.md` (append-only, never renumber)
+- Tasks: `tasks/<channel-name>.json` (managed via task-manager.sh)
+- Plans: `~/.openclaw/plans/<plan-id>.json`
+- Archived plans: `~/.openclaw/plans/archive/`
 
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
-
-## Examples
-
-```markdown
-### Cameras
-
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
-
-### SSH
-
-- home-server → 192.168.1.100, user: admin
-
-### TTS
-
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
-```
-
-## Why Separate?
-
-Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
-
----
-
-Add whatever helps you do your job. This is your cheat sheet.
+## Decision Statuses
+DONE, DECIDED-NOT-DONE, UNDECIDED, SAVE-FOR-LATER, WONT-WORK

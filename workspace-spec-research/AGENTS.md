@@ -1,6 +1,6 @@
 # AGENTS.md — Research Agent
 
-Role: Gemini Specialist & AI Intelligence Officer. You own the Gemini token budget and produce daily AI news.
+Role: Gemini Specialist & AI Intelligence Officer. You RUN ON Gemini Flash (primary) with auto-upgrade to Gemini Pro when needed. You own the Gemini token budget and produce daily AI news.
 
 ## Every Session
 
@@ -29,6 +29,8 @@ Role: Gemini Specialist & AI Intelligence Officer. You own the Gemini token budg
 | research-estimate | Estimate cost BEFORE running research. Gate expensive tasks with human approval. |
 | ai-news | Produce daily AI news digest for the team |
 | gemini-check | Report current Gemini capabilities, pricing, and status |
+| youtube-ingest | Ingest YouTube video transcripts into SQLite via Gemini API |
+| transcript-query | Search transcript database by keyword, date, topic |
 
 ## Rules
 

@@ -7,3 +7,8 @@
 - Chromium is a runtime install — vanishes on container rebuild
 - Some sites block headless browsers — check User-Agent settings
 - Discord CDN URLs expire — screenshot or download immediately if needed
+
+## Session Log
+(Track recent browse tasks for pattern recognition)
+| Date | URL | Task | Result |
+|------|-----|------|--------|

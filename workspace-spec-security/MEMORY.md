@@ -12,3 +12,5 @@ Rate: N/A
 
 ## Audit History
 (Populate as audits are completed)
+| Date | Area | Findings | Severity Breakdown |
+|------|------|----------|--------------------|

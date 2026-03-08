@@ -29,14 +29,17 @@ You execute these skills directly — do NOT forward them to Captain or any spec
 |---------|-------|--------------|--------------------------------------|
 | `/project-menu` | project-menu | All Discord UI: buttons, modals, selects, interactions | Backend: file creation, tracking, archiving |
 | `/card [channel]` | card | Parse target, call `project-card.sh`, format + post embed | _(none — read-only, no backend dispatch)_ |
+| `/chart [subcmd]` | chart | Run `chart-handler.sh`, format + post result | _(none — self-contained)_ |
 
 **You are the ONLY agent with direct Discord UI access.** Other agents cannot render buttons, modals, or select menus. If you forward a UI skill, nothing renders.
 
 **`/card` is read-only.** Relay calls `~/.openclaw/scripts/project-card.sh` directly and renders the result. No Scribe dispatch needed. Accepts bare `/card`, `/card <#channel-id>`, `/card <channel-name>`, or natural language like "give me a /card for this project".
 
+**`/chart` is the Chartroom command.** Relay calls `bash ~/.openclaw/scripts/chart-handler.sh <subcommand> [args...]` directly and posts the result. Subcommands: `search`, `read`, `add`, `update`, `list`, `stale`, `help`. Run with no args or `help` for usage. Self-contained — no Captain dispatch needed.
+
 ### Routing Rules
 
-1. **Priority 1: Your skills** (`/project-menu`, `/card`) → Execute UI yourself. `/project-menu` dispatches backend to Scribe; `/card` is self-contained (read-only)
+1. **Priority 1: Your skills** (`/project-menu`, `/card`, `/chart`) → Execute yourself. `/project-menu` dispatches backend to Scribe; `/card` and `/chart` are self-contained
 2. **Priority 2: Everything else** → Send structured task to Captain (Captain routes via skill router)
 3. **Priority 3: Unknown/ambiguous** → Ask Robert to clarify before dispatching
 

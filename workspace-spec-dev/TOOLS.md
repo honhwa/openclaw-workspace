@@ -1,40 +1,30 @@
-# TOOLS.md - Local Notes
+# TOOLS.md - Dev
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+## Skills (5)
+| Skill | Command | What |
+|-------|---------|------|
+| reactor | /reactor | Send tasks to Claude Code on host via bridge.sh |
+| code-review | /code-review | Review code for correctness, style, security |
+| write-skill | /write-skill | Create or update OpenClaw skills |
+| debug | /debug | Systematic debugging with hypothesis testing |
+| script | /script | Write bash/node scripts for automation |
 
-## What Goes Here
-
-Things like:
-
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
-
-## Examples
-
-```markdown
-### Cameras
-
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
-
-### SSH
-
-- home-server → 192.168.1.100, user: admin
-
-### TTS
-
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
+## Reactor (Claude Code Bridge)
+Your main power tool. Runs on the **host**, not in this container.
+```bash
+bash ~/.openclaw/scripts/bridge.sh send "reactor" "Task subject" --priority normal --desc "Full description"
+bash ~/.openclaw/scripts/bridge.sh status
 ```
+- Flat-rate plan — unlimited capacity
+- Runs in 5-min chunks, auto-continues up to 30min
+- Estimate first: `bash ~/.openclaw/scripts/reactor-estimate.sh "<keyword>"`
 
-## Why Separate?
+## Host Scripts Available
+- `~/.openclaw/scripts/chart-validate.sh` — Validate Chartroom data coherence
+- `~/.openclaw/scripts/skill-audit.sh` — Audit skill definitions
+- `~/.openclaw/scripts/crew-health-audit.sh` — Agent workspace health
 
-Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
-
----
-
-Add whatever helps you do your job. This is your cheat sheet.
+## Environment
+- Container: node user, `/home/node/.openclaw/`
+- `claude` CLI not installed in container — always use reactor bridge
+- Code changes go through you — no other agent modifies code

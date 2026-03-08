@@ -1,4 +1,4 @@
-# MEMORY.md — spec-github (Repo-Man)
+# MEMORY.md — Repo-Man
 
 > Auto-written by Repo-Man. Do not edit manually.
 
@@ -18,12 +18,12 @@
 
 | Skill | Last Run | Result |
 |-------|----------|--------|
-| key-drift-check | never | — |
-| workspace-backup | never | — |
-| env-backup | never | — |
-| repo-health | never | — |
+| key-drift-check | never | -- |
+| workspace-backup | never | -- |
+| env-backup | never | -- |
+| repo-health | never | -- |
 | rotate-key | 2026-03-01 (all 7) | PASS |
-| session-wrap | never | — |
+| session-wrap | never | -- |
 
 ## Known Issues / Suppressions
 

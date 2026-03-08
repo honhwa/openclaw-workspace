@@ -1,40 +1,22 @@
-# TOOLS.md - Local Notes
+# TOOLS.md - Captain
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+## Skills (your own)
+- `ask-agent` — Dispatch tasks to specialist agents
+- `chart` — Read/write the Chartroom (LanceDB memory)
+- `multi-engine` — Run same task across multiple models, compare results
+- `schedule-task` — Schedule delayed or recurring tasks
 
-## What Goes Here
+## Host Scripts (via exec)
+- `/usr/local/bin/chart` — Chartroom CLI (search, read, add, update, list, stale)
+- `~/.openclaw/scripts/skill-router.sh` — Route tasks to the right agent by keyword
+- `~/.openclaw/scripts/agent-bus.sh` — Inter-agent message bus (read/write/consume)
+- `~/.openclaw/scripts/bridge.sh` — Bridge to Claude Code Reactor
+- `~/.openclaw/scripts/bridge-reactor.sh` — Full reactor bridge with queue management
 
-Things like:
+## Routing
+You route tasks to specialists. Use `skill-router.sh route "<keywords>"` to find the right agent. Never do specialist work yourself — delegate.
 
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
-
-## Examples
-
-```markdown
-### Cameras
-
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
-
-### SSH
-
-- home-server → 192.168.1.100, user: admin
-
-### TTS
-
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
-```
-
-## Why Separate?
-
-Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
-
----
-
-Add whatever helps you do your job. This is your cheat sheet.
+## Environment
+- Container: `openclaw-openclaw-gateway-1` (user: node)
+- Config: `~/.openclaw/openclaw.json`
+- Workspace files injected every turn: SOUL.md, AGENTS.md, TOOLS.md, MEMORY.md, IDENTITY.md, USER.md, HEARTBEAT.md
