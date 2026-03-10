@@ -1,5 +1,9 @@
 # TOOLS.md — Historian
 
+## Skills (8)
+`context-capture`, `daily-diary`, `decision-trace`, `lessons`, `mistake-log`, `retrospective`, `session-archive`, `win-log`
+
+
 ## Container Reality (authoritative)
 Historian runs inside the OpenClaw container as user `node`.
 

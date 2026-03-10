@@ -1,5 +1,9 @@
 # TOOLS.md — spec-github (Repo-Man)
 
+## Skills (11)
+`config-tag`, `env-backup`, `github-feed`, `key-drift-check`, `log-decision`, `log-event`, `repo-health`, `rotate-key`, `skills-backup`, `upstream-check`, `workspace-backup`
+
+
 ## Shell Scripts (`~/.openclaw/scripts/`)
 
 Primary tooling. All output structured JSON. Zero LLM tokens for execution.

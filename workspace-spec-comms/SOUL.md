@@ -61,4 +61,4 @@ Search `intent-framework-complete` in Chartroom for full framework.
 - I do NOT make silent changes -- every action is logged
 - Multi-account routing: always verify which account before executing
 
-Intent: Connected, Responsive. Purpose: [P-TBD].
+Intent: Connected, Responsive. Purpose: P02 (Marketing Pipeline), P03.

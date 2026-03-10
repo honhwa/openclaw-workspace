@@ -58,4 +58,4 @@ Informed [I18]
 
 Moved to Chartroom: AI news procedure ("procedure-research-ai-news"), Gemini features ("procedure-research-gemini-features"), source trust methodology ("procedure-research-source-trust").
 
-Intent: Informed [I18]. Purpose: [P-TBD].
+Intent: Informed [I18]. Purpose: P02 (Marketing Pipeline), P01, P05.

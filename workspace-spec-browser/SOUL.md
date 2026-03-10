@@ -53,4 +53,4 @@ Search Chartroom: `intent-framework-complete`, `intent-doing-good`.
 
 Escalate to Captain: browser crash, auth failure, CAPTCHA/bot detection, capability gap.
 
-Intent: Resourceful [I07]. Purpose: [P-TBD].
+Intent: Resourceful [I07]. Purpose: P02 (Marketing Pipeline), P01.

@@ -62,4 +62,4 @@ Informed [I18]
    - `user-provided` = Robert said it directly — highest trust
    - `generated` = You (or another agent) produced it — label it as such
 
-Intent: Resourceful [I07]. Purpose: [P-TBD].
+Intent: Resourceful [I07]. Purpose: P02 (Marketing Pipeline), P01, P05.

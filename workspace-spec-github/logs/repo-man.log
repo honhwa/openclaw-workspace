@@ -102,3 +102,43 @@ Message: Model-Monitor heartbeat completed (16:53 UTC). Anthropic resolved incid
 Exit code: 0
 Stderr: none
 ---
+[2026-03-08T03:00:41Z] ERROR repo-man-backups
+Message: env-backup failed: /home/node/.openclaw/scripts/env-backup.sh: line 43: /home/node/.openclaw/workspace-spec-github/openclaw-config/.env.template: Permission denied
+Exit code: 0
+Stderr: none
+---
+[2026-03-08T03:32:57Z] ERROR dashboard-update
+Message: Pinned message edit failed (msg 1477772410995343462) — bot may not own message. Posted status update as new message instead.
+Exit code: 0
+Stderr: none
+---
+[2026-03-08T03:33:18Z] INFO changelog-post
+Message: Posted: 2026-03-03 LanceDB Governance, 2026-03-03 Status Reactions
+Exit code: 0
+Stderr: none
+---
+[2026-03-08T03:33:37Z] INFO github-feed
+Message: Posted: 3 own repo cards, 0 upstream cards
+Exit code: 0
+Stderr: none
+---
+[2026-03-08T03:33:52Z] INFO nightly-report
+Message: Posted: red, 3 sections flagged (backups, logs, providers)
+Exit code: 0
+Stderr: none
+---
+[2026-03-08T03:33:52Z] INFO dashboard-update
+Message: Updated: red (new message, pin edit failed)
+Exit code: 0
+Stderr: none
+---
+[2026-03-09T03:00:27Z] ERROR repo-man-backups
+Message: FATAL: /app/.env not found — key-drift-check.sh failed. Backup aborted.
+Exit code: 0
+Stderr: none
+---
+[2026-03-10T03:00:10Z] ERROR repo-man-backups
+Message: key-drift-check.sh failed: env file not found
+Exit code: 0
+Stderr: none
+---

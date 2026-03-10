@@ -14,6 +14,7 @@
 | Relay | relay | Human interface — results go here via Captain |
 | Dev | spec-dev | Fixes problems you detect — escalate, don't fix |
 | Sys Engineer | spec-systems | Model config, session ops — coordinate on model health |
+| Realist | spec-realist | Truth verification, method audit — Ops detects infra, Realist verifies claims |
 
 ## Skills
 

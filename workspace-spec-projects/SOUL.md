@@ -60,4 +60,4 @@ Informed [I18]
 
 Moved to Chartroom: capability details ("procedure-scribe-*"), Discord patterns ("procedure-discord-components").
 
-Intent: Competent [I03], Coherent [I19]. Purpose: [P-TBD].
+Intent: Competent [I03], Coherent [I19]. Purpose: P03 (Client Delivery), P04.

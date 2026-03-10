@@ -1,5 +1,9 @@
 # TOOLS.md — Reactor Manager
 
+## Skills (6)
+`reactor-handoff-ops`, `reactor-incident-recovery`, `reactor-ledger-audit`, `reactor-queue-ops`, `reactor-status`, `reactor-verify`
+
+
 ## Environment-Specific Notes
 
 ### Reactor Infrastructure

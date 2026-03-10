@@ -1,5 +1,9 @@
 # TOOLS.md — Strategist
 
+## Skills (8)
+`educate`, `idea-propose`, `opportunity-scan`, `source-brief`, `strategy-brief`, `strategy-digest`, `transcript-analyze`, `validate-idea`
+
+
 ## Environment-Specific Notes
 
 ### Your Model (YOU run on Codex)

@@ -25,11 +25,17 @@ When Robert asks what you can do or what commands are available, query the skill
 
 You execute these skills directly — do NOT forward them to Captain or any specialist:
 
-| Command | Skill | Relay handles | Scribe handles (via `sessions_spawn`) |
-|---------|-------|--------------|--------------------------------------|
-| `/project-menu` | project-menu | All Discord UI: buttons, modals, selects, interactions | Backend: file creation, tracking, archiving |
-| `/card [channel]` | card | Parse target, call `project-card.sh`, format + post embed | _(none — read-only, no backend dispatch)_ |
-| `/chart [subcmd]` | chart | Run `chart-handler.sh`, format + post result | _(none — self-contained)_ |
+| Command | Skill | Relay handles | Backend |
+|---------|-------|--------------|---------|
+| `/project-menu` | project-menu | All Discord UI: buttons, modals, selects, interactions | Scribe via `sessions_spawn` |
+| `/card [channel]` | card | Parse target, call `project-card.sh`, format + post embed | _(self-contained)_ |
+| `/chart [subcmd]` | chart | Run `chart-handler.sh`, format + post result | _(self-contained)_ |
+| `/check-in` | check-in | Alignment check — intent notes, vision/PTV, feedback | _(self-contained)_ |
+| `/import-context` | import-context | Structured context import from Robert | _(self-contained)_ |
+| `/vision-refresh` | vision-refresh | PTV review — stale north stars, new priorities | _(self-contained)_ |
+| `/send-discord` | send-discord | Send message to specified Discord channel | _(self-contained)_ |
+| `/ready [user]` | ready | Run `team-readiness --json`, format embeds, buttons | _(self-contained)_ |
+| `/transcript [args]` | telegram-transcript | Run `telegram-transcript.py`, format + post result | _(self-contained)_ |
 
 **You are the ONLY agent with direct Discord UI access.** Other agents cannot render buttons, modals, or select menus. If you forward a UI skill, nothing renders.
 
@@ -39,7 +45,7 @@ You execute these skills directly — do NOT forward them to Captain or any spec
 
 ### Routing Rules
 
-1. **Priority 1: Your skills** (`/project-menu`, `/card`, `/chart`) → Execute yourself. `/project-menu` dispatches backend to Scribe; `/card` and `/chart` are self-contained
+1. **Priority 1: Your skills** (`/project-menu`, `/card`, `/chart`, `/check-in`, `/import-context`, `/vision-refresh`, `/send-discord`, `/ready`, `/transcript`) → Execute yourself. `/project-menu` dispatches backend to Scribe; others are self-contained
 2. **Priority 2: Everything else** → Send structured task to Captain (Captain routes via skill router)
 3. **Priority 3: Unknown/ambiguous** → Ask Robert to clarify before dispatching
 

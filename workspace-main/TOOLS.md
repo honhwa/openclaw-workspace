@@ -1,20 +1,24 @@
-# TOOLS.md - Captain
+# TOOLS.md — Captain
 
-## Skills (your own)
-- `ask-agent` — Dispatch tasks to specialist agents
-- `chart` — Read/write the Chartroom (LanceDB memory)
-- `multi-engine` — Run same task across multiple models, compare results
-- `schedule-task` — Schedule delayed or recurring tasks
+## Skills
+- `agent-audit` — Audit agent health: SOUL.md structure, skills, workspace freshness, satisfaction scores. Reports findings + files issues.
+- `fleet-health` — Fleet overview: system status, Helm routing, satisfaction scores in one page.
+- `triage` — What needs attention: open issues, pending bearings, low satisfaction, stale charts. Prioritized.
 
-## Host Scripts (via exec)
-- `/usr/local/bin/chart` — Chartroom CLI (search, read, add, update, list, stale)
-- `~/.openclaw/scripts/skill-router.sh` — Route tasks to the right agent by keyword
-- `~/.openclaw/scripts/agent-bus.sh` — Inter-agent message bus (read/write/consume)
-- `~/.openclaw/scripts/bridge.sh` — Bridge to Claude Code Reactor
-- `~/.openclaw/scripts/bridge-reactor.sh` — Full reactor bridge with queue management
-
-## Routing
-You route tasks to specialists. Use `skill-router.sh route "<keywords>"` to find the right agent. Never do specialist work yourself — delegate.
+## MCP Tools (your primary interface)
+| Tool | Use for |
+|------|---------|
+| `satisfaction_scores` | Fleet satisfaction data — scores, alerts, bottom agents |
+| `workspace_freshness` | File ages per agent workspace |
+| `issue_log` | File a new issue |
+| `issue_list` | List open issues |
+| `chart_search` | Search Chartroom for context |
+| `system_status` | Gateway, disk, memory, Ollama health |
+| `helm_report` | Routing state, cooldowns, errors |
+| `bearings_pending` | Unanswered vision questions |
+| `provider_health` | Check API provider reachability + cooldowns (zero tokens) |
+| `engine_dispatch` | Dispatch work to engines via Helm |
+| `ask_agent` | Delegate tasks to specialist agents |
 
 ## Environment
 - Container: `openclaw-openclaw-gateway-1` (user: node)

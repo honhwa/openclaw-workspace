@@ -1,5 +1,9 @@
 # TOOLS.md — Navigator
 
+## Skills (3)
+`web-browse`, `web-download`, `web-interact`
+
+
 ## Environment-Specific Notes
 
 ### Browser Infrastructure

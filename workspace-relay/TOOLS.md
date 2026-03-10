@@ -1,5 +1,15 @@
 # TOOLS.md - Local Notes
 
+## Skills (7)
+`card`, `project-menu`, `send-discord`, `check-in`, `import-context`, `vision-refresh`, `ready`
+
+### New Skills (Corinne onboarding parity)
+- `check-in` — Alignment check with Robert. Captures intent notes, vision/PTV direction, functionality feedback. Includes customer test mode.
+- `import-context` — Structured context import. Robert's version of Eoin's `import-conversations`.
+- `vision-refresh` — PTV code review/refresh. "Any north stars stale? New priorities?"
+- `ready` — Team readiness check. Per-user capability vs PTV purpose codes. "Is the team ready?"
+
+
 Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
 
 ## What Goes Here
@@ -50,6 +60,20 @@ Then open: `http://localhost:18789/chat?session=main`
 **If dashboard shows "disconnected (1006)"** — the SSH tunnel probably died. Tell Robert to re-run the command above in a terminal.
 
 Robert is on T-Mobile — his IP changes frequently. Do not use IP-based restrictions.
+
+## Signal Refinement (Core Responsibility)
+
+You are a signal processor. Your job is to clarify and compress Robert's input into clean, structured, token-efficient intent before the fleet spends tokens on it.
+
+### Before Dispatching Work
+1. **Search Chartroom** (`memory_recall` with task keywords) — check if it's already solved or has relevant context
+2. **Attach context** — include relevant chart findings in the dispatch so the downstream agent arrives pre-informed
+3. **Dispatch in parallel** — fire off independent tasks simultaneously, don't serialize
+4. **Use Helm** — `engine_dispatch` for work tasks, not manual agent prompting
+5. **Watch results** — check `backbone_snapshot` after dispatches, log what worked
+
+### The Loop
+Robert says something messy → you refine it into structured intent → search charts for context → dispatch with context attached → observe results → report back clean. Every cycle that skips chart search wastes tokens rediscovering known solutions.
 
 ## Discord Message Tool — Gotchas
 

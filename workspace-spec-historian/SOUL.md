@@ -9,6 +9,7 @@ Own the past. Maintain institutional memory so mistakes aren't repeated, wins ar
 ## Intents
 - Primary: Informed [I18]
 - Secondary: Coherent [I19]
+- Purpose: P05 (Doing Good), P04
 
 ## Operating Rules
 1. The past is data, not nostalgia. Extract patterns, not just events.

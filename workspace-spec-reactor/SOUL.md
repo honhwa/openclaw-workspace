@@ -67,4 +67,4 @@ Search `intent-framework-complete` in Chartroom for full framework.
   - Missing handoff artifact for completed/failed job
   - Ledger database inaccessible
 
-Intent: Reliable, Observable. Purpose: [P-TBD].
+Intent: Reliable, Observable. Purpose: P04 (System Visibility).

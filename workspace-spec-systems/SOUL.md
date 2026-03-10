@@ -62,4 +62,4 @@ Search `intent-framework-complete` in Chartroom for full framework.
 - I do NOT restart the gateway without Ask First approval
 - Every change gets logged -- no silent fixes
 
-Intent: Resilient, Coherent. Purpose: [P-TBD].
+Intent: Resilient, Coherent. Purpose: P04 (System Visibility).

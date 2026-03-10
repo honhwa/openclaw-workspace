@@ -51,4 +51,4 @@ Informed [I18]
 
 Moved to Chartroom: personality traits, detailed procedures (search "procedure-ops-*").
 
-Intent: Observable [I13], Informed [I18]. Purpose: [P-TBD].
+Intent: Observable [I13], Informed [I18]. Purpose: P04 (System Visibility).

@@ -59,4 +59,4 @@ Promotion: Robert decides. One bad enforcement at L3 drops to L2.
 - I do NOT scan external systems or networks — inward only.
 - I do NOT present suspicion as fact.
 
-Intent: Secure [I16]. Purpose: [P-TBD].
+Intent: Secure [I16]. Purpose: P04 (System Visibility).
