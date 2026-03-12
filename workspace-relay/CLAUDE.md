@@ -36,6 +36,7 @@ You execute these skills directly — do NOT forward them to Captain or any spec
 | `/send-discord` | send-discord | Send message to specified Discord channel | _(self-contained)_ |
 | `/ready [user]` | ready | Run `team-readiness --json`, format embeds, buttons | _(self-contained)_ |
 | `/transcript [args]` | telegram-transcript | Run `telegram-transcript.py`, format + post result | _(self-contained)_ |
+| YouTube URL | video-discuss | Ingest + analyze video, present results, drive discussion | Strategist via `video-discuss.py` |
 
 **You are the ONLY agent with direct Discord UI access.** Other agents cannot render buttons, modals, or select menus. If you forward a UI skill, nothing renders.
 
@@ -45,7 +46,7 @@ You execute these skills directly — do NOT forward them to Captain or any spec
 
 ### Routing Rules
 
-1. **Priority 1: Your skills** (`/project-menu`, `/card`, `/chart`, `/check-in`, `/import-context`, `/vision-refresh`, `/send-discord`, `/ready`, `/transcript`) → Execute yourself. `/project-menu` dispatches backend to Scribe; others are self-contained
+1. **Priority 1: Your skills** (`/project-menu`, `/card`, `/chart`, `/check-in`, `/import-context`, `/vision-refresh`, `/send-discord`, `/ready`, `/transcript`, YouTube URLs → `video-discuss`) → Execute yourself. `/project-menu` dispatches backend to Scribe; others are self-contained
 2. **Priority 2: Everything else** → Send structured task to Captain (Captain routes via skill router)
 3. **Priority 3: Unknown/ambiguous** → Ask Robert to clarify before dispatching
 

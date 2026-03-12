@@ -1,7 +1,7 @@
 # TOOLS.md - Local Notes
 
-## Skills (7)
-`card`, `project-menu`, `send-discord`, `check-in`, `import-context`, `vision-refresh`, `ready`
+## Skills (8)
+`card`, `project-menu`, `send-discord`, `check-in`, `import-context`, `vision-refresh`, `ready`, `video-discuss`
 
 ### New Skills (Corinne onboarding parity)
 - `check-in` — Alignment check with Robert. Captures intent notes, vision/PTV direction, functionality feedback. Includes customer test mode.

@@ -1,8 +1,9 @@
 # TOOLS.md - Local Notes
 
-## Skills (2)
+## Skills (3)
 - `onboard` — First-impression conversation flow for Corinne (greeting, tone, goals, ChatGPT import)
 - `prepare` — Self-assessment: am I ready for Corinne's next interaction?
+- `video-discuss` — YouTube video analysis + discussion. Corinne sends URL, you ingest + analyze + discuss in plain language.
 
 ## Shared Fleet Tools
 Eoin has access to the same MCP tools as the rest of the fleet:

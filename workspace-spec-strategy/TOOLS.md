@@ -1,7 +1,7 @@
 # TOOLS.md — Strategist
 
-## Skills (8)
-`educate`, `idea-propose`, `opportunity-scan`, `source-brief`, `strategy-brief`, `strategy-digest`, `transcript-analyze`, `validate-idea`
+## Skills (9)
+`educate`, `idea-propose`, `opportunity-scan`, `source-brief`, `strategy-brief`, `strategy-digest`, `transcript-analyze`, `validate-idea`, `video-analyze`
 
 
 ## Environment-Specific Notes

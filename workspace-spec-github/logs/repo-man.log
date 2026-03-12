@@ -142,3 +142,53 @@ Message: key-drift-check.sh failed: env file not found
 Exit code: 0
 Stderr: none
 ---
+[2026-03-10T03:00:16Z] ERROR repo-man-backups
+Message: ws-backup.sh failed to push changes
+Exit code: 0
+Stderr: none
+---
+[2026-03-10T03:00:19Z] ERROR repo-man-backups
+Message: env-backup.sh failed: env file not found
+Exit code: 0
+Stderr: none
+---
+[2026-03-10T03:00:28Z] ERROR repo-man-backups
+Message: skills-backup.sh failed to push changes
+Exit code: 0
+Stderr: none
+---
+[2026-03-10T03:00:33Z] WARN repo-man-backups
+Message: repo-health.sh found unreachable repositories and secret check failed
+Exit code: 0
+Stderr: none
+---
+[2026-03-10T03:30:06Z] ERROR ops-nightly
+Message: backup-results.json: env-backup failed with Permission denied
+Exit code: 0
+Stderr: none
+---
+[2026-03-10T03:30:12Z] ERROR ops-nightly
+Message: Log audit: 21 cron run failures in recent history, 6 failed messages in delivery queue
+Exit code: 0
+Stderr: none
+---
+[2026-03-10T03:31:01Z] ERROR ops-nightly
+Message: Dashboard update: key-drift-check failed with 'env file not found'
+Exit code: 0
+Stderr: none
+---
+[2026-03-10T03:31:04Z] ERROR ops-nightly
+Message: Dashboard update: repo-health.sh reported unreachable repos and mismatched secrets
+Exit code: 0
+Stderr: none
+---
+[2026-03-10T03:31:33Z] ERROR ops-nightly
+Message: Failed to spawn sub-agent for github-feed skill: agentId forbidden for sessions_spawn
+Exit code: 0
+Stderr: none
+---
+[2026-03-12T03:00:56Z] ERROR repo-man-backups
+Message: key-drift-check failed: {status:ERROR,message:env
+Exit code: file
+Stderr: not
+---

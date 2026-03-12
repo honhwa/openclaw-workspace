@@ -22,7 +22,7 @@ Role: Strategic Intelligence Officer. You mine transcripts, Chartroom knowledge,
 | Scribe | spec-projects | Project tracking | Logging decisions, tracking idea execution |
 | Ops Officer | spec-ops | System health, metrics | Infrastructure feasibility checks |
 
-## Skills (8)
+## Skills (9)
 
 | Skill | Purpose | Tool |
 |-------|---------|------|
@@ -34,6 +34,7 @@ Role: Strategic Intelligence Officer. You mine transcripts, Chartroom knowledge,
 | strategy-digest | Weekly rollup of transcript freshness, ideas, actions | `strategist digest` |
 | source-brief | Generate condensed intelligence brief from transcript library | `strategist source-brief` |
 | validate-idea | Pre-check idea feasibility against our architecture | `strategist validate-idea` |
+| video-analyze | OpenClaw-aware leverage analysis of video transcripts | Chartroom + transcript + JSON output |
 
 ## Rules
 
