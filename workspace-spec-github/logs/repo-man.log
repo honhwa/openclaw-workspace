@@ -267,3 +267,102 @@ Message: /home/node/.openclaw/scripts/key-drift-check.sh failed (exit 1): {"stat
 Exit code: 1
 Stderr: {"status":"ERROR","message":"env file not found","file":"/app/.env"}
 ---
+[2026-03-14T03:00:58Z] ERROR repo-man-backups
+Message: /home/node/.openclaw/scripts/ws-backup.sh failed (exit 1): {"status":"ERROR","message":"Commit succeeded but push failed","pushed":false}
+Exit code: 1
+Stderr: {"status":"ERROR","message":"Commit succeeded but push failed","pushed":false}
+---
+[2026-03-14T03:00:58Z] ERROR repo-man-backups
+Message: /home/node/.openclaw/scripts/env-backup.sh failed (exit 1): {"status":"ERROR","message":"env file not found"}
+Exit code: 1
+Stderr: {"status":"ERROR","message":"env file not found"}
+---
+[2026-03-14T03:01:02Z] ERROR repo-man-backups
+Message: /home/node/.openclaw/scripts/skills-backup.sh failed (exit 1): {"status":"ERROR","message":"Push failed","pushed":false}
+Exit code: 1
+Stderr: {"status":"ERROR","message":"Push failed","pushed":false}
+---
+[2026-03-14T03:31:16Z] ERROR ops-nightly
+Message: github-feed step failed: gh CLI not found on host
+Exit code: 0
+Stderr: none
+---
+[2026-03-14T03:31:16Z] ERROR ops-nightly
+Message: known-issues refresh failed: cannot access /root/.openclaw/bridge/known-issues.json (permission denied)
+Exit code: 0
+Stderr: none
+---
+[2026-03-15T03:01:46Z] ERROR repo-man-backups
+Message: key-drift-check failed with exit 1: 
+Exit code: 1
+Stderr: none
+---
+[2026-03-15T03:01:48Z] ERROR repo-man-backups
+Message: ws-backup failed with exit 128: Author identity unknown  *** Please tell me who you are.  Run    git config --global user.email \"you@example.com\"   git config --global user.name \"Your Name\"  to set your account's default identity. Omit --global to set the identity only in this repository.  fatal: unable to auto-detect email address (got 'node@0f4945af5233.(none)') 
+Exit code: 128
+Stderr: Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'node@0f4945af5233.(none)')
+---
+[2026-03-15T03:01:48Z] ERROR repo-man-backups
+Message: env-backup failed with exit 1: 
+Exit code: 1
+Stderr: none
+---
+[2026-03-15T03:01:51Z] ERROR repo-man-backups
+Message: skills-backup failed with exit 128: Author identity unknown  *** Please tell me who you are.  Run    git config --global user.email \"you@example.com\"   git config --global user.name \"Your Name\"  to set your account's default identity. Omit --global to set the identity only in this repository.  fatal: unable to auto-detect email address (got 'node@0f4945af5233.(none)') 
+Exit code: 128
+Stderr: Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'node@0f4945af5233.(none)')
+---
+[2026-03-15T03:32:15Z] ERROR ops-nightly
+Message: backup-results.json is empty (0 bytes); cannot evaluate backup status
+Exit code: 0
+Stderr: none
+---
+[2026-03-15T03:32:15Z] ERROR ops-nightly
+Message: key-drift-check.sh failed: env file not found (/app/.env)
+Exit code: 0
+Stderr: none
+---
+[2026-03-15T03:32:15Z] ERROR ops-nightly
+Message: github-feed skill/script not found; unable to generate ops-github activity feed
+Exit code: 0
+Stderr: none
+---
+[2026-03-19T17:44:51Z] ERROR ops-nightly
+Message: backup-results.json is empty (0 bytes)
+Exit code: 0
+Stderr: none
+---
+[2026-03-19T17:45:07Z] ERROR ops-nightly
+Message: github-feed skill blocked: gh CLI not found on host
+Exit code: 0
+Stderr: none
+---
+[2026-03-20T03:00:39Z] ERROR repo-man-backups
+Message: key-drift-check failed: {\"status\":\"ERROR\",\"message\":\"env file not found\",\"file\":\"/app/.env\"} 
+Exit code: 0
+Stderr: none
+---
