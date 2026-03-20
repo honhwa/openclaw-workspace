@@ -366,3 +366,23 @@ Message: key-drift-check failed: {\"status\":\"ERROR\",\"message\":\"env file no
 Exit code: 0
 Stderr: none
 ---
+[2026-03-20T03:00:41Z] ERROR repo-man-backups
+Message: ws-backup failed: {\"status\":\"ERROR\",\"message\":\"Commit succeeded but push failed\",\"pushed\":false} 
+Exit code: 0
+Stderr: none
+---
+[2026-03-20T03:00:41Z] ERROR repo-man-backups
+Message: env-backup failed: {\"status\":\"ERROR\",\"message\":\"env file not found\"} 
+Exit code: 0
+Stderr: none
+---
+[2026-03-20T03:00:44Z] ERROR repo-man-backups
+Message: skills-backup failed: {\"status\":\"ERROR\",\"message\":\"Push failed\",\"pushed\":false} 
+Exit code: 0
+Stderr: none
+---
+[2026-03-20T03:01:00Z] ERROR repo-man-backups
+Message: key-drift-check failed: {\"status\":\"ERROR\",\"message\":\"env file not found\",\"file\":\"/app/.env\"}
+Exit code: 0
+Stderr: none
+---
