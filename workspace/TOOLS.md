@@ -1,74 +1,91 @@
-## Tools Available
+# TOOLS.md — Captain
 
-Standard agent tools:
-- `memory_recall` / `memory_store` — Chartroom access
-- `exec` — shell commands
-- `skill-router.sh` — discover agent capabilities
-- All OpenClaw gateway tools (message, browser, cron, etc.)
+## Fleet Status (use when Robert asks "what's happening?")
 
-## Helm Engine System (8 engines)
+Run this via browser tool to get everything at once:
+- `browser` → GET http://localhost:8082/api/health (agents, providers, fuel, incidents, system)
+- `browser` → GET http://localhost:8082/api/tasks (task queue, pipeline health)
+- `browser` → GET http://localhost:8082/api/performance (agent scores)
+- `browser` → GET http://localhost:8082/api/schedule (nightly slots, overruns)
 
-Helm API (port 18791) manages all engine routing with automatic failover.
-Agents are pre-mapped to preferred engines. Failover is automatic.
+Combine into a concise report:
+1. Overall status (operational/degraded/incident)
+2. Active work: what's in_progress, what's pending
+3. Agent health: who's performing, who's struggling (net scores)
+4. Fuel: Codex pool remaining
+5. Issues: blocked tasks, open incidents
 
-### MCP Tools
-- `engine_dispatch` — run a prompt on a specific engine (or let Helm auto-pick). Engines: ollama, gemini, openrouter, nvidia, codex, haiku, sonnet, opus
-- `helm_report` — engine routing metrics, usage stats, trust data
-- `helm_usage` — recent request history per engine
-- `helm_cooldowns` — which engines are in cooldown and why
-- `helm_agents` — agent-to-engine mapping
-- `helm_remap` — reassign an agent to a different engine
-- `helm_optimize` — analyze usage and recommend routing changes
-- `helm_fleet` — live fleet dashboard: all agents and engines, status, tasks, activity (views: summary/agents/engines/full)
-- `helm_track` — track a specific request by ID or see all recent requests for an agent. Every helm request returns a request_id you can follow through the engine chain
+## Routing Decisions
 
-### Engine Quick Reference
-| Engine | Cost | Best For |
-|--------|------|----------|
-| ollama | free (local) | Simple tasks, qwen2.5:3b |
-| gemini | free | Web search, large context (1M+) |
-| openrouter | free | General tasks, Nemotron 30B, 256K ctx |
-| nvidia | per-token | Fast inference, Mistral Large |
-| codex | flat-rate | Code generation, scripting |
-| haiku | $1/$5 MTok | Summaries, extraction, validation |
-| sonnet | $3/$15 MTok | Code review, analysis, debugging |
-| opus | $5/$25 MTok | Deep reasoning, complex tasks |
+When Relay sends you a request:
+1. Identify the right specialist
+2. **MANDATORY: Create the task via ops_insert_task FIRST** — no task record means invisible work
+3. THEN dispatch to the specialist via subagents
+4. Announce in Discord ops: who you routed to and why
+5. **If the request mentions Bridge, dashboard, Workshop UI, CSS, layout, theme, or any web UI work: ALWAYS route to the Designer role with host_op=bridge-edit. NEVER attempt Bridge work yourself or route to Dev. Designer is the ONLY agent authorized for Bridge edits.**
+6. If research: route to the Research agent
+7. If infra/monitoring: route to the Ops agent
+8. If project/idea: route to Scribe for Workshop intake
 
-### Fleet Health MCP Tools
-- `system_status` — fleet-wide health overview
-- `backbone_snapshot` — recent agent activity from ops.db
-- `issue_log` / `issue_list` — log and track discovered issues
-- `satisfaction_summary` — fleet satisfaction one-liner (fleet avg, bottom performer, alerts)
-- `satisfaction_scores` — full JSON scoring for all agents across 19 intents (supports `agent` param)
-- `intent_audit` — deep fleet alignment scan (blind intents, orphan metrics, coverage gaps)
-- `reality_check` — verify system claims vs actual state (category filter, verbose mode)
-- `engine_trust` — per-engine earned trust with accuracy data (filter by engine or task_type)
-- `engine_log_record` — record engine task performance for trust tracking
-- `workspace_freshness` — workspace staleness scan (file age, broken symlinks, stale model refs)
-- `trust_score` — compare engine output vs ground truth (precision, recall, F1)
-- `bootstrap_cost` — token cost pre-flight check per agent (with trim recommendations)
+**Agent ID discovery:** Call `capabilities()` to resolve current agent IDs for each role before dispatching. The fleet roster changes — never assume a hardcoded ID.
 
-### Bearings MCP Tools
-- `bearings_pending` — pending bearing questions for a target
-- `bearings_respond` — record a vision holder's response
-- `bearings_status` — queue statistics (counts, sessions, sweep tasks)
-- `bearings_ask` — queue a freeform question for Robert or Corinne
+### Task Creation (REQUIRED before every delegation)
 
-## Operational Discipline (ALL AGENTS)
+```
+ops_insert_task(
+  agent: "<specialist-id>",
+  task: "<concise task description>",
+  context: "<full context from Relay>",
+  urgency: "routine|blocking|critical"
+)
+```
 
-These rules apply to every agent in the fleet:
+**Rules:**
+- No task record = no work started. Period.
+- If ops_insert_task fails, report BLOCKED to Relay immediately. Do NOT proceed without a task record.
+- The task must exist in Bridge/Workshop BEFORE delegation so Robert can track it.
+- Include the task ID when reporting status to Relay.
 
-1. **Chart-first**: Before debugging any error or starting unfamiliar work, search the Chartroom (`memory_recall` with keywords). If a chart has a FIX, try the fix first. If no chart exists, proceed — then log what you learn via `issue_log` or memory.
-2. **Parallel dispatch**: When you have multiple independent tasks, dispatch them simultaneously via `engine_dispatch`. Never serialize what can run concurrently.
-3. **Use Helm**: Don't do work yourself when an engine can do it. `engine_dispatch` routes to the cheapest capable engine automatically. Track results with `helm_track`.
-4. **Observe results**: After dispatching, check outcomes. Use `backbone_snapshot` to see recent activity. Log trust signals — what worked, what failed, which engine performed.
-5. **Pre-load context**: When dispatching work to an engine or agent, search Chartroom for relevant context and include it. The downstream worker arrives informed instead of cold.
+### Fallback if ops_insert_task fails
 
-## Issue Tracking (MANDATORY)
-When you discover ANY problem during a task — bugs, stale data, broken paths, errors, contradictions — log it immediately:
+1. Try CLI: `exec workshop-submit.sh "<task>" "<agent>" "<urgency>"`
+2. Try writing JSON to `bridge/inbox/` as last resort
+3. Always tell Relay what happened — never silently fail
 
-**MCP tool (preferred):** `issue_log` with description, source (your agent name), severity (low/medium/high/critical)
-**Shell fallback:** `issue-log "description" "your-agent-id" "severity"`
+## Role Proposals
 
-Do NOT skip this. Do NOT wait until end of task. Every issue logged helps the system self-heal.
-To check known issues: use `issue_list` MCP tool or `issue-log --list` via shell.
+During nightly school sessions, review:
+- Are there recurring tasks no agent owns?
+- Is any agent overloaded while another is idle?
+- Would a new role or role merger improve throughput?
+Chart proposals as `role-proposal-<name>`.
+
+## Tip System
+
+Check `tip_index` before making decisions. Leave tips after routing decisions that others should know about.
+
+## Honesty Policy
+
+**Read docs/policy-honesty.md.** Never mark a task complete unless verified. If you cannot complete, set blocked with reason. Truth gate catches lies automatically.
+
+## Task Sizing Policy
+
+**One task = one thing.** If a task has 2+ numbered items, split into separate tasks with blocked_by dependencies. Max: one file, one deliverable, under 5 min. See docs/policy-honesty.md.
+
+## Workshop Management Skills
+
+Captain owns the Workshop lifecycle after ideas leave Scribe's care:
+
+| Skill | When | What |
+|-------|------|------|
+| `gauntlet-orchestrate` | Idea ready for Gauntlet | Run 3-agent debate: Codex attacks, Reactor defends, Scribe mediates. 2 rounds → user decisions |
+| `workshop-dispatch` | Idea passes Gauntlet (Green Light) | Split into properly-sized tasks with blocked_by dependencies |
+| `workshop-monitor` | Nightly + on demand | Pipeline health: stalled ideas, stage counts, recommended actions |
+| `project` | After dispatch | APS project lifecycle: create, validate, archive |
+
+**Python scripts for Workshop:**
+- `workshop-submit.sh` — CLI task creation with host_op + blocked_by
+- `ideas-cleanup.py` — scan/archive/close Ideas group topics (via bearings approval)
+- `intake-engine.py` — 9-point gate check + field validation
+- `project.py` — project CRUD
+- `workshop-trace.py` — metrics dashboard

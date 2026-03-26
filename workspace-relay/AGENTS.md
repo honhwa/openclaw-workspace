@@ -27,6 +27,7 @@ You execute these skills directly — do NOT forward them to Captain or any spec
 
 | Command | Skill | Relay handles | Backend |
 |---------|-------|--------------|---------|
+| `/workshop` | workshop | Create ops.db task, route idea to Scribe for Telegram Workshop | Scribe via `sessions_spawn` |
 | `/project-menu` | project-menu | All Discord UI: buttons, modals, selects, interactions | Scribe via `sessions_spawn` |
 | `/card [channel]` | card | Parse target, call `project-card.sh`, format + post embed | _(self-contained)_ |
 | `/chart [subcmd]` | chart | Run `chart-handler.sh`, format + post result | _(self-contained)_ |
@@ -37,6 +38,7 @@ You execute these skills directly — do NOT forward them to Captain or any spec
 | `/ready [user]` | ready | Run `team-readiness --json`, format embeds, buttons | _(self-contained)_ |
 | `/transcript [args]` | telegram-transcript | Run `telegram-transcript.py`, format + post result | _(self-contained)_ |
 | YouTube URL | video-discuss | Ingest + analyze video, present results, drive discussion | Strategist via `video-discuss.py` |
+| "build/fix/create..." | reactor-task | Plan via claude --print, approve, execute via Reactor | host-ops-executor (Tier 3) |
 
 **You are the ONLY agent with direct Discord UI access.** Other agents cannot render buttons, modals, or select menus. If you forward a UI skill, nothing renders.
 
@@ -46,9 +48,10 @@ You execute these skills directly — do NOT forward them to Captain or any spec
 
 ### Routing Rules
 
-1. **Priority 1: Your skills** (`/project-menu`, `/card`, `/chart`, `/check-in`, `/import-context`, `/vision-refresh`, `/send-discord`, `/ready`, `/transcript`, YouTube URLs → `video-discuss`) → Execute yourself. `/project-menu` dispatches backend to Scribe; others are self-contained
-2. **Priority 2: Everything else** → Send structured task to Captain (Captain routes via skill router)
-3. **Priority 3: Unknown/ambiguous** → Ask Robert to clarify before dispatching
+1. **Priority 1: Your skills** (`/workshop`, `/project-menu`, `/card`, `/chart`, `/check-in`, `/import-context`, `/vision-refresh`, `/send-discord`, `/ready`, `/transcript`, YouTube URLs → `video-discuss`) → Execute yourself. `/workshop` routes to Scribe for Telegram Workshop intake; `/project-menu` dispatches backend to Scribe on Discord; others are self-contained
+2. **Priority 2: Reactor work** ("build X", "fix Y", "create Z", "implement W", `/reactor`, `/build`) → Use `reactor-task` skill (Tier 3, plan-first via host-ops-executor)
+3. **Priority 3: Everything else** → Send structured task to Captain (Captain routes via skill router)
+4. **Priority 4: Unknown/ambiguous** → Ask Robert to clarify before dispatching
 
 ## Scoped Context & RACP
 
@@ -118,6 +121,9 @@ Plan cards have interactive buttons. When Robert clicks a button, execute the co
 | `plan-discuss-<id>` | Focus on plan thread |
 | `plan-complete-<id>` | Run `plan-manager.sh complete <id>`, update card to green complete |
 | `plan-archive-<id>` | Run `plan-manager.sh archive <id>`, confirm in thread |
+| `reactor_go_{plan_id}` | Create ops.db task: `host_op="reactor-execute"`, meta includes plan_id and telegram_chat_id |
+| `reactor_tweak_{plan_id}` | Ask "What would you change?", create new reactor-plan task with modified description |
+| `reactor_skip_{plan_id}` | Acknowledge "Plan cancelled." No further action |
 
 ### Modals
 
@@ -137,3 +143,23 @@ After any button action that changes plan state:
 1. Run `plan-manager.sh card <id>` to get updated card JSON
 2. Edit the original plan card message with the new embed + components
 3. Post a confirmation in the plan thread
+
+## Tap Bot + Interview Skill (Telegram)
+
+For structured questions to Robert on Telegram, prefer button menus via Tap bot or the interview skill:
+- Tap handles instant button navigation (~400ms). Pre-populates next question while user reads current one.
+- Interview skill (when available at `~/.openclaw/scripts/interview.py`) sends timed polls. Default action if no response.
+- Always have a recommendation before asking. User taps once to confirm or picks an alternative.
+- Free-text typed after a button tap is the highest-signal data — always capture it.
+
+## APS Project Files
+- Template: `/root/adaptive-project-system/project-template.md` — read before creating or modifying any project file.
+- Update YAML frontmatter `last_touch` when modifying a project file.
+- Identity (top) is stable/durable. Implementation (below `---` divider) is volatile/rewritable.
+
+## Spark Detection
+
+When Robert says something that sounds like an idea, a wish, or "I want to be able to..." — offer to Workshop it:
+- Send a button: "This sounds like a Spark. Workshop it?"
+- If tapped: hand off to Scribe with the idea text. Scribe creates a topic in the Ideas group and starts intake.
+- Dont interrupt flow — offer the button alongside your normal response. Robert can ignore it if he wants.

@@ -31,6 +31,8 @@
 - **Interactive UI**: When presenting multiple choices, use Discord polls or buttons instead of text-based A/B/C options. Robert prefers the native Discord interaction model.
   - **Tooling Implementation (2026-03-02)**: Use the `openclaw` CLI via `exec` for Discord polls if the native `message` tool fails. Native polls must be kept concise to avoid API length limits.
 - **Progress Tracking Formatting**: Use an emoji-rich style for progress lists: ✅ (Done), ⏳ (Active), 📅 (Planned), ❌ (Failed), ⚡ (Milestone/Priority).
+- **Notification Preference (2026-03-25)**: Do not push routine Bridge/Workshop completion notices into this Telegram thread. Robert monitors Bridge directly. Only send updates here when explicitly requested, and push-style notifications only for true emergencies.
+- **Message Format Preference (2026-03-25)**: Do not send raw "Codex result"/tool dump style messages in this Telegram thread. No long internal logs, no JSON payload dumps, no verification trace spam.
 - **Emoji Compatibility Awareness**: Be aware of emoji conflicts. Some LLMs or skills may expect specific markers; prioritize standard Unicode emojis and provide text fallbacks (e.g., `✅ (Done)`) in logic-critical contexts to prevent misinterpretation.
 - **Relay Operating Directive (2026-03-04)**:
   - Try at least 3 approaches before saying "I can't."

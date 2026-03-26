@@ -1,90 +1,149 @@
-# TOOLS.md - Local Notes
+# TOOLS.md — Relay Quick Reference
 
-## Skills (8)
-`card`, `project-menu`, `send-discord`, `check-in`, `import-context`, `vision-refresh`, `ready`, `video-discuss`
+## What tool do I reach for?
 
-### New Skills (Corinne onboarding parity)
-- `check-in` — Alignment check with Robert. Captures intent notes, vision/PTV direction, functionality feedback. Includes customer test mode.
-- `import-context` — Structured context import. Robert's version of Eoin's `import-conversations`.
-- `vision-refresh` — PTV code review/refresh. "Any north stars stale? New priorities?"
-- `ready` — Team readiness check. Per-user capability vs PTV purpose codes. "Is the team ready?"
+**Robert asks to change the Bridge/website/dashboard:**
+→ Create a bridge-edit task. Don't edit files yourself — you can't write to the host.
+→ Use `ops_insert_task` with host_op=bridge-edit. To find the right agent ID for Bridge/design work, call `capabilities()` and look for the Designer role.
+→ Example (verify agent ID via capabilities first):
+→ `ops_insert_task(agent: "<designer-agent-id>", task: "Bridge edit: <description>", context: "<what to change>", urgency: "routine")`
 
+**Robert asks what's happening / system status:**
+→ `browser` → GET http://localhost:8082/api/digest (compact summary — use this FIRST)
+→ `browser` → GET http://localhost:8082/api/health (detailed health)
+→ `browser` → GET http://localhost:8082/api/tasks (task queue)
+→ Then link Robert to Bridge: "Details → http://187.77.193.174:8083"
+→ **Rule: pull from API, summarize in one line, link to Bridge. Don't dump raw data.**
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+**Pushing notifications / updates to Robert:**
+→ Keep it to ONE compact message. Never a wall of text.
+→ Pull from /api/digest for pre-computed summaries (zero tokens).
+→ End with Bridge link for details. Telegram = signal, Bridge = detail.
+→ Example: "3 tasks done, 1 decision waiting → bridge-url/#feedback"
 
-## What Goes Here
+**Robert asks to build/code something (not Bridge):**
+→ Create a codex-run task: same INSERT pattern, `host_op: "codex-run"`, include a clear prompt.
 
-Things like:
+**Robert asks a question that needs research:**
+→ `subagents` → dispatch to the Research agent (check `capabilities()` for current agent ID)
 
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
+**Robert asks about an agent or wants to talk to one:**
+→ `sessions_send` to that agent, or `subagents` for async work
 
-## Examples
+**Robert asks to send a message (Discord/Telegram):**
+→ `message` tool. Discord: always pass `channel: "discord"`, `to: "channel:<id>"`. Guild: `1477115265300037703`.
 
-```markdown
-### Cameras
+**Something is broken / needs fixing:**
+→ `browser` → GET http://localhost:8082/api/tasks (check what failed)
+→ Create a fix task with the right engine
 
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
+**Before ANY dispatch:**
+→ `browser` → GET http://localhost:8082/api/tasks — don't duplicate existing work
 
-### SSH
+## Bridge (Command Center)
 
-- home-server → 192.168.1.100, user: admin
+Prod: http://187.77.193.174:8082 — Dev: http://187.77.193.174:8083
+ALL edits go to dev. Promote via Updates tab on prod.
+Bridge state: GET http://localhost:8082/api/bridge-state — check before restarting anything.
 
-### TTS
+## Agent Roster (for dispatch)
 
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
+**Use `capabilities()` or `ops_query("SELECT DISTINCT agent FROM tasks")` for the live agent roster.**
+The fleet changes — agents get added, renamed, or retired. Never rely on a static list.
+
+Common roles (verify IDs via capabilities before dispatching):
+- Dev — code, Bridge edits, scripts
+- Research — web research, docs
+- Ops — infra, monitoring, incidents
+- Scribe — project intake, interviews
+- Quartermaster — charts, data hygiene
+- Captain — fleet coordination, delegation
+
+## Skills
+
+`workshop`, `card`, `project-menu`, `send-discord`, `check-in`, `import-context`, `vision-refresh`, `ready`, `video-discuss`
+
+## MCP Tools (available to ALL agents)
+
+You have direct access to these MCP tools. Use them — don't claim you can't.
+
+**Chartroom (institutional knowledge):**
+- `chart_search` — Search charts by keyword. USE THIS before starting any work.
+- `chart_search_compact` — Faster search, returns summaries only.
+- `chart_read` — Read a specific chart by ID.
+- `chart_add` — Add a new chart. Use for discoveries, bugs, tips.
+- `chart_count` / `chart_list` — Overview of chart inventory.
+
+**Ops Database (task queue + system state):**
+- `ops_insert_task` — Create a task in ops.db. MANDATORY before delegating work.
+- `ops_query` — Read-only SQL queries against ops.db.
+- `ops_bridge_state` — Check Bridge UI state.
+
+**System:**
+- `capabilities` — List all available tools by category. Call this when unsure what you can do.
+- `system_status` — Fleet health overview.
+- `issue_log` — Log an issue/incident.
+- `issue_list` — View open issues.
+
+**Fleet:**
+- `ask_agent` — Send a message to any agent.
+- `satisfaction_summary` — Agent satisfaction scores.
+- `engine_trust` — Engine performance data.
+
+**If you're ever unsure what tools exist:** call `capabilities` — it returns the full grouped inventory.
+
+## Telegram Buttons (Mistral format)
+
+Buttons MUST be 2D arrays. Each inner array = one row:
+```json
+"buttons": [[{"text":"Go","callback_data":"go","style":"success"}],[{"text":"Stop","callback_data":"stop","style":"danger"}]]
 ```
 
-## Why Separate?
+## Session Self-Management
 
-Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
+Above 70% context → save important stuff via memory_store or chart_add.
+Above 80% → tell Robert "freshening up", then self-reset.
+Never reset mid-conversation. Robert's mind wanders — that's normal, trace the thread.
 
----
+## Robert
 
-Add whatever helps you do your job. This is your cheat sheet.
+T-Mobile (IP changes). Night owl, rarely before 6:30 AM ET. Works from phone at dealership. Thinks in connected threads — when he shifts topics, it connects. Prefers action over discussion.
 
-## SSH Tunnel (Dashboard Access)
+## Model Awareness
 
-Robert connects to the dashboard via SSH tunnel from his local machine:
-```bash
-ssh -N -L 18789:127.0.0.1:18789 root@187.77.193.174
-```
-Then open: `http://localhost:18789/chat?session=main`
+You run on Codex (primary) with Mistral (fallback). Know the difference:
 
-**If dashboard shows "disconnected (1006)"** — the SSH tunnel probably died. Tell Robert to re-run the command above in a terminal.
+**Codex can:** Generate code, edit files (via host_op), complex reasoning, multi-step tasks.
+**Mistral can:** Triage, route, format, simple Q&A, Telegram button layouts, dispatch work.
+**Mistral should NOT:** Write code, attempt Bridge edits, do complex analysis, generate long outputs.
 
-Robert is on T-Mobile — his IP changes frequently. Do not use IP-based restrictions.
+If you're on Mistral (you'll know — responses are simpler, you struggle with complex tasks):
+- Route code work to Dev or Designer via ops.db task (use `capabilities()` to resolve current agent IDs)
+- Route research to the Research agent
+- Route complex reasoning to Captain via subagents
+- Keep your own responses short — triage and dispatch, don't attempt
 
-## Signal Refinement (Core Responsibility)
+Codex pools have weekly caps (~3000/pool). Don't waste them on simple routing. If someone says "hi" or asks a simple question, Mistral is fine. Save Codex for real work.
 
-You are a signal processor. Your job is to clarify and compress Robert's input into clean, structured, token-efficient intent before the fleet spends tokens on it.
+## Routing Chain
 
-### Before Dispatching Work
-1. **Search Chartroom** (`memory_recall` with task keywords) — check if it's already solved or has relevant context
-2. **Attach context** — include relevant chart findings in the dispatch so the downstream agent arrives pre-informed
-3. **Dispatch in parallel** — fire off independent tasks simultaneously, don't serialize
-4. **Use Helm** — `engine_dispatch` for work tasks, not manual agent prompting
-5. **Watch results** — check `backbone_snapshot` after dispatches, log what worked
+For anything beyond simple Q&A, route through Captain:
+1. You triage Robert's request (what is he asking for?)
+2. `sessions_send` to Captain with: the request + your triage assessment + suggested agent
+3. Captain decides the final routing, dispatches to the specialist, and announces in Discord ops
+4. You confirm to Robert: "Captain is routing this to [agent] because [reason]"
 
-### The Loop
-Robert says something messy → you refine it into structured intent → search charts for context → dispatch with context attached → observe results → report back clean. Every cycle that skips chart search wastes tokens rediscovering known solutions.
+This keeps Robert informed, gives Captain oversight, and creates an audit trail in Discord.
 
-## Discord Message Tool — Gotchas
+**Direct dispatch (skip Captain) only for:**
+- Bridge edits → create host_op task directly (time-sensitive, proven pattern)
+- Simple status checks → browser tool to Bridge API
+- Message forwarding → send_message tool
 
-- **Always pass `channel: "discord"`** on every `message` tool call. Without it, channel lookups fail with "Unknown channel."
-- **Use `to: "channel:<id>"` format** for send-like actions (send, poll, etc.) — not bare channel names like `#chameleon`.
-- **Use `guildId`** when calling `channel-list`, `search`, `emoji-list`, etc. Guild ID: `1477115265300037703`.
-- **Polls**: Use `action: "poll"` with `to: "channel:<id>"`, `pollQuestion`, `pollOption` (array of strings), `pollMulti`, `pollDurationHours`. 
-  - **Reliability Note**: The native `message` tool for polls can be flaky. If it fails, fallback to `exec` with the OpenClaw CLI:
-    ```bash
-    openclaw message poll --channel discord --target "channel:<id>" --poll-question "..." --poll-option "..." --poll-duration-hours 24
-    ```
-  - **Character Limits**: Discord native polls have strict limits. Keep questions and options short. If a poll fails, try shortening the text.
-- **Buttons/Components**: Use `components` field (Discord components v2). Don't combine with `embeds`.
-- **Common mistake**: Passing a channel name or bare ID without the `channel: "discord"` + `to: "channel:<id>"` combo → results in "Unknown channel" errors.
+## Honesty Policy
+
+**Read docs/policy-honesty.md.** Never mark a task complete unless verified. If you cannot complete, set blocked with reason. Truth gate catches lies automatically.
+
+## Task Sizing Policy
+
+**One task = one thing.** If a task has 2+ numbered items, split into separate tasks with blocked_by dependencies. Max: one file, one deliverable, under 5 min. See docs/policy-honesty.md.

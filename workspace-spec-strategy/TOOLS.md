@@ -83,14 +83,17 @@ Use these MCP tools directly — do NOT use chart-handler.sh CLI:
 - `sessions` — conversation memory
 
 ### Delegation Protocol
-| Need | Delegate to | Via |
-|------|------------|-----|
-| Fresh web research | Research (spec-research) | agentToAgent |
-| New transcript ingestion | Research (spec-research) | agentToAgent |
-| Live browsing / scraping | Navigator (spec-browser) | agentToAgent |
-| Code implementation | Dev (spec-dev) | agentToAgent |
-| Project tracking | Scribe (spec-projects) | agentToAgent |
-| System health data | Ops Officer (spec-ops) | agentToAgent |
+
+**Resolve agent IDs dynamically:** Call `capabilities()` to get the current agent roster before dispatching. Role names are stable; agent IDs may change.
+
+| Need | Delegate to (role) | Via |
+|------|-------------------|-----|
+| Fresh web research | Research | agentToAgent |
+| New transcript ingestion | Research | agentToAgent |
+| Live browsing / scraping | Navigator | agentToAgent |
+| Code implementation | Dev | agentToAgent |
+| Project tracking | Scribe | agentToAgent |
+| System health data | Ops Officer | agentToAgent |
 
 ### Storage
 - Strategy outputs: Chartroom (category: strategy or reading)
@@ -107,3 +110,17 @@ Use these MCP tools directly — do NOT use chart-handler.sh CLI:
 Robert has a full-time day job. 9 hours work + 4 hours OpenClaw + weekends. No spare time.
 ALL ideas must be UNMANNED — can this make money while Robert sleeps?
 No consulting, no client calls, no manual delivery per transaction.
+
+## MCP Tools
+
+You have access to all fleet MCP tools. See `docs/mcp-tools-reference.md` for the full list.
+Key tools: `chart_search`, `chart_add`, `ops_insert_task`, `ops_query`, `capabilities` (lists everything).
+**Rule:** Search Chartroom before work. Create ops_insert_task before delegating. Chart discoveries immediately.
+
+## Honesty Policy
+
+**Read docs/policy-honesty.md.** Never mark a task complete unless verified. If you cannot complete, set blocked with reason. Truth gate catches lies automatically.
+
+## Task Sizing Policy
+
+**One task = one thing.** If a task has 2+ numbered items, split into separate tasks with blocked_by dependencies. Max: one file, one deliverable, under 5 min. See docs/policy-honesty.md.

@@ -386,3 +386,113 @@ Message: key-drift-check failed: {\"status\":\"ERROR\",\"message\":\"env file no
 Exit code: 0
 Stderr: none
 ---
+[2026-03-20T03:01:01Z] ERROR repo-man-backups
+Message: ws-backup failed: {\"status\":\"ERROR\",\"message\":\"Commit succeeded but push failed\",\"pushed\":false}
+Exit code: 0
+Stderr: none
+---
+[2026-03-20T03:01:02Z] ERROR repo-man-backups
+Message: env-backup failed: {\"status\":\"ERROR\",\"message\":\"env file not found\"}
+Exit code: 0
+Stderr: none
+---
+[2026-03-20T03:30:52Z] ERROR ops-nightly
+Message: github-feed failed: gh CLI not found (unable to fetch commits/issues/tags for all repos)
+Exit code: 0
+Stderr: none
+---
+[2026-03-21T03:00:03Z] ERROR repo-man-backups
+Message: Nightly backup failed at key-drift-check.sh: env file not found at /app/.env
+Exit code: 1
+Stderr: env file not found
+---
+[2026-03-21T03:30:44Z] ERROR ops-nightly
+Message: gh CLI not found; skipping github-feed
+Exit code: 0
+Stderr: none
+---
+[2026-03-21T03:31:44Z] INFO nightly-report
+Message: Posted: red, 4 sections flagged
+Exit code: 0
+Stderr: none
+---
+[2026-03-21T03:31:44Z] INFO dashboard-update
+Message: Updated: red
+Exit code: 0
+Stderr: none
+---
+[2026-03-21T07:07:40Z] INFO github-feed
+Message: Posted: 3 repo cards (git log fallback)
+Exit code: 0
+Stderr: none
+---
+[2026-03-22T03:00:32Z] ERROR repo-man-backups
+Message: env file not found: /app/.env. Backup halted.
+Exit code: 1
+Stderr: none
+---
+[2026-03-22T03:30:28Z] ERROR ops-nightly
+Message: key-drift-check.sh: env file not found
+Exit code: 0
+Stderr: none
+---
+[2026-03-23T03:01:03Z] ERROR repo-man-backups
+Message: env file not found (/app/.env). Nightly backup aborted.
+Exit code: 0
+Stderr: none
+---
+[2026-03-24T03:00:35Z] ERROR repo-man-backups
+Message: key-drift-check.sh failed
+Exit code: 0
+Stderr: none
+---
+[2026-03-24T03:00:36Z] ERROR repo-man-backups
+Message: ws-backup.sh failed
+Exit code: 0
+Stderr: none
+---
+[2026-03-24T03:00:36Z] ERROR repo-man-backups
+Message: env-backup.sh failed
+Exit code: 0
+Stderr: none
+---
+[2026-03-24T03:00:37Z] ERROR repo-man-backups
+Message: skills-backup.sh failed
+Exit code: 0
+Stderr: none
+---
+[2026-03-24T03:00:37Z] ERROR repo-man-backups
+Message: repo-health.sh failed
+Exit code: 0
+Stderr: none
+---
+[2026-03-24T03:01:04Z] FATAL repo-man-backups
+Message: Nightly backup aborted: /app/.env missing. Infrastructure at risk.
+Exit code: 0
+Stderr: none
+---
+[2026-03-25T03:00:11Z] ERROR repo-man-backups
+Message: key-drift-check.sh failed: env file not found (/app/.env)
+Exit code: 0
+Stderr: none
+---
+[2026-03-25T03:32:33Z] ERROR ops-nightly
+Message: Script dashboard-update.sh not found
+Exit code: 0
+Stderr: none
+---
+[2026-03-25T03:32:41Z] ERROR ops-nightly
+Message: Script changelog-post.sh not found
+Exit code: 0
+Stderr: none
+---
+[2026-03-25T03:32:48Z] ERROR ops-nightly
+Message: Script github-feed.sh not found
+Exit code: 0
+Stderr: none
+---
+[2026-03-26T03:00:16Z] ERROR repo-man-backups
+Message: key-drift-check.sh failed: env file not found (/app/.env)
+Exit code: 0
+Stderr: none
+---

@@ -54,3 +54,11 @@ When your gateway Gemini model is rate-limited or unavailable, use the `engine_d
   - ID convention: research-<topic> or reading-<topic>
 - `chart_search` MCP tool — search existing charts before adding
 - `chart_read` MCP tool — read a specific chart by ID
+
+## Honesty Policy
+
+**Read docs/policy-honesty.md.** Never mark a task complete unless verified. If you cannot complete, set blocked with reason. Truth gate catches lies automatically.
+
+## Task Sizing Policy
+
+**One task = one thing.** If a task has 2+ numbered items, split into separate tasks with blocked_by dependencies. Max: one file, one deliverable, under 5 min. See docs/policy-honesty.md.
