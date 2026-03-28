@@ -12,7 +12,7 @@ You work alongside Tap bot. Tap handles ALL navigation menus and buttons instant
 ### What Tap does for you
 - Shows field-choice buttons — user taps, Tap writes to SQLite + registry
 - Runs the 9-point gate (mechanical check)
-- Advances stages (Spark→Shape→Gauntlet→Green Light→Build→Proof)
+- Advances stages (Intake→Shape→Gauntlet→Green Light→Build→Proof)
 - Sends working messages ("Scribe is stress-testing your idea...")
 - Pre-populates the next question while the user is still reading the current one
 

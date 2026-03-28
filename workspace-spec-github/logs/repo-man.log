@@ -1,321 +1,3 @@
-[2026-03-01T07:14:00Z] INFO bootstrap
-Command: gh auth status
-Exit code: 0
-Stdout summary: ✓ Logged in to github.com account NowThatJustMakesSense (GH_TOKEN)
-Context: gh_token present
-Next action: Proceed to key drift check
-
-[2026-03-01T07:14:10Z] ERROR key-drift-check
-Command: key-drift-check (internal)
-Exit code: 1
-Stderr: key-drift-check FAIL: missing keys: OPENCLAW_PROD_ANTHROPIC_KEY, OPENCLAW_PROD_GOOGLE_AI_KEY, OPENCLAW_PROD_OPENROUTER_KEY, OPENCLAW_PROD_DISCORD_TOKEN
-Context: /app/.env checked against canonical list in AGENTS.md
-Next action: Notify Robert via Discord, update LAST_RUN.md
-
-[2026-03-01T07:14:15Z] WARN key-drift-check
-Command: key-drift-check (internal)
-Exit code: 0
-Stdout summary: unexpected keys in .env: OPENCLAW_BRIDGE_PORT, OPENCLAW_CONFIG_DIR, OPENCLAW_GATEWAY_BIND, OPENCLAW_GATEWAY_PORT, OPENCLAW_IMAGE, OPENCLAW_WORKSPACE_DIR
-Next action: Proceed to session status update
-[2026-03-01T19:00:31Z] ERROR env-backup
-Message: Commit succeeded but push failed
-Exit code: 0
-Stderr: none
----
-[2026-03-02T03:00:31Z] INFO nightly-cron
-Message: Phase 1 complete: key-drift=PASS ws-backup=PASS env-backup=PASS skills-backup=PASS repo-health=PASS log-audit=WARNING(2 cron failures, 1 failed delivery)
-Exit code: 0
-Stderr: none
----
-[2026-03-02T03:00:48Z] ERROR nightly-cron
-Message: Phase 1: key-drift PASS, ws-backup PASS, env-backup PASS, skills-backup PASS, repo-health PASS, log-audit WARNING
-Exit code: 0
-Stderr: none
----
-[2026-03-02T03:00:57Z] INFO nightly-cron
-Message: Completed Phase 1; repo health: ok; proceeding to Phase 2
-Exit code: 0
-Stderr: none
----
-[2026-03-02T03:01:11Z] INFO nightly-cron
-Message: Phase 2: ran nightly reports
-Exit code: 0
-Stderr: none
----
-[2026-03-03T17:25:06Z] INFO model-monitor
-Message: Run complete: Anthropic/OpenAI degraded, Google/OpenRouter operational.
-Exit code: 0
-Stderr: none
----
-[2026-03-04T02:53:56Z] INFO bootstrap
-Message: Started model-monitor-30m heartbeat
-Exit code: 0
-Stderr: none
----
-[2026-03-04T03:24:48Z] INFO model-monitor
-Message: Heartbeat complete at 03:23 UTC. Anthropic: 🟡, others: 🟢. Dashboard updated.
-Exit code: 0
-Stderr: none
----
-[2026-03-04T06:54:52Z] INFO model-monitor
-Message: Interval 06:54 complete. Anthropic 🟡, others 🟢.
-Exit code: 0
-Stderr: none
----
-[2026-03-04T08:53:57Z] INFO bootstrap
-Message: Bootstrap complete
-Exit code: 0
-Stderr: none
----
-[2026-03-04T09:55:01Z] INFO model-monitor
-Message: Heartbeat complete: All providers healthy. Dashboard updated.
-Exit code: 0
-Stderr: none
----
-[2026-03-04T10:55:11Z] INFO model-monitor
-Message: Successfully ran heartbeat monitor. All providers up.
-Exit code: 0
-Stderr: none
----
-[2026-03-04T14:23:57Z] INFO bootstrap
-Message: Repo-Man heartbeat start
-Exit code: 0
-Stderr: none
----
-[2026-03-04T14:25:01Z] INFO model-monitor
-Message: Heartbeat complete. All systems UP.
-Exit code: 0
-Stderr: none
----
-[2026-03-04T14:54:30Z] INFO model-monitor
-Message: Heartbeat summary: all 🟢 up (Anthropic incident resolved, OpenAI/Google/OpenRouter operational). Pinned message 1478382267985432626 updated.
-Exit code: 0
-Stderr: none
----
-[2026-03-04T15:24:40Z] INFO model-monitor
-Message: Model-Monitor heartbeat completed: all providers healthy
-Exit code: 0
-Stderr: none
----
-[2026-03-04T16:54:58Z] INFO model-monitor
-Message: Model-Monitor heartbeat completed (16:53 UTC). Anthropic resolved incident (15:57) noted.
-Exit code: 0
-Stderr: none
----
-[2026-03-08T03:00:41Z] ERROR repo-man-backups
-Message: env-backup failed: /home/node/.openclaw/scripts/env-backup.sh: line 43: /home/node/.openclaw/workspace-spec-github/openclaw-config/.env.template: Permission denied
-Exit code: 0
-Stderr: none
----
-[2026-03-08T03:32:57Z] ERROR dashboard-update
-Message: Pinned message edit failed (msg 1477772410995343462) — bot may not own message. Posted status update as new message instead.
-Exit code: 0
-Stderr: none
----
-[2026-03-08T03:33:18Z] INFO changelog-post
-Message: Posted: 2026-03-03 LanceDB Governance, 2026-03-03 Status Reactions
-Exit code: 0
-Stderr: none
----
-[2026-03-08T03:33:37Z] INFO github-feed
-Message: Posted: 3 own repo cards, 0 upstream cards
-Exit code: 0
-Stderr: none
----
-[2026-03-08T03:33:52Z] INFO nightly-report
-Message: Posted: red, 3 sections flagged (backups, logs, providers)
-Exit code: 0
-Stderr: none
----
-[2026-03-08T03:33:52Z] INFO dashboard-update
-Message: Updated: red (new message, pin edit failed)
-Exit code: 0
-Stderr: none
----
-[2026-03-09T03:00:27Z] ERROR repo-man-backups
-Message: FATAL: /app/.env not found — key-drift-check.sh failed. Backup aborted.
-Exit code: 0
-Stderr: none
----
-[2026-03-10T03:00:10Z] ERROR repo-man-backups
-Message: key-drift-check.sh failed: env file not found
-Exit code: 0
-Stderr: none
----
-[2026-03-10T03:00:16Z] ERROR repo-man-backups
-Message: ws-backup.sh failed to push changes
-Exit code: 0
-Stderr: none
----
-[2026-03-10T03:00:19Z] ERROR repo-man-backups
-Message: env-backup.sh failed: env file not found
-Exit code: 0
-Stderr: none
----
-[2026-03-10T03:00:28Z] ERROR repo-man-backups
-Message: skills-backup.sh failed to push changes
-Exit code: 0
-Stderr: none
----
-[2026-03-10T03:00:33Z] WARN repo-man-backups
-Message: repo-health.sh found unreachable repositories and secret check failed
-Exit code: 0
-Stderr: none
----
-[2026-03-10T03:30:06Z] ERROR ops-nightly
-Message: backup-results.json: env-backup failed with Permission denied
-Exit code: 0
-Stderr: none
----
-[2026-03-10T03:30:12Z] ERROR ops-nightly
-Message: Log audit: 21 cron run failures in recent history, 6 failed messages in delivery queue
-Exit code: 0
-Stderr: none
----
-[2026-03-10T03:31:01Z] ERROR ops-nightly
-Message: Dashboard update: key-drift-check failed with 'env file not found'
-Exit code: 0
-Stderr: none
----
-[2026-03-10T03:31:04Z] ERROR ops-nightly
-Message: Dashboard update: repo-health.sh reported unreachable repos and mismatched secrets
-Exit code: 0
-Stderr: none
----
-[2026-03-10T03:31:33Z] ERROR ops-nightly
-Message: Failed to spawn sub-agent for github-feed skill: agentId forbidden for sessions_spawn
-Exit code: 0
-Stderr: none
----
-[2026-03-12T03:00:56Z] ERROR repo-man-backups
-Message: key-drift-check failed: {status:ERROR,message:env
-Exit code: file
-Stderr: not
----
-[2026-03-12T03:00:58Z] ERROR repo-man-backups
-Message: ws-backup failed: {status:ERROR,message:Commit
-Exit code: succeeded
-Stderr: but
----
-[2026-03-12T03:00:59Z] ERROR repo-man-backups
-Message: env-backup failed: {status:ERROR,message:env
-Exit code: file
-Stderr: not
----
-[2026-03-12T03:01:02Z] ERROR repo-man-backups
-Message: skills-backup failed: {status:ERROR,message:Push
-Exit code: failed,pushed:false}
-Stderr: none
----
-[2026-03-12T03:01:33Z] ERROR repo-man-backups
-Message: key-drift-check failed: {"status":"ERROR","message":"env file not found","file":"/app/.env"}
-Exit code: 0
-Stderr: none
----
-[2026-03-12T03:01:34Z] ERROR repo-man-backups
-Message: ws-backup failed: {"status":"ERROR","message":"Commit succeeded but push failed","pushed":false}
-Exit code: 0
-Stderr: none
----
-[2026-03-12T03:01:35Z] ERROR repo-man-backups
-Message: env-backup failed: {"status":"ERROR","message":"env file not found"}
-Exit code: 0
-Stderr: none
----
-[2026-03-12T03:31:23Z] ERROR ops-nightly
-Message: key-drift-check failed: /app/.env not found
-Exit code: 0
-Stderr: none
----
-[2026-03-12T03:31:23Z] ERROR ops-nightly
-Message: known-issues refresh failed: update-known-issues.sh attempted /root/.openclaw (permission denied)
-Exit code: 0
-Stderr: none
----
-[2026-03-12T03:31:24Z] ERROR ops-nightly
-Message: github-feed skill missing in workspace-spec-ops/skills; feed step not executed
-Exit code: 0
-Stderr: none
----
-[2026-03-13T03:01:13Z] ERROR repo-man-backups
-Message: key-drift-check.sh failed (exit 1): 
-Exit code: 1
-Stderr: none
----
-[2026-03-13T03:01:15Z] ERROR repo-man-backups
-Message: ws-backup.sh failed (exit 1): 
-Exit code: 1
-Stderr: none
----
-[2026-03-13T03:01:16Z] ERROR repo-man-backups
-Message: env-backup.sh failed (exit 1): 
-Exit code: 1
-Stderr: none
----
-[2026-03-13T03:01:19Z] ERROR repo-man-backups
-Message: skills-backup.sh failed (exit 1): 
-Exit code: 1
-Stderr: none
----
-[2026-03-13T03:31:32Z] ERROR ops-nightly
-Message: Nightly failures detected: key-drift/env-backup missing /app/.env, ws/skills backup push failed, repo-health repos unreachable+secrets mismatch, github-feed skill missing, update-known-issues permission denied creating /root
-Exit code: 0
-Stderr: none
----
-[2026-03-14T03:00:55Z] ERROR repo-man-backups
-Message: /home/node/.openclaw/scripts/key-drift-check.sh failed (exit 1): {"status":"ERROR","message":"env file not found","file":"/app/.env"}
-Exit code: 1
-Stderr: {"status":"ERROR","message":"env file not found","file":"/app/.env"}
----
-[2026-03-14T03:00:58Z] ERROR repo-man-backups
-Message: /home/node/.openclaw/scripts/ws-backup.sh failed (exit 1): {"status":"ERROR","message":"Commit succeeded but push failed","pushed":false}
-Exit code: 1
-Stderr: {"status":"ERROR","message":"Commit succeeded but push failed","pushed":false}
----
-[2026-03-14T03:00:58Z] ERROR repo-man-backups
-Message: /home/node/.openclaw/scripts/env-backup.sh failed (exit 1): {"status":"ERROR","message":"env file not found"}
-Exit code: 1
-Stderr: {"status":"ERROR","message":"env file not found"}
----
-[2026-03-14T03:01:02Z] ERROR repo-man-backups
-Message: /home/node/.openclaw/scripts/skills-backup.sh failed (exit 1): {"status":"ERROR","message":"Push failed","pushed":false}
-Exit code: 1
-Stderr: {"status":"ERROR","message":"Push failed","pushed":false}
----
-[2026-03-14T03:31:16Z] ERROR ops-nightly
-Message: github-feed step failed: gh CLI not found on host
-Exit code: 0
-Stderr: none
----
-[2026-03-14T03:31:16Z] ERROR ops-nightly
-Message: known-issues refresh failed: cannot access /root/.openclaw/bridge/known-issues.json (permission denied)
-Exit code: 0
-Stderr: none
----
-[2026-03-15T03:01:46Z] ERROR repo-man-backups
-Message: key-drift-check failed with exit 1: 
-Exit code: 1
-Stderr: none
----
-[2026-03-15T03:01:48Z] ERROR repo-man-backups
-Message: ws-backup failed with exit 128: Author identity unknown  *** Please tell me who you are.  Run    git config --global user.email \"you@example.com\"   git config --global user.name \"Your Name\"  to set your account's default identity. Omit --global to set the identity only in this repository.  fatal: unable to auto-detect email address (got 'node@0f4945af5233.(none)') 
-Exit code: 128
-Stderr: Author identity unknown
-
-*** Please tell me who you are.
-
-Run
-
-  git config --global user.email "you@example.com"
-  git config --global user.name "Your Name"
-
-to set your account's default identity.
-Omit --global to set the identity only in this repository.
-
-fatal: unable to auto-detect email address (got 'node@0f4945af5233.(none)')
----
-[2026-03-15T03:01:48Z] ERROR repo-man-backups
-Message: env-backup failed with exit 1: 
 Exit code: 1
 Stderr: none
 ---
@@ -495,4 +177,44 @@ Stderr: none
 Message: key-drift-check.sh failed: env file not found (/app/.env)
 Exit code: 0
 Stderr: none
+---
+[2026-03-26T03:00:34Z] WARN repo-man-backups
+Message: ws-backup.sh: commit succeeded but push failed
+Exit code: 0
+Stderr: none
+---
+[2026-03-26T03:00:42Z] ERROR repo-man-backups
+Message: env-backup.sh failed: env file not found (/app/.env)
+Exit code: 0
+Stderr: none
+---
+[2026-03-26T03:00:54Z] WARN repo-man-backups
+Message: skills-backup.sh: commit succeeded but push failed
+Exit code: 0
+Stderr: none
+---
+[2026-03-26T03:01:09Z] ERROR repo-man-backups
+Message: repo-health.sh: all repos unreachable, secrets inventory failed (missing .env)
+Exit code: 0
+Stderr: none
+---
+[2026-03-26T03:32:43Z] INFO nightly-report
+Message: Posted: yellow, 6 sections flagged (3 missing, 2 warnings, 1 ok)
+Exit code: 0
+Stderr: none
+---
+[2026-03-26T03:34:40Z] ERROR ops-nightly
+Message: Nightly run completed with critical failures: missing .env file, 3 repos unreachable, 60 recent cron failures, 6 failed messages in delivery queue.
+Exit code: 0
+Stderr: none
+---
+[2026-03-27T03:00:20Z] ERROR repo-man-backups
+Message: Key drift check failed: /app/.env not found. Aborting backup run.
+Exit code: 0
+Stderr: none
+---
+[2026-03-28T03:00:05Z] ERROR repo-man-backups
+Message: key-drift-check.sh failed: env file not found at /app/.env
+Exit code: 1
+Stderr: env file not found
 ---

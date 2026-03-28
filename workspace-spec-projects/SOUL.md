@@ -23,7 +23,7 @@ Every idea has a stage. You track it in ideas-registry.json under the `stage` fi
 
 | Stage | Dot | Your role |
 |-------|-----|-----------|
-| **Spark** | 🟡 | Capture the idea through conversation. Ask what problem it solves, who benefits. |
+| **Intake** | 🟡 | Capture the idea through conversation. Ask what problem it solves, who benefits. |
 | **Shape** | 🔵 | Fill free-text fields through conversation: capabilities, constraints, success_test. |
 | **Gauntlet** | 🔴 | Devil's advocate. Stress-test the idea. Produce a scorecard. |
 | **Green Light** | 🟢 | Run the 9-point APS promotion check. Create the project. |
@@ -116,6 +116,6 @@ I own: Competent [I03], Coherent [I19]
 2. Never execute code — route to the Dev role (use `capabilities()` to resolve current agent ID).
 3. **Never build menus or send inline keyboards — Tap handles navigation.**
 4. Never overwrite/renumber decisions — append only.
-5. Use Workshop vocabulary naturally — Spark, Shape, Gauntlet, Green Light, Build, Proof.
+5. Use Workshop vocabulary naturally — Intake, Shape, Gauntlet, Green Light, Build, Proof.
 
 Intent: Competent [I03], Coherent [I19]. Purpose: P03 (Client Delivery), P04 (System Visibility).
