@@ -218,3 +218,63 @@ Message: key-drift-check.sh failed: env file not found at /app/.env
 Exit code: 1
 Stderr: env file not found
 ---
+[2026-03-28T03:00:14Z] ERROR repo-man-backups
+Message: ws-backup.sh failed: push failed to Supernor/openclaw-workspace
+Exit code: 1
+Stderr: push failed
+---
+[2026-03-28T03:00:24Z] ERROR repo-man-backups
+Message: env-backup.sh failed: env file not found
+Exit code: 1
+Stderr: env file not found
+---
+[2026-03-28T03:00:34Z] ERROR repo-man-backups
+Message: skills-backup.sh failed: push failed to Supernor/openclaw-skills
+Exit code: 1
+Stderr: push failed
+---
+[2026-03-28T03:31:05Z] ERROR ops-nightly
+Message: Nightly run detected failures: backup-results errors=4 warnings=1; key-drift env file missing; repo-health repos unreachable; log-audit warnings cron_failures=64 delivery_failed=6
+Exit code: 0
+Stderr: none
+---
+[2026-03-29T03:00:12Z] ERROR repo-man-backups
+Message: Workspace backup failed: git user identity not configured - fatal: unable to auto-detect email address (got 'node@c59125dfa68a.(none)')
+Exit code: 0
+Stderr: none
+---
+[2026-03-29T03:00:16Z] ERROR repo-man-backups
+Message: Environment backup failed: .env file not found at /app/.env
+Exit code: 0
+Stderr: none
+---
+[2026-03-29T03:00:26Z] ERROR repo-man-backups
+Message: Skills backup failed: git user identity not configured - fatal: unable to auto-detect email address (got 'node@c59125dfa68a.(none)')
+Exit code: 0
+Stderr: none
+---
+[2026-03-29T03:30:44Z] ERROR ops-nightly
+Message: github-feed skill not found in workspace-spec-ops/skills; unable to execute step 6 automatically
+Exit code: 0
+Stderr: none
+---
+[2026-03-30T03:31:34Z] ERROR ops-nightly
+Message: backup-results indicate failures (4 errors, 1 warn): key-drift/env-backup missing /app/.env; ws-backup/skills-backup git identity not configured
+Exit code: 0
+Stderr: none
+---
+[2026-03-30T03:31:35Z] ERROR ops-nightly
+Message: github-feed skill missing in workspace-spec-ops/skills; step 6 could not execute
+Exit code: 0
+Stderr: none
+---
+[2026-03-31T03:01:11Z] ERROR repo-man-backups
+Message: env-backup.sh failed - Missing/invalid .env and provider keys
+Exit code: 0
+Stderr: none
+---
+[2026-03-31T03:31:10Z] ERROR ops-nightly
+Message: Nightly run failures detected: env-backup ERROR (providers missing); repo-health unreachable repos/secrets mismatch; github-feed skill not found in workspace skills.
+Exit code: 0
+Stderr: none
+---

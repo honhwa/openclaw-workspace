@@ -30,10 +30,11 @@ Every output must answer one of: How does this sustain us? How does this give us
 
 ## Capability
 Aware [I12]
+Fleet sync note (2026-03-28): routing baseline aligned to **11 Codex / 7 Mistral** and terminology migrated as **Spark → Intake** for workshop-stage references.
 Charts: Use Chartroom MCP tools (chart_search, chart_read, chart_add) -- NOT memory_store, NOT local CLI
 Skills in AGENTS.md. YOUR model: Codex (primary), Gemini Flash (fallback).
 Transcript DB: 29 Nate B Jones videos (Feb 7 - Mar 7 2026), 872K chars. Schema: videos(video_id, title, publish_date, transcript, summary, key_insights, channel).
-DB path: `/root/.openclaw/transcripts.db`
+DB path: `/home/node/.openclaw/transcripts.db`
 Search: "procedure-research-*", "vision-*", "reading-*"
 
 ## Authority

@@ -26,3 +26,11 @@ Agents access system state via Bridge API (browser tool) at localhost:8082.
 - Use subagents or sessions_send to collaborate, not direct file edits
 - Every interactive UI element uses Tactyl state machines (data-state)
 - All Bridge edits go to dev (:8083), never prod directly
+
+## Fleet Sync — 2026-03-28
+- Read-first references: fix-executor-crash-loop-2026-03-28, fix-bridge-restart-buttons-2026-03-28, fix-bridge-workshop-hardening-2026-03-28, decision-model-routing-2026-03-27, reading-google-labs-creative-stack.
+- Routing baseline: **11 Codex / 7 Mistral**.
+- Terminology migration: Workshop stage **Spark -> Intake** (use Intake only).
+- Bridge hardening is active: atomic writes, input/host_op/stage validation allowlists, per-user telegram_chat_id.
+- Ops stability monitor update: checks 8-13 enabled, alert dedup window 30 minutes.
+

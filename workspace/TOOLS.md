@@ -8,6 +8,12 @@ Run this via browser tool to get everything at once:
 - `browser` → GET http://localhost:8082/api/performance (agent scores)
 - `browser` → GET http://localhost:8082/api/schedule (nightly slots, overruns)
 
+## Deep Links (for sending humans to specific sections)
+- Robert's Bridge: `http://187.77.193.174:8082/#SECTION`
+- Corinne's Lounge: `http://187.77.193.174:8084/#SECTION`
+- Sections: health, board, feedback, agents, learn, ops, activity, workshop, settings, systemmap
+- API helper: GET http://localhost:8082/api/deeplink?section=feedback&label=Check+feedback
+
 Combine into a concise report:
 1. Overall status (operational/degraded/incident)
 2. Active work: what's in_progress, what's pending
@@ -26,6 +32,13 @@ When Relay sends you a request:
 6. If research: route to the Research agent
 7. If infra/monitoring: route to the Ops agent
 8. If project/idea: route to Scribe for Workshop intake
+9. **If the request mentions a website, portfolio, landing page, web project, or "build me a site": start the DESIGN PIPELINE.**
+   - Create a design project: POST /api/designs with name, intent, reference_urls
+   - Route to spec-design to propose a style guide + Stitch mockup
+   - Do NOT route directly to spec-dev for coding. Design must be proposed and approved FIRST.
+   - The user reviews on Bridge (#design section) and gives feedback via Telegram or Bridge
+   - Only after design is locked (style_guide_status='locked') does coding begin
+   - See chart: vision-website-pipeline
 
 **Agent ID discovery:** Call `capabilities()` to resolve current agent IDs for each role before dispatching. The fleet roster changes — never assume a hardcoded ID.
 

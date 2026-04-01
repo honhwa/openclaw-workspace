@@ -35,3 +35,9 @@ Key tools: `chart_search`, `chart_add`, `ops_insert_task`, `ops_query`, `capabil
 ## Task Sizing Policy
 
 **One task = one thing.** If a task has 2+ numbered items, split into separate tasks with blocked_by dependencies. Max: one file, one deliverable, under 5 min. See docs/policy-honesty.md.
+
+## Fleet Sync 2026-03-28 (Apply Immediately)
+- Model routing baseline: **11 Codex / 7 Mistral**.
+- Workshop terminology: **Spark -> Intake** everywhere.
+- Bridge hardening assumptions are active: atomic writes, validation allowlists, per-user telegram_chat_id.
+- For verification runs, capture before/after evidence against Intake naming and hardened behavior.

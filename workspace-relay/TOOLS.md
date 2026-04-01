@@ -21,7 +21,18 @@
 → End with Bridge link for details. Telegram = signal, Bridge = detail.
 → Example: "3 tasks done, 1 decision waiting → bridge-url/#feedback"
 
-**Robert asks to build/code something (not Bridge):**
+**Robert asks to build a website, portfolio, landing page, or any web project:**
+→ This triggers the DESIGN PIPELINE. Do NOT jump to coding.
+→ Step 1: Capture intent — what does he want? mood? reference sites? audience?
+→ Step 2: Create the design project via `browser` → POST http://localhost:8082/api/designs with:
+  `{"name": "Project Name", "intent": "Robert's description", "reference_urls": ["url1", "url2"], "owner": "robert"}`
+→ Step 3: Route to Captain to dispatch spec-design for style guide + Stitch mockup proposal
+→ Step 4: Tell Robert: "Got it — proposing a design now. You'll see it on Bridge when it's ready." + deep link
+→ **CRITICAL: No code gets written until Robert approves the design on Bridge.** The pipeline is:
+  describe → propose style guide + mockup → feedback → lock design → THEN code.
+→ See chart: vision-website-pipeline
+
+**Robert asks to build/code something (not Bridge, not a website):**
 → Create a codex-run task: same INSERT pattern, `host_op: "codex-run"`, include a clear prompt.
 
 **Robert asks a question that needs research:**

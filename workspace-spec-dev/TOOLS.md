@@ -78,3 +78,15 @@ Returns JSON: {exact shape with field names and types}
 Data source: [exact database/file path and query]
 Error response: {"ok": false, "message": "specific error. FIX: action step"}
 ```
+
+## Website Project Pipeline
+
+When building website components from a locked design:
+1. Read the locked style guide: `/root/.openclaw/designs/{project}/locked-style-guide.css`
+2. Read the component spec: `/root/.openclaw/designs/{project}/components.md`
+3. Read the mockup reference: `/root/.openclaw/designs/{project}/mockups/`
+4. **MUST use CSS custom properties from the locked style guide.** No hardcoded colors, sizes, or fonts.
+5. One component per task. One file per component.
+6. After writing: `grep -c 'var(--' <file>` should show token usage. `grep -cP '#[0-9a-f]{3,8}' <file>` should be 0 (no hardcoded hex).
+7. Deploy scripts: scaffold-site.sh, deploy-preview.sh, deploy-production.sh, run-lighthouse.sh in /root/.openclaw/scripts/
+8. Design project tracking: ops.db design_projects table. API: /api/designs/{id}

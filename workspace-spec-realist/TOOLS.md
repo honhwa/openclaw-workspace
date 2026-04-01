@@ -55,7 +55,7 @@ Key tools: `chart_search`, `chart_add`, `ops_insert_task`, `ops_query`, `capabil
 ## System Truth Enforcement (Realist's primary responsibility)
 
 ### Tools available:
-1. **system-troubleshoot.sh** — Zero-token live state probe. Run: `bash /root/.openclaw/scripts/system-troubleshoot.sh`
+1. **system-troubleshoot.sh** — Zero-token live state probe. Run: `bash /home/node/.openclaw/scripts/system-troubleshoot.sh`
    Checks: processes (alive + no orphans), task pipeline (flowing + not stuck), config (current model, quarantined agents), engine health, cron health, Bridge sync, resources, data integrity.
    Output: ISSUE → CAUSE → FIX for each problem found.
 
@@ -63,7 +63,7 @@ Key tools: `chart_search`, `chart_add`, `ops_insert_task`, `ops_query`, `capabil
    Detects: verification_failed, reverted_work, could_not_complete, empty_outcome, no_file_changes
 
 3. **agent-capability-review.py** — Identifies agent capability gaps from task history
-   Run: `python3 /root/.openclaw/scripts/agent-capability-review.py`
+   Run: `python3 /home/node/.openclaw/scripts/agent-capability-review.py`
 
 ### When to use:
 - Robert says "things are stuck" → run troubleshooter first

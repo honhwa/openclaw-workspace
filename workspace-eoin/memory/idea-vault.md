@@ -109,6 +109,14 @@ Each idea is stored as:
 - **Priority:** Now
 - **Status:** In Progress
 
+## IV-013 — Today Focus List (Captured)
+- **Idea:** Hold a short list of tasks for today without overload.
+- **Items:** possible rebranding, new website, Google integration, building lead machine, dishes, ordering food, trash.
+- **Why it matters:** Keeps business momentum while still handling home essentials.
+- **Next step:** Pick top 3 for today and defer the rest.
+- **Priority:** Today
+- **Status:** Captured
+
 ## IV-006 — Home Safety-First Triage (Must-Fix List)
 - **Idea:** Prioritize critical home risks before cosmetic upgrades.
 - **Why it matters:** Water and structural issues can compound quickly and become significantly more expensive.

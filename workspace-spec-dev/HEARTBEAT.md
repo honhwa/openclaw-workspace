@@ -20,6 +20,14 @@ Concurrency cap: 2 system-wide. Circuit breaker: 3 failures/hour.
 Self-decomposition: failed tasks output JSON subtasks.
 Agents access system state via Bridge API (browser tool) at localhost:8082.
 
+## Fleet Sync 2026-03-28
+- Routing baseline: **11 Codex / 7 Mistral**.
+- Terminology migration: Workshop stage **Spark -> Intake** (use Intake everywhere).
+- Bridge hardening assumptions are active:
+  - atomic writes enabled
+  - validation allowlists enabled
+  - per-user `telegram_chat_id` support enabled
+
 ## Rules
 - Check /api/tasks before starting work that might overlap
 - Check /api/bridge-state before restarting any service
