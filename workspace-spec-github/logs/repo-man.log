@@ -278,3 +278,18 @@ Message: Nightly run failures detected: env-backup ERROR (providers missing); re
 Exit code: 0
 Stderr: none
 ---
+[2026-04-01T03:00:12Z] ERROR repo-man-backups
+Message: Commit succeeded but push failed for ws-backup.sh
+Exit code: 0
+Stderr: none
+---
+[2026-04-01T03:30:49Z] ERROR ops-nightly
+Message: Nightly run detected failures: backup/env export error, repo reachability errors, and log-audit warnings (cron failures, failed delivery queue).
+Exit code: 0
+Stderr: none
+---
+[2026-04-01T03:30:50Z] ERROR ops-nightly
+Message: github-feed skill not found at /home/node/.openclaw/workspace-spec-ops/skills/github-feed/SKILL.md
+Exit code: 0
+Stderr: none
+---

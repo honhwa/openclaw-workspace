@@ -117,6 +117,14 @@ Each idea is stored as:
 - **Priority:** Today
 - **Status:** Captured
 
+## IV-014 — Agency Channel: OpenClaw Custom AI Agents (White-Label)
+- **Idea:** Sell OpenClaw-built custom AI agents to end businesses through partner marketing agencies.
+- **Why it matters:** Agencies already have client trust and distribution; can accelerate revenue faster than pure direct outreach.
+- **Concept:** CRS acts as backend AI implementation partner while agencies package/sell to their clients.
+- **Next step:** Define partner offer model, productized starter bundles, and fulfillment boundaries.
+- **Priority:** Now
+- **Status:** In Progress
+
 ## IV-006 — Home Safety-First Triage (Must-Fix List)
 - **Idea:** Prioritize critical home risks before cosmetic upgrades.
 - **Why it matters:** Water and structural issues can compound quickly and become significantly more expensive.
