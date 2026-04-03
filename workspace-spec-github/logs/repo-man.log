@@ -293,3 +293,23 @@ Message: github-feed skill not found at /home/node/.openclaw/workspace-spec-ops/
 Exit code: 0
 Stderr: none
 ---
+[2026-04-02T03:00:28Z] ERROR repo-man-backups
+Message: Nightly backup run initiated at 2026-04-02 03:00 UTC
+Exit code: 1. key-drift-check.sh failed with exit code 1
+Stderr: 2. ws-backup.sh failed: Commit succeeded but push failed
+---
+[2026-04-02T03:31:29Z] ERROR ops-nightly
+Message: github-feed failed: gh CLI not installed on host
+Exit code: 0
+Stderr: none
+---
+[2026-04-02T03:31:30Z] ERROR ops-nightly
+Message: backup-results indicates partial failure (3 errors, 1 warning)
+Exit code: 0
+Stderr: none
+---
+[2026-04-03T03:00:32Z] ERROR repo-man-backups
+Message: Nightly backup failed at script: /home/node/.openclaw/scripts/key-drift-check.sh\n
+Exit code: 1
+Stderr: none
+---
