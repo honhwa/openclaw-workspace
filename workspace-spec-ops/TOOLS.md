@@ -25,6 +25,17 @@
 - `~/.openclaw/scripts/incident-manager.sh` — GitHub Issues incident tracking
 - `~/.openclaw/scripts/workspace-audit.sh` — Workspace file health
 
+## Error Audit (your nightly duty)
+**Use the golden script handler — do NOT curl localhost.**
+Create a task with `host_op: "error-audit"` and the executor runs it on the host:
+```
+ops_insert_task(agent: "spec-ops", task: "Run error audit",
+  meta: {"host_op": "error-audit", "telegram_chat_id": "8561305605"}, urgency: "routine")
+```
+This runs `/root/.openclaw/scripts/error-audit.py` on the host, queries ops.db directly, groups root causes, and returns the report. No HTTP calls, no localhost access needed. Results also saved to `error_audit` table in ops.db.
+
+**NEVER try to curl localhost:8082 from inside the container — it will fail (connection refused).**
+
 ## Rules
 - Detect, report, escalate — never fix directly
 - Incidents have lifecycle: open > track > resolve > close

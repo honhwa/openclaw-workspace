@@ -20,16 +20,22 @@ Primary tooling. All output structured JSON. Zero LLM tokens for execution.
 | `incident-manager.sh` | `./incident-manager.sh open\|close\|list\|check [args]` |
 | `config-tag.sh` | `./config-tag.sh [label]` |
 
-## gh CLI
+## gh CLI (via golden script handler)
+**Do NOT run gh directly in the container — use the host-side handler.**
+Create a task with `host_op: "github-cli"` and put the gh command in `prompt`:
+```
+ops_insert_task(agent: "spec-github", task: "GitHub: list secrets",
+  meta: {"host_op": "github-cli", "prompt": "gh secret list --repo Supernor/openclaw-config"})
+```
 
 | Field | Value |
 |-------|-------|
-| Binary | `/usr/local/bin/gh` |
-| Auth | `GH_TOKEN` env var |
+| Handler | `host_op: "github-cli"` |
+| Auth | `GH_TOKEN` in /root/openclaw/.env |
 | Account | Supernor |
 
-**Common:**
-```bash
+**Common commands (put these in the prompt field):**
+```
 gh auth status
 gh secret list --repo Supernor/<repo>
 gh secret set <KEY> --body "<value>" --repo Supernor/<repo>
@@ -37,6 +43,15 @@ gh api repos/Supernor/<repo>
 gh issue list --repo Supernor/openclaw-config --label incident --state open
 gh issue create --repo Supernor/openclaw-config --title "..." --body "..." --label "incident,provider:X"
 ```
+
+## Key Infrastructure Repos
+| Repo | Purpose |
+|------|---------|
+| `Supernor/openclaw-config` | **Key vault** — 9 GitHub Secrets (API keys), env templates, config structure, incident logs |
+| `Supernor/openclaw-skills` | Custom skills, hooks, shell scripts |
+| `Supernor/openclaw-workspace` | Agent workspace configs, routing policies |
+| `Supernor/adaptive-project-system` | APS project governance (private) |
+| `Supernor/openclaw` | Personal fork of OpenClaw |
 
 ## jq
 

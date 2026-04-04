@@ -313,3 +313,18 @@ Message: Nightly backup failed at script: /home/node/.openclaw/scripts/key-drift
 Exit code: 1
 Stderr: none
 ---
+[2026-04-03T03:00:35Z] ERROR repo-man-backups
+Message: Nightly backup failed at script: /home/node/.openclaw/scripts/ws-backup.sh\n{"status":"ERROR","message":"Commit succeeded but push failed","pushed":false}
+Exit code: 1
+Stderr: none
+---
+[2026-04-03T03:00:36Z] ERROR repo-man-backups
+Message: Nightly backup failed at script: /home/node/.openclaw/scripts/env-backup.sh\n
+Exit code: 1
+Stderr: none
+---
+[2026-04-03T03:00:41Z] ERROR repo-man-backups
+Message: Nightly backup failed at script: /home/node/.openclaw/scripts/skills-backup.sh\n{"status":"ERROR","message":"Push failed","pushed":false}
+Exit code: 1
+Stderr: none
+---
