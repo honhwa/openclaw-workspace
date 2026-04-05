@@ -328,3 +328,13 @@ Message: Nightly backup failed at script: /home/node/.openclaw/scripts/skills-ba
 Exit code: 1
 Stderr: none
 ---
+[2026-04-04T03:00:39Z] WARN repo-man-backups
+Message: Nightly backup run completed with errors: ws-backup.sh push failed, env-backup.sh exit=1, skills-backup.sh exit=1
+Exit code: 0
+Stderr: none
+---
+[2026-04-04T03:31:07Z] ERROR ops-nightly
+Message: Nightly run detected failures: backups failed (ws/env/skills), key-drift-check exit=1, log-audit warnings (81 cron failures, 6 failed deliveries).
+Exit code: 0
+Stderr: none
+---
