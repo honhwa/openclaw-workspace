@@ -353,3 +353,23 @@ Message: backup failures detected: ws-backup push failed; env-backup no output
 Exit code: 0
 Stderr: none
 ---
+[2026-04-06T03:00:41Z] ERROR repo-man-backups
+Message: key-drift-check.sh exited with code 1
+Exit code: 0
+Stderr: none
+---
+[2026-04-06T03:00:42Z] ERROR repo-man-backups
+Message: ws-backup.sh: Commit succeeded but push failed
+Exit code: 0
+Stderr: none
+---
+[2026-04-06T03:00:45Z] ERROR repo-man-backups
+Message: env-backup.sh exited with code 1
+Exit code: 0
+Stderr: none
+---
+[2026-04-06T03:31:24Z] ERROR ops-nightly
+Message: Backup failures detected: key-drift-check FAIL; ws-backup push failed; env-backup FAIL
+Exit code: 0
+Stderr: none
+---
