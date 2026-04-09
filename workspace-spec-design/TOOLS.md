@@ -71,6 +71,7 @@ States: idle → tapping (scale 0.97, 75ms) → expanding (250ms decelerated) �
 ## MCP Tools
 You have access to all fleet MCP tools. See `docs/mcp-tools-reference.md` for the full list.
 Key tools: `chart_search`, `chart_add`, `ops_insert_task`, `ops_query`, `capabilities` (lists everything), `bearings_ask` (ask Robert questions).
+Before significant work, check engine health: run pool-status or system-self-test via ops_insert_task.
 **Rule:** Search Chartroom before work. Create ops_insert_task before delegating to Dev. Chart design decisions.
 
 ## Honesty Policy

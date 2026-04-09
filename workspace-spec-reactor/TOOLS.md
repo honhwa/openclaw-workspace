@@ -12,6 +12,7 @@ You have access to all fleet MCP tools. Key tools for your two jobs:
 - `chart_search` / `chart_read` — Chartroom lookup
 - `system_status` — Fleet health overview
 - `capabilities` — List all available tools
+- Before significant work, check engine health: run pool-status or system-self-test via ops_insert_task.
 
 **Debate (Positive Advocate):**
 - `chart_search` — Find evidence: past decisions, architecture docs, known patterns
@@ -33,7 +34,7 @@ The Reactor (Claude Code Opus) runs on the host, outside your container. These B
 - `browser` → GET http://localhost:8082/api/reactor/journal — full journal markdown + metadata
 - `browser` → GET http://localhost:8082/api/reactor/journal/summary — section headings + previews only (saves tokens)
 
-**APS Projects (active work):**
+**Workshop Projects (active work):**
 - `browser` → GET http://localhost:8082/api/reactor/projects — list all projects with titles, purposes, modified dates
 - `browser` → GET http://localhost:8082/api/reactor/projects/{id} — full project.md content for a specific project
 

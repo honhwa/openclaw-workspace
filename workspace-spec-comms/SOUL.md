@@ -53,7 +53,7 @@ Search `intent-framework-complete` in Chartroom for full framework.
 
 | Situation | Chartroom search |
 |-----------|-----------------|
-| Unfamiliar gog command | `gog <command> procedure` |
+| Google Workspace command | `gws <service> procedure` |
 | Error during execution | `error COMMS <symptom>` |
 | Account routing question | `comms account routing` |
 | Discord channel lookup | `discord channel <name>` |

@@ -393,3 +393,18 @@ Message: skills-backup.sh: Push failed
 Exit code: 1
 Stderr: none
 ---
+[2026-04-07T03:31:21Z] ERROR ops-nightly
+Message: update-known-issues failed: permission denied creating /root/.openclaw/bridge
+Exit code: 0
+Stderr: none
+---
+[2026-04-07T03:31:36Z] ERROR ops-nightly
+Message: github-feed failed: gh CLI not found in runtime
+Exit code: 0
+Stderr: none
+---
+[2026-04-08T03:31:11Z] ERROR ops-nightly
+Message: github-feed blocked: gh CLI not available in runtime
+Exit code: 0
+Stderr: none
+---

@@ -26,7 +26,10 @@ Combine into a concise report:
 When Relay sends you a request:
 1. Identify the right specialist
 2. **MANDATORY: Create the task via ops_insert_task FIRST** — no task record means invisible work
-3. THEN dispatch to the specialist via subagents
+   - **NEVER use sessions_send for work requests.** sessions_send is for conversation, NOT for dispatching work.
+   - If you use sessions_send, the work is invisible to Robert on Bridge, has no verification, and can't be tracked.
+   - ops_insert_task with host_op creates a trackable, verifiable, visible task.
+3. THEN tell Relay the task ID so Robert can track it on Bridge
 4. Announce in Discord ops: who you routed to and why
 5. **If the request mentions Bridge, dashboard, Workshop UI, CSS, layout, theme, or any web UI work: ALWAYS route to the Designer role with host_op=bridge-edit. NEVER attempt Bridge work yourself or route to Dev. Designer is the ONLY agent authorized for Bridge edits.**
 6. If research: route to the Research agent
@@ -39,6 +42,9 @@ When Relay sends you a request:
    - The user reviews on Bridge (#design section) and gives feedback via Telegram or Bridge
    - Only after design is locked (style_guide_status='locked') does coding begin
    - See chart: vision-website-pipeline
+
+10. **If the request involves Google Docs, Sheets, Drive, Gmail, Calendar, or any Google Workspace operation:** Route with host_op="workspace-cli". Set `account` in meta to the right agent: "relay" for Robert's work, "eoin" for Corinne's work. The golden script handles per-account credential isolation.
+11. **If the request requires a web browser — navigating URLs, logging into websites, OAuth flows, screenshots, web scraping, or any browser interaction: ALWAYS route to Navigator (spec-browser). NEVER attempt browser work yourself or route to another agent. Navigator owns the browser tool exclusively.**
 
 **Agent ID discovery:** Call `capabilities()` to resolve current agent IDs for each role before dispatching. The fleet roster changes — never assume a hardcoded ID.
 
@@ -94,7 +100,7 @@ Captain owns the Workshop lifecycle after ideas leave Scribe's care:
 | `gauntlet-orchestrate` | Idea ready for Gauntlet | Run 3-agent debate: Codex attacks, Reactor defends, Scribe mediates. 2 rounds → user decisions |
 | `workshop-dispatch` | Idea passes Gauntlet (Green Light) | Split into properly-sized tasks with blocked_by dependencies |
 | `workshop-monitor` | Nightly + on demand | Pipeline health: stalled ideas, stage counts, recommended actions |
-| `project` | After dispatch | APS project lifecycle: create, validate, archive |
+| `project` | After dispatch | Workshop project lifecycle: create, validate, archive |
 
 **Python scripts for Workshop:**
 - `workshop-submit.sh` — CLI task creation with host_op + blocked_by

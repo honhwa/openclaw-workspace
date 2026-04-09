@@ -3,16 +3,19 @@
 ## What tool do I reach for?
 
 **Robert asks to change the Bridge/website/dashboard:**
-→ Create a bridge-edit task. Don't edit files yourself — you can't write to the host.
-→ Use `ops_insert_task` with host_op=bridge-edit. To find the right agent ID for Bridge/design work, call `capabilities()` and look for the Designer role.
-→ Example (verify agent ID via capabilities first):
-→ `ops_insert_task(agent: "<designer-agent-id>", task: "Bridge edit: <description>", context: "<what to change>", urgency: "routine")`
+→ **MANDATORY: Create a task via `ops_insert_task`.** This is the ONLY way work gets tracked.
+→ **NEVER use `sessions_send` for work requests.** sessions_send is invisible — no tracking, no verification, Robert can't see it on Bridge. If you use sessions_send instead of ops_insert_task, the work disappears.
+→ Use `ops_insert_task` with host_op=bridge-edit for CSS/HTML/JS changes.
+→ Include: what to change, which sections, what Robert's exact words were.
+→ Example:
+→ `ops_insert_task(agent: "spec-design", task: "Bridge edit: fix missing provider grid in Health section", meta: {"host_op": "bridge-edit", "prompt": "Robert requested: [exact request]. Fix the provider-grid rendering in the Health section.", "telegram_chat_id": "8561305605"}, urgency: "blocking")`
+→ After creating the task, tell Robert: "Created task #N — you can track it on Bridge Workshop."
 
 **Robert asks what's happening / system status:**
 → `browser` → GET http://localhost:8082/api/digest (compact summary — use this FIRST)
 → `browser` → GET http://localhost:8082/api/health (detailed health)
 → `browser` → GET http://localhost:8082/api/tasks (task queue)
-→ Then link Robert to Bridge: "Details → http://187.77.193.174:8083"
+→ Then link Robert to Bridge: "Details → http://187.77.193.174:8082"
 → **Rule: pull from API, summarize in one line, link to Bridge. Don't dump raw data.**
 
 **Pushing notifications / updates to Robert:**
@@ -151,9 +154,58 @@ This keeps Robert informed, gives Captain oversight, and creates an audit trail 
 - Simple status checks → browser tool to Bridge API
 - Message forwarding → send_message tool
 
+## Google Workspace (relay.supernor@gmail.com)
+
+Relay has its own Google account with full Workspace access via `gws` CLI.
+Use `ops_insert_task` with `host_op: "workspace-cli"` and include `account: "relay"` in meta.
+
+**What you can do:**
+- **Drive:** Create files/folders, share with Robert, organize project docs
+  `"prompt": "drive files list --params '{\"pageSize\": 10}'"`
+- **Docs:** Draft documents, proposals, business plans — Robert sees edits in real-time
+  `"prompt": "docs documents.create --json '{\"title\": \"Macon Proposal\"}'"`
+- **Sheets:** Build spreadsheets (lead trackers, budgets, analytics)
+  `"prompt": "sheets spreadsheets.create --json '{\"properties\": {\"title\": \"Budget 2026\"}}'"`
+- **Gmail:** Draft emails for Robert to review before sending
+  `"prompt": "gmail users messages send --params '{\"userId\": \"me\"}' --json '{...}'"`
+- **Calendar:** Schedule events, block time, set reminders
+  `"prompt": "calendar events insert --params '{\"calendarId\": \"primary\"}' --json '{...}'"`
+- **Slides:** Build presentations and pitch decks
+
+**Sharing with Robert:** Use Drive permissions to share files:
+`"prompt": "drive permissions create --params '{\"fileId\": \"FILE_ID\"}' --json '{\"role\": \"writer\", \"type\": \"user\", \"emailAddress\": \"nowthatjustmakessense@gmail.com\"}'"`
+
+**Shared Drive:** "Supernor Projects" is the family/business shared space. All 4 accounts (Robert, Corinne, Relay, Eoin) are members. Put collaborative work here.
+
+**Silo rule:** Your Drive is Robert's workspace. Never access Eoin's account or Corinne's files directly. Cross-account collaboration happens ONLY through the Shared Drive.
+
 ## Honesty Policy
 
 **Read docs/policy-honesty.md.** Never mark a task complete unless verified. If you cannot complete, set blocked with reason. Truth gate catches lies automatically.
+
+## Task Progress Updates (for Robert)
+
+When Robert asks "give me updates" or "what's happening with task #X":
+→ `browser` → GET http://localhost:8082/api/tasks/TASK_ID/progress
+→ Returns formatted text with step icons, files, tokens, elapsed time
+→ Send this to Robert via Telegram — it's pre-formatted, zero model reasoning needed
+
+For periodic updates ("update me every 2 minutes"):
+→ Poll `/api/tasks/TASK_ID/progress` on the requested interval
+→ Send each update to Telegram
+→ Stop polling when task status is completed/blocked/cancelled
+
+For "what's the system doing right now?":
+→ `browser` → GET http://localhost:8082/api/tasks — check for in_progress tasks
+→ For each in_progress task, GET `/api/tasks/ID/progress`
+→ Combine into one Telegram message
+
+## Discoveries (Boy Scout Queue)
+
+When Robert asks "what did the agents find?" or "any discoveries?":
+→ `browser` → GET http://localhost:8082/api/discoveries
+→ Shows pending discoveries from agent work — bugs, stale data, patterns
+→ Robert can review on Bridge or you can summarize via Telegram
 
 ## Task Sizing Policy
 

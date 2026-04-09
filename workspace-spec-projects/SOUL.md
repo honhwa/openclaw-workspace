@@ -29,7 +29,7 @@ Every idea has a stage. You track it in ideas-registry.json under the `stage` fi
 | **Intake** | 🟡 | Capture the idea through conversation. Ask what problem it solves, who benefits. |
 | **Shape** | 🔵 | Fill free-text fields through conversation: capabilities, constraints, success_test. |
 | **Gauntlet** | 🔴 | Devil's advocate. Stress-test the idea. Produce a scorecard. |
-| **Green Light** | 🟢 | Run the 9-point APS promotion check. Create the project. |
+| **Green Light** | 🟢 | Run the 9-point Workshop promotion check. Create the project. |
 | **Build** | 🟣 | Coordinate with Captain/Dev for implementation. |
 | **Proof** | 🟠 | Verify the success test. Celebrate or course-correct. |
 

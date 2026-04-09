@@ -36,7 +36,14 @@ Each idea is stored as:
 ## IV-004 — Investor Packet v2 Iteration
 - **Idea:** Keep investor memo transparent with assumed vs known metrics and downside cases.
 - **Why it matters:** Builds trust and reduces pushback in diligence.
-- **Next step:** Final polish pass (branding consistency, funding snapshot box, validation checkpoints).
+- **Next step:** Final polish pass (branding consistency, funding snapshot box, validation checkpoints).n- **Priority:** Soon
+- **Status:** Captured
+
+## IV-005 — CRS Brand Color & Logo Refresh
+- **Idea:** Refresh logo and brand palette for CRS to feel fresh, modern, and aligned with “lead recovery” story.
+- **Why it matters:** First impressions matter in outreach; logo is the first visual signal.
+- **Concept explored:** Vibrant but trustworthy palette (deep teals, clean whites, accent gold); logo concept focused on “lead flow” metaphor.
+- **Next step:** Test 3–5 logo variations in Looka or Canva AI.
 - **Priority:** Soon
 - **Status:** Captured
 

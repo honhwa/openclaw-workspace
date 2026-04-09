@@ -48,6 +48,7 @@ When your gateway Gemini model is rate-limited or unavailable, use the `engine_d
 
 ### Chartroom Write Access
 - `chart_add` MCP tool — chart discoveries inline during research
+- Before significant work, check engine health: run pool-status or system-self-test via ops_insert_task.
   - Usage: chart_add(id, text, category, importance)
   - Categories: reading, issue, decision, agent, procedure, fact
   - Use for: research findings, model evaluations, source assessments

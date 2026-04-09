@@ -50,7 +50,7 @@ gh issue create --repo Supernor/openclaw-config --title "..." --body "..." --lab
 | `Supernor/openclaw-config` | **Key vault** — 9 GitHub Secrets (API keys), env templates, config structure, incident logs |
 | `Supernor/openclaw-skills` | Custom skills, hooks, shell scripts |
 | `Supernor/openclaw-workspace` | Agent workspace configs, routing policies |
-| `Supernor/adaptive-project-system` | APS project governance (private) |
+| `Supernor/adaptive-project-system` | Workshop project governance (private) |
 | `Supernor/openclaw` | Personal fork of OpenClaw |
 
 ## jq

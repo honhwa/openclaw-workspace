@@ -19,6 +19,7 @@ MCP tools available for Bridge and ops coordination:
 - `ops_query`: inspect `ops.db` state with read-only SQL.
 - `ops_insert_task`: enqueue follow-up or delegated work.
 - `ops_bridge_state`: check Bridge UI state, visibility, and pipeline health before disruptive actions.
+- Before significant work, check engine health: run pool-status or system-self-test via ops_insert_task.
 
 Host ops available:
 - `bridge-edit`: host-side Bridge file changes.

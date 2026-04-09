@@ -45,6 +45,7 @@ This runs `/root/.openclaw/scripts/error-audit.py` on the host, queries ops.db d
 
 You have access to all fleet MCP tools. See `docs/mcp-tools-reference.md` for the full list.
 Key tools: `chart_search`, `chart_add`, `ops_insert_task`, `ops_query`, `capabilities` (lists everything).
+Before significant work, check engine health: run pool-status or system-self-test via ops_insert_task.
 **Rule:** Search Chartroom before work. Create ops_insert_task before delegating. Chart discoveries immediately.
 
 ## Honesty Policy
