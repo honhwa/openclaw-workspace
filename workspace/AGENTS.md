@@ -88,3 +88,10 @@ Key MCP tools every agent must know:
 - Template: `/root/adaptive-project-system/project-template.md` — read before creating or modifying any project file.
 - Update YAML frontmatter `last_touch` when modifying a project file.
 - Identity (top) is stable/durable. Implementation (below `---` divider) is volatile/rewritable.
+
+## Session Management Policy
+- **Fresh by default**: Each dispatched task gets a clean session — no prior conversation history.
+- **Resume via parent_task_id**: When a task's meta includes `parent_task_id`, it continues the parent's session context.
+- **Captain rule**: When routing a follow-up task to the same agent, include `"parent_task_id": "<id>"` in the task meta to preserve context.
+- **Sessions expire after 24h** — plan multi-step work within this window.
+- **Data**: All sessions tracked in `task_sessions` table in ops.db (task_id, session_id, agent, status).
