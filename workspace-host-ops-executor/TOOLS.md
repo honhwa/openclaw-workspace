@@ -1,6 +1,14 @@
 # TOOLS.md - Local Notes
 
+IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost. Use host.docker.internal:8082 for Bridge and host.docker.internal:8083 for Bridge dev when applicable. For screenshots, use ops_insert_task with host_op=screenshot.
+
 Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+
+## MCP Tools
+
+- `ops_insert_task` — create a tracked task in `ops.db` for host-side execution or follow-up work.
+- `chart_search` — search Chartroom for prior fixes, patterns, and operational context before acting.
+- `chart_add` — record new tips, issues, and findings after you learn something worth preserving.
 
 ## What Goes Here
 

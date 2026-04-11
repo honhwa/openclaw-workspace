@@ -1,5 +1,7 @@
 # TOOLS.md — Strategist
 
+IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost. Use host.docker.internal:8082 for Bridge and host.docker.internal:8083 for Bridge dev when applicable. For screenshots, use ops_insert_task with host_op=screenshot.
+
 ## Skills (9)
 `educate`, `idea-propose`, `opportunity-scan`, `source-brief`, `strategy-brief`, `strategy-digest`, `transcript-analyze`, `validate-idea`, `video-analyze`
 

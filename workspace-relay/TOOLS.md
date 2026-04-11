@@ -1,5 +1,7 @@
 # TOOLS.md — Relay Quick Reference
 
+IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost. Use host.docker.internal:8082 for Bridge and host.docker.internal:8083 for Bridge dev when applicable. For screenshots, use ops_insert_task with host_op=screenshot.
+
 ## What tool do I reach for?
 
 **Robert asks to change the Bridge/website/dashboard:**
@@ -12,9 +14,9 @@
 → After creating the task, tell Robert: "Created task #N — you can track it on Bridge Workshop."
 
 **Robert asks what's happening / system status:**
-→ `browser` → GET http://localhost:8082/api/digest (compact summary — use this FIRST)
-→ `browser` → GET http://localhost:8082/api/health (detailed health)
-→ `browser` → GET http://localhost:8082/api/tasks (task queue)
+→ `browser` → GET http://host.docker.internal:8082/api/digest (compact summary — use this FIRST)
+→ `browser` → GET http://host.docker.internal:8082/api/health (detailed health)
+→ `browser` → GET http://host.docker.internal:8082/api/tasks (task queue)
 → Then link Robert to Bridge: "Details → http://187.77.193.174:8082"
 → **Rule: pull from API, summarize in one line, link to Bridge. Don't dump raw data.**
 
@@ -26,14 +28,47 @@
 
 **Robert asks to build a website, portfolio, landing page, or any web project:**
 → This triggers the DESIGN PIPELINE. Do NOT jump to coding.
+→ Treat nearby phrasing as the same intent: "make a web page", "we need an online presence", "page for this project", "site for the business", "sales page", "microsite".
+→ Also catch conversational phrasing: "we should put this online", "I want somewhere to send people", "this needs a web presence", "can we make this a real site".
+→ First ask exactly: "Sounds like a website project. Want to start one?"
+→ Include the Bridge deep link: <http://187.77.193.174:8082/#design>
 → Step 1: Capture intent — what does he want? mood? reference sites? audience?
-→ Step 2: Create the design project via `browser` → POST http://localhost:8082/api/designs with:
+→ Step 2: Create the design project via `browser` → POST http://host.docker.internal:8082/api/designs with:
   `{"name": "Project Name", "intent": "Robert's description", "reference_urls": ["url1", "url2"], "owner": "robert"}`
 → Step 3: Route to Captain to dispatch spec-design for style guide + Stitch mockup proposal
-→ Step 4: Tell Robert: "Got it — proposing a design now. You'll see it on Bridge when it's ready." + deep link
+→ Step 4: Tell Robert: "Got it — proposing a design now. You'll see it on Bridge when it's ready." + <http://187.77.193.174:8082/#design>
 → **CRITICAL: No code gets written until Robert approves the design on Bridge.** The pipeline is:
   describe → propose style guide + mockup → feedback → lock design → THEN code.
 → See chart: vision-website-pipeline
+
+## Web Project Intent Recognition
+
+Use this when Robert is speaking naturally, not issuing a clean command.
+
+Recognize these as website-start intents:
+- "I need a website"
+- "Make me a landing page"
+- "We need a web page for this"
+- "I want an online presence"
+- "Let's put this business online"
+- "I need a portfolio site"
+- "We should have a page for this project"
+
+Do not trigger this flow for:
+- Bridge/dashboard edits
+- bugs on an existing website
+- copy-only requests for an existing page
+- clearly technical implementation asks already tied to an approved design
+
+Preferred handoff:
+- Ask the start question
+- Link to `#design`
+- If Robert says yes, create the design project and dispatch the proposal work
+
+Recognition heuristic:
+- If Robert is talking about creating net-new public presence, treat it as website intent.
+- If Robert is talking about fixing, editing, or debugging an existing page/site/dashboard, do not use the website-start prompt.
+- In ambiguous cases, ask the website-start question first instead of assuming implementation work.
 
 **Robert asks to build/code something (not Bridge, not a website):**
 → Create a codex-run task: same INSERT pattern, `host_op: "codex-run"`, include a clear prompt.
@@ -48,17 +83,18 @@
 → `message` tool. Discord: always pass `channel: "discord"`, `to: "channel:<id>"`. Guild: `1477115265300037703`.
 
 **Something is broken / needs fixing:**
-→ `browser` → GET http://localhost:8082/api/tasks (check what failed)
+→ `browser` → GET http://host.docker.internal:8082/api/tasks (check what failed)
 → Create a fix task with the right engine
 
 **Before ANY dispatch:**
-→ `browser` → GET http://localhost:8082/api/tasks — don't duplicate existing work
+→ `browser` → GET http://host.docker.internal:8082/api/tasks — don't duplicate existing work
 
 ## Bridge (Command Center)
 
 Prod: http://187.77.193.174:8082 — Dev: http://187.77.193.174:8083
 ALL edits go to dev. Promote via Updates tab on prod.
-Bridge state: GET http://localhost:8082/api/bridge-state — check before restarting anything.
+Bridge state: GET http://host.docker.internal:8082/api/bridge-state — check before restarting anything.
+Design intake deep link: http://187.77.193.174:8082/#design
 
 ## Agent Roster (for dispatch)
 
@@ -186,7 +222,7 @@ Use `ops_insert_task` with `host_op: "workspace-cli"` and include `account: "rel
 ## Task Progress Updates (for Robert)
 
 When Robert asks "give me updates" or "what's happening with task #X":
-→ `browser` → GET http://localhost:8082/api/tasks/TASK_ID/progress
+→ `browser` → GET http://host.docker.internal:8082/api/tasks/TASK_ID/progress
 → Returns formatted text with step icons, files, tokens, elapsed time
 → Send this to Robert via Telegram — it's pre-formatted, zero model reasoning needed
 
@@ -196,14 +232,14 @@ For periodic updates ("update me every 2 minutes"):
 → Stop polling when task status is completed/blocked/cancelled
 
 For "what's the system doing right now?":
-→ `browser` → GET http://localhost:8082/api/tasks — check for in_progress tasks
+→ `browser` → GET http://host.docker.internal:8082/api/tasks — check for in_progress tasks
 → For each in_progress task, GET `/api/tasks/ID/progress`
 → Combine into one Telegram message
 
 ## Discoveries (Boy Scout Queue)
 
 When Robert asks "what did the agents find?" or "any discoveries?":
-→ `browser` → GET http://localhost:8082/api/discoveries
+→ `browser` → GET http://host.docker.internal:8082/api/discoveries
 → Shows pending discoveries from agent work — bugs, stale data, patterns
 → Robert can review on Bridge or you can summarize via Telegram
 

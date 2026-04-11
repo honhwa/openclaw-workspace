@@ -1,5 +1,7 @@
 # TOOLS.md - spec-dev
 
+IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost. Use host.docker.internal:8082 for Bridge and host.docker.internal:8083 for Bridge dev when applicable. For screenshots, use ops_insert_task with host_op=screenshot.
+
 Bridge files live on the host at `/root/bridge-dev/` and are bind-mounted into this container. Treat that directory as the source of truth for Bridge UI and bridge-side edits.
 
 Design rules for Bridge work:
@@ -16,6 +18,7 @@ Dev/prod workflow:
 
 MCP tools available for Bridge and ops coordination:
 - `chart_search`: search Chartroom context before starting work.
+- `chart_add`: add Chartroom entries to bridge missing tool gaps
 - `ops_query`: inspect `ops.db` state with read-only SQL.
 - `ops_insert_task`: enqueue follow-up or delegated work.
 - `ops_bridge_state`: check Bridge UI state, visibility, and pipeline health before disruptive actions.
@@ -53,7 +56,7 @@ Operational rule:
 ### What causes failures:
 1. **API contract mismatch** — If the plan mentions a field name in CSS classes (e.g., `.board-shape-field-label`) but the API doesn't return `label`, Codex will write JS expecting `label` and it shows "undefined." **FIX: Always include the exact JSON response shape in the prompt, not just the endpoint path.**
 
-2. **Localhost verification impossible** — Codex runs in a sandbox that cannot reach `localhost:8083`. Never include `curl localhost:8083` as a verification step. **FIX: Say "Do NOT attempt HTTP verification — the host verifies after you finish."**
+2. **Localhost verification impossible** — Codex runs in a sandbox that cannot reach `host.docker.internal:8083`. Never include `curl host.docker.internal:8083` as a verification step. **FIX: Say "Do NOT attempt HTTP verification — the host verifies after you finish."**
 
 3. **Permission denied on some files** — Codex sometimes can't write to files the executor manages. If a task fails with permission errors, it needs to be a Claude Code (reactor) task instead. **FIX: Check file ownership before assigning to Codex.**
 

@@ -1,5 +1,7 @@
 # TOOLS.md — Research Agent
 
+IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost. Use host.docker.internal:8082 for Bridge and host.docker.internal:8083 for Bridge dev when applicable. For screenshots, use ops_insert_task with host_op=screenshot.
+
 ## Skills (6)
 `ai-news`, `gemini-check`, `research-estimate`, `research`, `transcript-query`, `youtube-ingest`
 
@@ -55,6 +57,8 @@ When your gateway Gemini model is rate-limited or unavailable, use the `engine_d
   - ID convention: research-<topic> or reading-<topic>
 - `chart_search` MCP tool — search existing charts before adding
 - `chart_read` MCP tool — read a specific chart by ID
+- `chart_add` MCP tool — add new research findings to Chartroom (id, text, category, importance)
+- `ops_insert_task` MCP tool — queue follow-up tasks from research for execution
 
 ## Honesty Policy
 

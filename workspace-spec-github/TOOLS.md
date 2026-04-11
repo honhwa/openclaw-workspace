@@ -1,5 +1,7 @@
 # TOOLS.md — spec-github (Repo-Man)
 
+IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost. Use host.docker.internal:8082 for Bridge and host.docker.internal:8083 for Bridge dev when applicable. For screenshots, use ops_insert_task with host_op=screenshot.
+
 ## Skills (11)
 `config-tag`, `env-backup`, `github-feed`, `key-drift-check`, `log-decision`, `log-event`, `repo-health`, `rotate-key`, `skills-backup`, `upstream-check`, `workspace-backup`
 

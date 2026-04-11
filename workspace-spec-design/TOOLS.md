@@ -1,15 +1,17 @@
 # TOOLS.md — Frontend Dev
 
+IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost. Use host.docker.internal:8082 for Bridge and host.docker.internal:8083 for Bridge dev when applicable. For screenshots, use ops_insert_task with host_op=screenshot.
+
 ## What tool do I reach for?
 
 **Bridge edit request:**
-→ FIRST: `browser` → GET http://localhost:8082/api/tasks — see what's already in progress, don't duplicate
+→ FIRST: `browser` → GET http://host.docker.internal:8082/api/tasks — see what's already in progress, don't duplicate
 → THEN: Read the Bridge files. Edit on dev (:8083), never prod.
-→ AFTER: `browser` → GET http://localhost:8083/api/health — verify dev is healthy after changes
+→ AFTER: `browser` → GET http://host.docker.internal:8083/api/health — verify dev is healthy after changes
 → COORDINATE: Check if Dev (spec-dev) has related pending tasks. Use `ops_insert_task` to assign backend API work to Dev.
 
 **Sync with fleet before starting:**
-→ `browser` → GET http://localhost:8082/api/tasks — all fleet work in progress
+→ `browser` → GET http://host.docker.internal:8082/api/tasks — all fleet work in progress
 → `ops_query` "SELECT id, agent, status, substr(task,1,60) FROM tasks WHERE status IN ('pending','in_progress')" — quick queue
 → If you need a human decision: `bearings_ask` with question + predicted options → Robert answers on Bridge/Feedback
 
@@ -23,10 +25,10 @@
 Don't load everything. Load the index, find your topic, read that ONE chart.
 
 **Need to check what was done before:**
-→ browser → GET http://localhost:8082/api/tasks
+→ browser → GET http://host.docker.internal:8082/api/tasks
 
 **Need to check if user is watching:**
-→ browser → GET http://localhost:8082/api/bridge-state
+→ browser → GET http://host.docker.internal:8082/api/bridge-state
 
 **Need to ask Robert a design question:**
 → Use `bearings_ask` with question + predicted options. Robert answers on Bridge/Feedback. Don't block — keep working with your best guess.
@@ -81,7 +83,7 @@ Before significant work, check engine health: run pool-status or system-self-tes
 ### Designer Screenshot Requirement
 
 For EVERY Bridge edit, take before/after screenshots:
-1. **Before:** `browser` → navigate to the affected section at http://localhost:8083, describe or capture current state
+1. **Before:** `browser` → navigate to the affected section at http://host.docker.internal:8083, describe or capture current state
 2. **Make your changes**
 3. **After:** `browser` → navigate to same section, describe or capture new state
 4. **Include both in outcome** — "Before: task list had no IDs. After: task list shows #N badges."
@@ -101,7 +103,7 @@ For EVERY Bridge edit, take before/after screenshots:
 ### What causes failures:
 1. **API field mismatch** — If you're building UI that consumes an API, include the EXACT JSON response in your prompt. Codex will guess field names from CSS class names if you don't specify. This caused "undefined" showing on Bridge.
 
-2. **Cannot verify via localhost** — Do NOT include `curl localhost:8083` or `systemctl restart openclaw-bridge-dev` in prompts. Codex can't reach Bridge from its sandbox. Say: "Do NOT attempt HTTP verification — the host verifies after you finish."
+2. **Cannot verify via localhost** — Do NOT include `curl host.docker.internal:8083` or `systemctl restart openclaw-bridge-dev` in prompts. Codex can't reach Bridge from its sandbox. Say: "Do NOT attempt HTTP verification — the host verifies after you finish."
 
 3. **Read STYLE-GUIDE.md first** — Always start prompts with "Read /root/bridge-dev/STYLE-GUIDE.md." Codex follows it when it reads it, invents its own patterns when it doesn't.
 

@@ -1,6 +1,14 @@
 # TOOLS.md — Corinne
 
+IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost. Use host.docker.internal:8082 for Bridge and host.docker.internal:8083 for Bridge dev when applicable. For screenshots, use ops_insert_task with host_op=screenshot.
+
 ## How Things Work (plain language)
+
+## Team Tools (plain language)
+
+- `ops_insert_task` tells the team to do a tracked piece of work.
+- `chart_search` looks up past notes, tips, and decisions before starting.
+- `chart_add` saves a new tip, discovery, or issue so the team can reuse it later.
 
 **To start a project:**
 Tell Eoin on Telegram: "I want to build a website for lead capture" or "I have an idea for..." — Eoin handles the rest. He'll ask you some questions, then the team starts working.

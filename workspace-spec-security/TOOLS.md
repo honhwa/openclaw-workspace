@@ -1,5 +1,7 @@
 # TOOLS.md — Security Officer
 
+IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost. Use host.docker.internal:8082 for Bridge and host.docker.internal:8083 for Bridge dev when applicable. For screenshots, use ops_insert_task with host_op=screenshot.
+
 ## Skills (2)
 `security-audit`, `security-report`
 

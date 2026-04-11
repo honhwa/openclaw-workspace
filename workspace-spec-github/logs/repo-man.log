@@ -408,3 +408,13 @@ Message: github-feed blocked: gh CLI not available in runtime
 Exit code: 0
 Stderr: none
 ---
+[2026-04-10T03:00:24Z] ERROR repo-man-backups
+Message: Workspace backup commit succeeded but remote push failed during nightly run at 2026-04-10 03:00 UTC
+Exit code: 0
+Stderr: none
+---
+[2026-04-10T03:00:24Z] ERROR repo-man-backups
+Message: Environment backup failed: env file not found during nightly run at 2026-04-10 03:00 UTC
+Exit code: 0
+Stderr: none
+---

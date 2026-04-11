@@ -1,5 +1,7 @@
 # TOOLS.md - Local Notes
 
+IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost. Use host.docker.internal:8082 for Bridge and host.docker.internal:8083 for Bridge dev when applicable. For screenshots, use ops_insert_task with host_op=screenshot.
+
 ## Skills (3)
 - `onboard` — First-impression conversation flow for Corinne (greeting, tone, goals, ChatGPT import)
 - `prepare` — Self-assessment: am I ready for Corinne's next interaction?
@@ -37,7 +39,7 @@ You have direct access to these tools. Use them — they are your core capabilit
 When Corinne wants to build a website, landing page, or any web project:
 1. Capture what she wants in her words — mood, colors, examples ("I want it to feel like...")
 2. Ask her for any websites she likes for inspiration (reference URLs)
-3. Create the design project: `browser` → POST http://localhost:8082/api/designs with:
+3. Create the design project: `browser` → POST http://host.docker.internal:8082/api/designs with:
    `{"name": "CRS Lead Capture", "intent": "Corinne's description", "reference_urls": ["url1"], "owner": "corinne"}`
 4. Route to Captain to dispatch spec-design for a style guide + mockup proposal
 5. Tell Corinne: "The team is putting together some design ideas for you! I'll show you when they're ready." → deep link to The Lounge http://187.77.193.174:8084/#design
@@ -183,8 +185,8 @@ Route to Captain via subagents for the full picture. Then translate for Corinne:
 Captain speaks in system metrics. You speak in warm, human terms. Never expose task IDs, engine names, or technical details unless she asks.
 
 **Quick check without Captain:**
-- `browser` → GET http://localhost:8082/api/digest — compact summary of what happened
-- `browser` → GET http://localhost:8082/api/health — is the system healthy?
+- `browser` → GET http://host.docker.internal:8082/api/digest — compact summary of what happened
+- `browser` → GET http://host.docker.internal:8082/api/health — is the system healthy?
 - If overall = "operational" → "Everything's running great!"
 - If overall = "incident" → "There's a small issue being worked on, nothing to worry about"
 - For details, point Corinne to The Lounge with a deep link (warm language):
@@ -194,7 +196,7 @@ Captain speaks in system metrics. You speak in warm, human terms. Never expose t
   - "Learn more about how things work" → http://187.77.193.174:8084/#learn
   - "See who's on the team" → http://187.77.193.174:8084/#agents
 - Deep link pattern: `http://187.77.193.174:8084/#SECTION` where SECTION is: learn, health, board, feedback, agents
-- API helper: GET http://localhost:8082/api/deeplink?section=feedback&label=Check+feedback → returns {"url": "...", "label": "..."}
+- API helper: GET http://host.docker.internal:8082/api/deeplink?section=feedback&label=Check+feedback → returns {"url": "...", "label": "..."}
 - **Rule:** Telegram is the signal. The Lounge is the detail. Don't dump data in chat.
 
 **Tool Discovery:**

@@ -1,5 +1,7 @@
 # TOOLS.md — Reactor Manager
 
+IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost. Use host.docker.internal:8082 for Bridge and host.docker.internal:8083 for Bridge dev when applicable. For screenshots, use ops_insert_task with host_op=screenshot.
+
 ## Skills (6)
 `reactor-handoff-ops`, `reactor-incident-recovery`, `reactor-ledger-audit`, `reactor-queue-ops`, `reactor-status`, `reactor-verify`
 
@@ -9,6 +11,7 @@ You have access to all fleet MCP tools. Key tools for your two jobs:
 
 **Monitoring:**
 - `ops_query` — Read-only SQL against ops.db (tasks, issues, kv)
+- `ops_insert_task` — Create tasks for follow-up or delegated work
 - `chart_search` / `chart_read` — Chartroom lookup
 - `system_status` — Fleet health overview
 - `capabilities` — List all available tools
@@ -16,6 +19,7 @@ You have access to all fleet MCP tools. Key tools for your two jobs:
 
 **Debate (Positive Advocate):**
 - `chart_search` — Find evidence: past decisions, architecture docs, known patterns
+- `chart_add` — Add Chartroom entries for new context
 - `ops_query` — Check issue history, task relationships, bundle contents
 - `bearings_ask` — Escalate intent questions to Robert (async, non-blocking):
   ```
@@ -31,12 +35,12 @@ You have access to all fleet MCP tools. Key tools for your two jobs:
 The Reactor (Claude Code Opus) runs on the host, outside your container. These Bridge API endpoints give you read-only access:
 
 **Journal (current session state):**
-- `browser` → GET http://localhost:8082/api/reactor/journal — full journal markdown + metadata
-- `browser` → GET http://localhost:8082/api/reactor/journal/summary — section headings + previews only (saves tokens)
+- `browser` → GET http://host.docker.internal:8082/api/reactor/journal — full journal markdown + metadata
+- `browser` → GET http://host.docker.internal:8082/api/reactor/journal/summary — section headings + previews only (saves tokens)
 
 **Workshop Projects (active work):**
-- `browser` → GET http://localhost:8082/api/reactor/projects — list all projects with titles, purposes, modified dates
-- `browser` → GET http://localhost:8082/api/reactor/projects/{id} — full project.md content for a specific project
+- `browser` → GET http://host.docker.internal:8082/api/reactor/projects — list all projects with titles, purposes, modified dates
+- `browser` → GET http://host.docker.internal:8082/api/reactor/projects/{id} — full project.md content for a specific project
 
 **When to use these:**
 - Monitoring: check journal summary to see what the Reactor is working on
