@@ -418,3 +418,8 @@ Message: Environment backup failed: env file not found during nightly run at 202
 Exit code: 0
 Stderr: none
 ---
+[2026-04-11T03:31:28Z] ERROR ops-nightly
+Message: Nightly run failures: backup errors (ws push failed, env missing), repo health unreachable (3/3), key-drift-check failed (env missing), github-feed blocked (gh CLI not installed)
+Exit code: 0
+Stderr: none
+---
