@@ -423,3 +423,18 @@ Message: Nightly run failures: backup errors (ws push failed, env missing), repo
 Exit code: 0
 Stderr: none
 ---
+[2026-04-12T03:31:15Z] ERROR ops-nightly
+Message: key-drift-check failed: env file not found at /app/.env
+Exit code: 0
+Stderr: none
+---
+[2026-04-12T03:31:16Z] ERROR ops-nightly
+Message: backup-results indicate ws-backup push failed and env-backup failed due missing /app/.env
+Exit code: 0
+Stderr: none
+---
+[2026-04-12T03:31:16Z] ERROR ops-nightly
+Message: github-feed skill blocked: gh CLI not found in runtime
+Exit code: 0
+Stderr: none
+---
