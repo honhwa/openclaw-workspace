@@ -438,3 +438,33 @@ Message: github-feed skill blocked: gh CLI not found in runtime
 Exit code: 0
 Stderr: none
 ---
+[2026-04-13T03:00:53Z] ERROR repo-man-backups
+Message: Nightly backup run: 3 scripts failed (key-drift-check.sh, ws-backup.sh, env-backup.sh) - root cause: .env file not found at /app/.env and GitHub repos unreachable
+Exit code: 1
+Stderr: none
+---
+[2026-04-13T03:33:40Z] ERROR ops-nightly
+Message: Nightly failures: key/env backup failures (.env missing), ws-backup push failure, repo-health unreachable(3), cron failures=90, delivery queue failed=6, github-feed blocked (gh CLI missing)
+Exit code: 0
+Stderr: none
+---
+[2026-04-13T03:33:45Z] INFO nightly-report
+Message: Posted: red, 4 sections flagged
+Exit code: 0
+Stderr: none
+---
+[2026-04-13T03:33:45Z] INFO dashboard-update
+Message: Updated: red
+Exit code: 0
+Stderr: none
+---
+[2026-04-13T03:33:50Z] INFO changelog-post
+Message: Posted: none (no new sections past cursor 2026-03-03)
+Exit code: 0
+Stderr: none
+---
+[2026-04-13T03:33:50Z] ERROR github-feed
+Message: Failed: gh CLI not installed in runtime
+Exit code: 0
+Stderr: none
+---
