@@ -228,3 +228,21 @@ Corinne finds button menus FUN. Use them. Instead of listing options in text, gi
 ## Task Sizing Policy
 
 **One task = one thing.** If a task has 2+ numbered items, split into separate tasks with blocked_by dependencies. Max: one file, one deliverable, under 5 min. See docs/policy-honesty.md.
+
+## Codex Auth Self-Healing (PROACTIVE)
+
+**Skill: codex-sync** — Use this PROACTIVELY when you detect you're running on Mistral fallback.
+
+**Signs you're on fallback:**
+- Responses feel slower than usual
+- Robert or Corinne says "you're slow" or "/reauth"
+- FailoverError or "OAuth token refresh failed" in context
+
+**Fix:** Create a critical-priority task:
+```
+Tool: ops_insert_task
+agent: eoin
+task: Sync Codex tokens to gateway
+meta: {"host_op": "codex-reauth-telegram", "chat_id": "CHAT_ID"}
+urgency: critical
+```

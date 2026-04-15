@@ -108,3 +108,28 @@ Captain owns the Workshop lifecycle after ideas leave Scribe's care:
 - `intake-engine.py` — 9-point gate check + field validation
 - `project.py` — project CRUD
 - `workshop-trace.py` — metrics dashboard
+
+## Requesting New Golden Scripts (Self-Improvement)
+
+If you need a capability that doesn't exist as a host_op handler, you can REQUEST one.
+Codex CLI runs on the host with full filesystem access — it can create new scripts.
+
+**Pattern:**
+```
+Tool: ops_insert_task
+agent: spec-dev
+task: Create golden script: <description>
+meta: {
+  "host_op": "codex-run",
+  "prompt": "Create /root/.openclaw/scripts/<script-name>.sh (or .py) that <does what>. Make it executable. Add alignment header comments. Test it.",
+  "dir": "/root/.openclaw/scripts"
+}
+urgency: routine
+```
+
+**Rules:**
+- Scripts go in /root/.openclaw/scripts/
+- Add alignment header (Role, Dependencies, Key patterns, Reference)
+- Make executable (chmod +x)
+- To make it a host_op handler, chart it and a human will register it in the executor
+- For urgent needs, use urgency: critical

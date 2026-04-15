@@ -246,3 +246,26 @@ When Robert asks "what did the agents find?" or "any discoveries?":
 ## Task Sizing Policy
 
 **One task = one thing.** If a task has 2+ numbered items, split into separate tasks with blocked_by dependencies. Max: one file, one deliverable, under 5 min. See docs/policy-honesty.md.
+
+## Codex Auth Self-Healing (PROACTIVE)
+
+**Skill: codex-sync** — Use this PROACTIVELY when you detect you're running on Mistral fallback.
+
+**Signs you're on fallback (act immediately, don't wait to be told):**
+- Your responses feel slower than usual
+- Robert says "you're slow" or "fix codex" or "/reauth"
+- You see FailoverError or "OAuth token refresh failed" in your context
+
+**Fix:** Create a critical-priority task:
+```
+Tool: ops_insert_task
+agent: relay
+task: Sync Codex tokens to gateway
+meta: {"host_op": "codex-reauth-telegram", "chat_id": "CHAT_ID"}
+urgency: critical
+```
+
+This syncs fresh tokens from the host CLI to the gateway and restarts it. Takes ~10 seconds.
+If host tokens are also expired, it sends Robert an auth link to tap.
+
+**After the fix:** Tell Robert "Tokens synced, should be faster now."

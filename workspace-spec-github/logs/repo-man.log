@@ -468,3 +468,18 @@ Message: Failed: gh CLI not installed in runtime
 Exit code: 0
 Stderr: none
 ---
+[2026-04-14T03:00:29Z] ERROR repo-man-backups
+Message: Nightly backup run repo-man-nightly-hde96n01: key-drift-check.sh failed - env file not found
+Exit code: 0
+Stderr: none
+---
+[2026-04-14T03:00:31Z] ERROR repo-man-backups
+Message: Nightly backup run repo-man-nightly-hde96n01: ws-backup.sh failed - Commit succeeded but push failed
+Exit code: 0
+Stderr: none
+---
+[2026-04-14T03:00:37Z] ERROR repo-man-backups
+Message: Nightly backup run repo-man-nightly-hde96n01: env-backup.sh failed - env file not found
+Exit code: 0
+Stderr: none
+---
