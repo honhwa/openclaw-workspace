@@ -1,313 +1,3 @@
-Exit code: 1
-Stderr: none
----
-[2026-03-15T03:01:51Z] ERROR repo-man-backups
-Message: skills-backup failed with exit 128: Author identity unknown  *** Please tell me who you are.  Run    git config --global user.email \"you@example.com\"   git config --global user.name \"Your Name\"  to set your account's default identity. Omit --global to set the identity only in this repository.  fatal: unable to auto-detect email address (got 'node@0f4945af5233.(none)') 
-Exit code: 128
-Stderr: Author identity unknown
-
-*** Please tell me who you are.
-
-Run
-
-  git config --global user.email "you@example.com"
-  git config --global user.name "Your Name"
-
-to set your account's default identity.
-Omit --global to set the identity only in this repository.
-
-fatal: unable to auto-detect email address (got 'node@0f4945af5233.(none)')
----
-[2026-03-15T03:32:15Z] ERROR ops-nightly
-Message: backup-results.json is empty (0 bytes); cannot evaluate backup status
-Exit code: 0
-Stderr: none
----
-[2026-03-15T03:32:15Z] ERROR ops-nightly
-Message: key-drift-check.sh failed: env file not found (/app/.env)
-Exit code: 0
-Stderr: none
----
-[2026-03-15T03:32:15Z] ERROR ops-nightly
-Message: github-feed skill/script not found; unable to generate ops-github activity feed
-Exit code: 0
-Stderr: none
----
-[2026-03-19T17:44:51Z] ERROR ops-nightly
-Message: backup-results.json is empty (0 bytes)
-Exit code: 0
-Stderr: none
----
-[2026-03-19T17:45:07Z] ERROR ops-nightly
-Message: github-feed skill blocked: gh CLI not found on host
-Exit code: 0
-Stderr: none
----
-[2026-03-20T03:00:39Z] ERROR repo-man-backups
-Message: key-drift-check failed: {\"status\":\"ERROR\",\"message\":\"env file not found\",\"file\":\"/app/.env\"} 
-Exit code: 0
-Stderr: none
----
-[2026-03-20T03:00:41Z] ERROR repo-man-backups
-Message: ws-backup failed: {\"status\":\"ERROR\",\"message\":\"Commit succeeded but push failed\",\"pushed\":false} 
-Exit code: 0
-Stderr: none
----
-[2026-03-20T03:00:41Z] ERROR repo-man-backups
-Message: env-backup failed: {\"status\":\"ERROR\",\"message\":\"env file not found\"} 
-Exit code: 0
-Stderr: none
----
-[2026-03-20T03:00:44Z] ERROR repo-man-backups
-Message: skills-backup failed: {\"status\":\"ERROR\",\"message\":\"Push failed\",\"pushed\":false} 
-Exit code: 0
-Stderr: none
----
-[2026-03-20T03:01:00Z] ERROR repo-man-backups
-Message: key-drift-check failed: {\"status\":\"ERROR\",\"message\":\"env file not found\",\"file\":\"/app/.env\"}
-Exit code: 0
-Stderr: none
----
-[2026-03-20T03:01:01Z] ERROR repo-man-backups
-Message: ws-backup failed: {\"status\":\"ERROR\",\"message\":\"Commit succeeded but push failed\",\"pushed\":false}
-Exit code: 0
-Stderr: none
----
-[2026-03-20T03:01:02Z] ERROR repo-man-backups
-Message: env-backup failed: {\"status\":\"ERROR\",\"message\":\"env file not found\"}
-Exit code: 0
-Stderr: none
----
-[2026-03-20T03:30:52Z] ERROR ops-nightly
-Message: github-feed failed: gh CLI not found (unable to fetch commits/issues/tags for all repos)
-Exit code: 0
-Stderr: none
----
-[2026-03-21T03:00:03Z] ERROR repo-man-backups
-Message: Nightly backup failed at key-drift-check.sh: env file not found at /app/.env
-Exit code: 1
-Stderr: env file not found
----
-[2026-03-21T03:30:44Z] ERROR ops-nightly
-Message: gh CLI not found; skipping github-feed
-Exit code: 0
-Stderr: none
----
-[2026-03-21T03:31:44Z] INFO nightly-report
-Message: Posted: red, 4 sections flagged
-Exit code: 0
-Stderr: none
----
-[2026-03-21T03:31:44Z] INFO dashboard-update
-Message: Updated: red
-Exit code: 0
-Stderr: none
----
-[2026-03-21T07:07:40Z] INFO github-feed
-Message: Posted: 3 repo cards (git log fallback)
-Exit code: 0
-Stderr: none
----
-[2026-03-22T03:00:32Z] ERROR repo-man-backups
-Message: env file not found: /app/.env. Backup halted.
-Exit code: 1
-Stderr: none
----
-[2026-03-22T03:30:28Z] ERROR ops-nightly
-Message: key-drift-check.sh: env file not found
-Exit code: 0
-Stderr: none
----
-[2026-03-23T03:01:03Z] ERROR repo-man-backups
-Message: env file not found (/app/.env). Nightly backup aborted.
-Exit code: 0
-Stderr: none
----
-[2026-03-24T03:00:35Z] ERROR repo-man-backups
-Message: key-drift-check.sh failed
-Exit code: 0
-Stderr: none
----
-[2026-03-24T03:00:36Z] ERROR repo-man-backups
-Message: ws-backup.sh failed
-Exit code: 0
-Stderr: none
----
-[2026-03-24T03:00:36Z] ERROR repo-man-backups
-Message: env-backup.sh failed
-Exit code: 0
-Stderr: none
----
-[2026-03-24T03:00:37Z] ERROR repo-man-backups
-Message: skills-backup.sh failed
-Exit code: 0
-Stderr: none
----
-[2026-03-24T03:00:37Z] ERROR repo-man-backups
-Message: repo-health.sh failed
-Exit code: 0
-Stderr: none
----
-[2026-03-24T03:01:04Z] FATAL repo-man-backups
-Message: Nightly backup aborted: /app/.env missing. Infrastructure at risk.
-Exit code: 0
-Stderr: none
----
-[2026-03-25T03:00:11Z] ERROR repo-man-backups
-Message: key-drift-check.sh failed: env file not found (/app/.env)
-Exit code: 0
-Stderr: none
----
-[2026-03-25T03:32:33Z] ERROR ops-nightly
-Message: Script dashboard-update.sh not found
-Exit code: 0
-Stderr: none
----
-[2026-03-25T03:32:41Z] ERROR ops-nightly
-Message: Script changelog-post.sh not found
-Exit code: 0
-Stderr: none
----
-[2026-03-25T03:32:48Z] ERROR ops-nightly
-Message: Script github-feed.sh not found
-Exit code: 0
-Stderr: none
----
-[2026-03-26T03:00:16Z] ERROR repo-man-backups
-Message: key-drift-check.sh failed: env file not found (/app/.env)
-Exit code: 0
-Stderr: none
----
-[2026-03-26T03:00:34Z] WARN repo-man-backups
-Message: ws-backup.sh: commit succeeded but push failed
-Exit code: 0
-Stderr: none
----
-[2026-03-26T03:00:42Z] ERROR repo-man-backups
-Message: env-backup.sh failed: env file not found (/app/.env)
-Exit code: 0
-Stderr: none
----
-[2026-03-26T03:00:54Z] WARN repo-man-backups
-Message: skills-backup.sh: commit succeeded but push failed
-Exit code: 0
-Stderr: none
----
-[2026-03-26T03:01:09Z] ERROR repo-man-backups
-Message: repo-health.sh: all repos unreachable, secrets inventory failed (missing .env)
-Exit code: 0
-Stderr: none
----
-[2026-03-26T03:32:43Z] INFO nightly-report
-Message: Posted: yellow, 6 sections flagged (3 missing, 2 warnings, 1 ok)
-Exit code: 0
-Stderr: none
----
-[2026-03-26T03:34:40Z] ERROR ops-nightly
-Message: Nightly run completed with critical failures: missing .env file, 3 repos unreachable, 60 recent cron failures, 6 failed messages in delivery queue.
-Exit code: 0
-Stderr: none
----
-[2026-03-27T03:00:20Z] ERROR repo-man-backups
-Message: Key drift check failed: /app/.env not found. Aborting backup run.
-Exit code: 0
-Stderr: none
----
-[2026-03-28T03:00:05Z] ERROR repo-man-backups
-Message: key-drift-check.sh failed: env file not found at /app/.env
-Exit code: 1
-Stderr: env file not found
----
-[2026-03-28T03:00:14Z] ERROR repo-man-backups
-Message: ws-backup.sh failed: push failed to Supernor/openclaw-workspace
-Exit code: 1
-Stderr: push failed
----
-[2026-03-28T03:00:24Z] ERROR repo-man-backups
-Message: env-backup.sh failed: env file not found
-Exit code: 1
-Stderr: env file not found
----
-[2026-03-28T03:00:34Z] ERROR repo-man-backups
-Message: skills-backup.sh failed: push failed to Supernor/openclaw-skills
-Exit code: 1
-Stderr: push failed
----
-[2026-03-28T03:31:05Z] ERROR ops-nightly
-Message: Nightly run detected failures: backup-results errors=4 warnings=1; key-drift env file missing; repo-health repos unreachable; log-audit warnings cron_failures=64 delivery_failed=6
-Exit code: 0
-Stderr: none
----
-[2026-03-29T03:00:12Z] ERROR repo-man-backups
-Message: Workspace backup failed: git user identity not configured - fatal: unable to auto-detect email address (got 'node@c59125dfa68a.(none)')
-Exit code: 0
-Stderr: none
----
-[2026-03-29T03:00:16Z] ERROR repo-man-backups
-Message: Environment backup failed: .env file not found at /app/.env
-Exit code: 0
-Stderr: none
----
-[2026-03-29T03:00:26Z] ERROR repo-man-backups
-Message: Skills backup failed: git user identity not configured - fatal: unable to auto-detect email address (got 'node@c59125dfa68a.(none)')
-Exit code: 0
-Stderr: none
----
-[2026-03-29T03:30:44Z] ERROR ops-nightly
-Message: github-feed skill not found in workspace-spec-ops/skills; unable to execute step 6 automatically
-Exit code: 0
-Stderr: none
----
-[2026-03-30T03:31:34Z] ERROR ops-nightly
-Message: backup-results indicate failures (4 errors, 1 warn): key-drift/env-backup missing /app/.env; ws-backup/skills-backup git identity not configured
-Exit code: 0
-Stderr: none
----
-[2026-03-30T03:31:35Z] ERROR ops-nightly
-Message: github-feed skill missing in workspace-spec-ops/skills; step 6 could not execute
-Exit code: 0
-Stderr: none
----
-[2026-03-31T03:01:11Z] ERROR repo-man-backups
-Message: env-backup.sh failed - Missing/invalid .env and provider keys
-Exit code: 0
-Stderr: none
----
-[2026-03-31T03:31:10Z] ERROR ops-nightly
-Message: Nightly run failures detected: env-backup ERROR (providers missing); repo-health unreachable repos/secrets mismatch; github-feed skill not found in workspace skills.
-Exit code: 0
-Stderr: none
----
-[2026-04-01T03:00:12Z] ERROR repo-man-backups
-Message: Commit succeeded but push failed for ws-backup.sh
-Exit code: 0
-Stderr: none
----
-[2026-04-01T03:30:49Z] ERROR ops-nightly
-Message: Nightly run detected failures: backup/env export error, repo reachability errors, and log-audit warnings (cron failures, failed delivery queue).
-Exit code: 0
-Stderr: none
----
-[2026-04-01T03:30:50Z] ERROR ops-nightly
-Message: github-feed skill not found at /home/node/.openclaw/workspace-spec-ops/skills/github-feed/SKILL.md
-Exit code: 0
-Stderr: none
----
-[2026-04-02T03:00:28Z] ERROR repo-man-backups
-Message: Nightly backup run initiated at 2026-04-02 03:00 UTC
-Exit code: 1. key-drift-check.sh failed with exit code 1
-Stderr: 2. ws-backup.sh failed: Commit succeeded but push failed
----
-[2026-04-02T03:31:29Z] ERROR ops-nightly
-Message: github-feed failed: gh CLI not installed on host
-Exit code: 0
-Stderr: none
----
-[2026-04-02T03:31:30Z] ERROR ops-nightly
-Message: backup-results indicates partial failure (3 errors, 1 warning)
-Exit code: 0
-Stderr: none
----
 [2026-04-03T03:00:32Z] ERROR repo-man-backups
 Message: Nightly backup failed at script: /home/node/.openclaw/scripts/key-drift-check.sh\n
 Exit code: 1
@@ -480,6 +170,61 @@ Stderr: none
 ---
 [2026-04-14T03:00:37Z] ERROR repo-man-backups
 Message: Nightly backup run repo-man-nightly-hde96n01: env-backup.sh failed - env file not found
+Exit code: 0
+Stderr: none
+---
+[2026-04-15T03:00:28Z] ERROR repo-man-backups
+Message: key-drift-check.sh failed: .env file not found at /app/.env
+Exit code: EXIT_CODE_1
+Stderr: none
+---
+[2026-04-15T03:00:28Z] ERROR repo-man-backups
+Message: ws-backup.sh failed: Commit succeeded but push failed - check git push permissions or remote URL
+Exit code: EXIT_CODE_2
+Stderr: none
+---
+[2026-04-15T03:00:28Z] ERROR repo-man-backups
+Message: env-backup.sh failed: .env template file not found
+Exit code: EXIT_CODE_3
+Stderr: none
+---
+[2026-04-15T03:00:28Z] ERROR repo-man-backups
+Message: skills-backup.sh failed: Push failed - check git push permissions or remote URL
+Exit code: EXIT_CODE_4
+Stderr: none
+---
+[2026-04-15T03:00:28Z] WARN repo-man-backups
+Message: repo-health.sh completed with warnings: repos not reachable (expected initialization state after clone)
+Exit code: EXIT_CODE_5
+Stderr: none
+---
+[2026-04-15T03:32:59Z] ERROR ops-nightly
+Message: Discord components send failed; falling back to plain messages
+Exit code: 0
+Stderr: none
+---
+[2026-04-15T03:34:16Z] INFO nightly-report
+Message: Posted: red, 4 sections flagged
+Exit code: 0
+Stderr: none
+---
+[2026-04-15T03:34:16Z] INFO dashboard-update
+Message: Updated: red
+Exit code: 0
+Stderr: none
+---
+[2026-04-15T03:34:16Z] INFO changelog-post
+Message: Posted: none (no new sections past cursor 2026-03-03)
+Exit code: 0
+Stderr: none
+---
+[2026-04-15T03:34:16Z] INFO github-feed
+Message: Posted: 10 commits, 0 issues, 0 tags
+Exit code: 0
+Stderr: none
+---
+[2026-04-15T03:34:19Z] ERROR ops-nightly
+Message: github-feed: gh CLI not installed; used GitHub REST API fallback
 Exit code: 0
 Stderr: none
 ---

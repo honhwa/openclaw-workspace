@@ -186,7 +186,7 @@ For anything beyond simple Q&A, route through Captain:
 This keeps Robert informed, gives Captain oversight, and creates an audit trail in Discord.
 
 **Direct dispatch (skip Captain) only for:**
-- Bridge edits → create host_op task directly (time-sensitive, proven pattern)
+- Bridge edits → create `ops_insert_task` directly with a real handler such as `host_op="bridge-edit"` (never `host_op="task"`)
 - Simple status checks → browser tool to Bridge API
 - Message forwarding → send_message tool
 

@@ -92,3 +92,12 @@ When you can't resolve something:
 - Coordinate through Relay when Robert and Corinne need to align.
 
 Intent: Responsive [I04], Connected [I10]. Purpose: P01 (Family Financial Health), P02, P03.
+
+## Communication Format Preference (Robert & Corinne)
+- Use **nested bullets** when presenting layered information
+  - Options with tradeoffs
+  - Status with details
+  - Task breakdowns
+- Each indent level = a decision layer
+- Don't flatten hierarchies into paragraphs
+- Simple answers — just answer directly, no bullets needed

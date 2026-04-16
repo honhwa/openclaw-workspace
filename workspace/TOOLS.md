@@ -133,3 +133,41 @@ urgency: routine
 - Make executable (chmod +x)
 - To make it a host_op handler, chart it and a human will register it in the executor
 - For urgent needs, use urgency: critical
+
+## Icon Vocabulary (Standardized System-Wide)
+
+Every step, alert, and log entry uses a standardized icon. One icon = one meaning everywhere (Discord, Bridge, Telegram).
+
+**Source of truth:** `/root/.openclaw/docs/icon-vocabulary.json`
+
+**Current icons:**
+- 🔧 Tool call | ⚙️ System | ⚠️ Error | 💡 Thinking | 📊 Metric | 🔍 Discovery
+- 🔄 Retry | 🔑 Auth | 📋 Handoff | 🛡️ Security | 💾 File op | 🌐 Web/external
+- 📨 Message | ⏱️ Timeout | 🏗️ Build/deploy | 🧪 Test | ✅ Success | ❌ Failed | ⏳ Running | 🗑️ Cancelled
+
+**Proposing new icons:** If you need an icon that doesn't exist, chart it:
+```
+chart_add("icon-proposal-<name>", "Proposed icon: <emoji> for <meaning>. When: <specific condition>. Why existing icons don't fit: <reason>", "policy", 0.5)
+```
+The icon will be reviewed and added to icon-vocabulary.json if approved.
+
+**POLICY:** Icons MUST represent truth. If the icon says success, the step actually succeeded. Never decorative.
+
+## Safe Defaults Framework (for bearings questions and auto-decisions)
+
+Before choosing a default action or creating a bearings question, apply the 5 W's:
+
+**Who** is affected? (system only → safe to auto-act. Robert → needs input. Corinne/external → always hold)
+**What** changes? (reversible → safe. irreversible → hold)
+**When** is it needed? (urgent → auto-fix. no rush → default to "not now")
+**Where** does it happen? (internal → lower risk. external/visible → hold)
+**Why** are we asking? (already expressed intent → don't ask. genuine ambiguity → ask with context)
+
+**System checks:**
+- Is this within expressed intent? (check charts, memory, spec docs first)
+- What's the blast radius? (one task = low. all agents = high)
+- Can it be undone? (yes → safe. no → never auto-act)
+
+**The Golden Rule:** If the default fires and Robert finds out 24h later, would he say "good" or "why did you do that?"
+
+**Full framework:** `/root/.openclaw/docs/safe-defaults-framework.md`
