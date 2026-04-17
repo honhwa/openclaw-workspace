@@ -228,3 +228,33 @@ Message: github-feed: gh CLI not installed; used GitHub REST API fallback
 Exit code: 0
 Stderr: none
 ---
+[2026-04-16T03:00:29Z] ERROR repo-man-backups
+Message: Nightly backup run encountered multiple errors: (1) key-drift-check.sh failed with 'env file not found' (EXIT: 1), (2) ws-backup.sh committed but push failed, (3) env-backup.sh failed with 'env file not found' (EXIT: 1). Script skills-backup.sh passed with no changes. repo-health.sh showed repo reachability issues and secret count mismatch (-1 vs expected 9). Results written to /home/node/.openclaw/cron/runs/backup-results.json
+Exit code: 0
+Stderr: none
+---
+[2026-04-16T03:32:14Z] ERROR ops-nightly
+Message: github-feed failed: gh CLI not found in runtime (cannot fetch repo activity)
+Exit code: 0
+Stderr: none
+---
+[2026-04-16T03:32:14Z] ERROR ops-nightly
+Message: nightly detected failures: key drift/env backup/ws backup/repo health/log warnings
+Exit code: 0
+Stderr: none
+---
+[2026-04-16T03:32:29Z] INFO nightly-report
+Message: Posted: red, 4 sections flagged
+Exit code: 0
+Stderr: none
+---
+[2026-04-16T03:32:29Z] INFO dashboard-update
+Message: Updated: red
+Exit code: 0
+Stderr: none
+---
+[2026-04-16T03:32:29Z] INFO changelog-post
+Message: Posted: none (no new sections past cursor 2026-03-03)
+Exit code: 0
+Stderr: none
+---
