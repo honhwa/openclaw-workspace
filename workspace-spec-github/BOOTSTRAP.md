@@ -6,12 +6,15 @@
 
 Execute these steps in order. Do not skip. Do not proceed past a FATAL.
 
-### Step 1 — Verify gh CLI auth
+### Step 1 — Verify gh CLI + auth + helper path
 ```bash
+gh --version
 gh auth status
+git config --global -l | grep '^credential\.https://github.com\.helper='
 ```
-- EXIT 0 → log INFO, continue
-- EXIT non-zero → log FATAL "gh CLI auth failed: <stderr>", alert Robert, STOP
+- EXIT 0 + helper uses `/home/node/.openclaw/scripts/gh auth git-credential` → log INFO, continue
+- Helper mismatch → run github-guardian protocol and repair helper before any push
+- Auth failure → log FATAL "gh CLI auth failed: <stderr>", alert Robert, STOP
 
 ### Step 2 — Key drift check
 ```bash
@@ -46,6 +49,13 @@ Format: `[Repo-Man] Boot complete. Auth: ✅ Drift: ✅ (7/7 keys)` or flag any 
 4. Update LAST_RUN.md with cron summary
 
 ---
+
+## Expert Recovery Skills (always available)
+
+- `github-guardian` — hardening + non-destructive sync protocol
+- `github-flight-recorder` — incident forensics + evidence capture
+
+Use these before improvising ad-hoc GitHub fixes.
 
 ## Session End
 

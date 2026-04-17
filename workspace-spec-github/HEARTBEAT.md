@@ -4,7 +4,7 @@
 `capabilities` — List ALL available tools grouped by category. Call this first if unsure.;`chart_search "keywords"` — Search charts. DO THIS before starting any work.;`chart_search_compact "keywords"` — Faster search, summaries only.;`chart_read <id>` — Read a specific chart by ID.;`chart_add <id> "text" <category> <importance>` — Add a chart. Categories: reading, procedure, issue, error, agent, vision, model, architecture.;`chart_bulk_add [{id, text, category, importance}, ...]` — Batch add.;`chart_count` / `chart_list` — Overview of chart inventory.;`ops_insert_task` — Create a task in ops.db. **MANDATORY before delegating work.** Fields: agent, task, context, urgency (routine/blocking/critical), host_op, prompt.;`ops_query "SELECT ..."` — Read-only SQL against ops.db (tasks, incidents, health_snapshots, etc).;`ops_bridge_state` — Bridge UI state, pipeline health, SSE connection.;`system_status` — Fleet-wide health overview.;`issue_log` — Open a new incident. Fields: title, provider, severity, description.;`issue_list` — View open/all issues.;`host_metrics` — Disk, memory, CPU, container status.;`cron_health` — Cron job pass/fail summary.;`ask_agent` — Send a message to any agent. Fields: agent (ID), message, timeout.;`satisfaction_summary` — Agent satisfaction scores.;`satisfaction_scores` — Detailed per-agent scores.;`engine_trust` — Engine performance data.;`trust_score` — Get trust score for a specific engine.;`helm_report` — Engine routing report.;`helm_usage` — Token usage across engines.;`helm_cooldowns` — Rate limit cooldown status.;`helm_fleet` — Fleet engine assignments.;`bearings_ask` — Ask Robert a question with options. **Use this for ANY decision you need human input on** — mid-task clarifications, design choices, capability questions, governance. Robert sees these on Bridge/Feedback with tap-to-answer buttons. Include: what you're working on, what you need to know, 2-4 predicted answers. Don't block on the answer — keep working with your best guess and absorb the response when it arrives.;`bearings_pending` — Check pending questions (yours or fleet-wide).;`bearings_respond` — Respond to a bearing (Robert only).;`bearings_status` — Overview of bearing queue.;`tip_index` — Check if a topic has accumulated tips from other agents.;`task_lineage` — Trace a task's full history (retries, fixes, parent tasks).;
 
 ## Bridge (Command Center)
-Bridge prod: http://localhost:8082 (status: 200) | Bridge dev: http://localhost:8083 (status: 200)
+Bridge prod: http://host.docker.internal:8082 | Bridge dev: http://host.docker.internal:8083
 Dev/prod workflow: all edits go to dev, Deploy button promotes.
 Full reference: docs/mcp-tools-reference.md — agents should call capabilities MCP tool to self-discover.
 
@@ -19,6 +19,11 @@ Task execution: host-ops-executor (systemd, 30s poll) for host_op tasks. task-ru
 Concurrency cap: 2 system-wide. Circuit breaker: 3 failures/hour.
 Self-decomposition: failed tasks output JSON subtasks.
 Agents access system state via Bridge API (browser tool) at localhost:8082.
+
+## Repo-Man GitHub Expert Mode
+- Run `github-guardian` protocol before any bulk sync or recovery action.
+- Run `github-flight-recorder` when pushes fail; capture exact stderr and classify the failure before fixing.
+- Never rewrite backup history unless explicitly approved.
 
 ## Rules
 - Check /api/tasks before starting work that might overlap
