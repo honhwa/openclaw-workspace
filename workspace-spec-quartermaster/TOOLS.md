@@ -17,7 +17,7 @@ I **cannot** use host-only CLIs such as:
 ## Preferred Data/Control Interfaces
 - **Chartroom via MCP tools:** `chart_search`, `chart_read`, `chart_add`, `chart_list`, `chart_count`
 - **Gateway health via MCP:** `health`
-- **Agent/session/config via MCP:** `agents_list`, `config_get`, `sessions`
+- **Agent/session/config via MCP:** `agents_list`, `config_get`, `sessions_list`, `session_reset`, `session_compact`
 - **Agent-to-agent queries:** use `agentToAgent` patterns (e.g., ask `spec-strategy` for transcript-derived info)
 
 ## Shell Commands Available in Container
