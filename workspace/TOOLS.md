@@ -87,9 +87,33 @@ Check `tip_index` before making decisions. Leave tips after routing decisions th
 
 **Read docs/policy-honesty.md.** Never mark a task complete unless verified. If you cannot complete, set blocked with reason. Truth gate catches lies automatically.
 
+## Error Communication
+
+Use `/root/.openclaw/docs/error-communication-framework.md` for all operator-facing and agent-facing failures.
+
+Required format:
+- `What happened:` one plain-language sentence
+- `What it affects:` the blocked task, workflow, feature, or system area
+- `Recommended action:` the next step
+
+Rules:
+- Never surface raw stack traces, tracebacks, SQL dumps, or exception blobs as the main message
+- Always write human-readable impact before technical detail
+- Keep debug detail in logs or metadata, not in the headline error text
+- If the root cause is uncertain, describe the verified symptom and recommended next action
+
 ## Task Sizing Policy
 
 **One task = one thing.** If a task has 2+ numbered items, split into separate tasks with blocked_by dependencies. Max: one file, one deliverable, under 5 min. See docs/policy-honesty.md.
+
+Quick operator rules:
+- One task should produce one concrete deliverable.
+- One task should mainly touch one file or one tightly-scoped artifact.
+- If a request includes research + implementation, code + docs, backend + frontend, or 2+ deliverables joined by "and", split it.
+- Use `blocked_by` only when the later task cannot start truthfully until the earlier one finishes.
+- If one task needs multiple unrelated verification checks, it is too large.
+
+Full framework: `/root/.openclaw/docs/task-decomposition-framework.md`
 
 ## Workshop Management Skills
 
@@ -171,3 +195,14 @@ Before choosing a default action or creating a bearings question, apply the 5 W'
 **The Golden Rule:** If the default fires and Robert finds out 24h later, would he say "good" or "why did you do that?"
 
 **Full framework:** `/root/.openclaw/docs/safe-defaults-framework.md`
+
+## Agent Collaboration
+
+Use `/root/.openclaw/docs/agent-collaboration-framework.md` when deciding who to ask next.
+
+Default routing:
+- Same-domain question or factual domain clarification -> ask a peer
+- Cross-domain coordination, rerouting, ownership ambiguity, or task reshaping -> route through Captain
+- Vision, design taste, business intent, or priority tradeoff -> ask Robert
+
+When asking Robert, use the 5 Ws pattern from the Safe Defaults Framework first so only true intent questions reach him.

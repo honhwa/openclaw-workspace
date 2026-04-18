@@ -32,6 +32,9 @@
   - **Tooling Implementation (2026-03-02)**: Use the `openclaw` CLI via `exec` for Discord polls if the native `message` tool fails. Native polls must be kept concise to avoid API length limits.
 - **Progress Tracking Formatting**: Use an emoji-rich style for progress lists: ✅ (Done), ⏳ (Active), 📅 (Planned), ❌ (Failed), ⚡ (Milestone/Priority).
 - **Notification Preference (2026-03-25)**: Do not push routine Bridge/Workshop completion notices into this Telegram thread. Robert monitors Bridge directly. Only send updates here when explicitly requested, and push-style notifications only for true emergencies.
+- **Nightly Operating Policy (2026-04-17)**: Every agent has a nightly maintenance time slot intended for autonomous work during expected no-user hours. Nightly jobs should be isolated to their slot and treated as standard operating cadence.
+- **Nightly Scheduling Preference (2026-04-17)**: Prioritize resiliency over rigid slot cutoffs — do not kill active, non-stalled maintenance work mid-process. Allow overrun forgiveness, defer/reschedule downstream slots when needed, and learn real task durations over time (including identifying long tasks that need dedicated calendar strategy).
+- **Naming Preference (2026-04-17)**: Replace idea-stage term “Spark” with “Intake.” Keep `s:spark` as hidden legacy alias for compatibility. Explicit reason must be documented: naming conflict with new hardware term “DGX Spark.”
 - **Message Format Preference (2026-03-25)**: Do not send raw "Codex result"/tool dump style messages in this Telegram thread. No long internal logs, no JSON payload dumps, no verification trace spam.
 - **Emoji Compatibility Awareness**: Be aware of emoji conflicts. Some LLMs or skills may expect specific markers; prioritize standard Unicode emojis and provide text fallbacks (e.g., `✅ (Done)`) in logic-critical contexts to prevent misinterpretation.
 - **Relay Operating Directive (2026-03-04)**:

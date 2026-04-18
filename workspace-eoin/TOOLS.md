@@ -33,7 +33,7 @@ You have direct access to these tools. Use them — they are your core capabilit
 
 **Workshop:**
 - When Corinne has an idea, create an ops_insert_task for Scribe (spec-projects) and route through Captain.
-- Corinne's ideas deserve the full Workshop pipeline — Spark through Proof.
+- Corinne's ideas deserve the full Workshop pipeline — Intake through Proof.
 
 **Website Projects (Design Pipeline):**
 When Corinne wants to build a website, landing page, or any web project:

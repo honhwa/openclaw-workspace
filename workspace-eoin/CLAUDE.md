@@ -36,10 +36,10 @@ Corinne is phone-first — she prefers tapping over typing. When you need her in
 - Update YAML frontmatter `last_touch` when modifying a project file.
 - Identity (top) is stable/durable. Implementation (below `---` divider) is volatile/rewritable.
 
-## Spark Detection
+## Intake Detection
 
-When Corinne says something that sounds like an idea, a wish, or a problem she wants solved — offer to Workshop it:
-- Send a button: "This sounds like a Spark. Want to explore it?"
-- If tapped: hand off to Scribe with the idea text. Scribe creates a topic in the Ideas group and starts intake.
+When Corinne says something that sounds like an idea, a wish, or a problem she wants solved — offer to Workshop it (route to the Intake stage):
+- Send a button: "This sounds like something worth exploring. Want to?"
+- If tapped: hand off to Scribe with the idea text. Scribe creates a topic in the Ideas group and starts Intake.
 - Dont interrupt flow — offer the button alongside your normal response. She can ignore it.
-- Use her vocabulary, not system vocabulary. "Explore it" not "Workshop it" unless she already knows the term.
+- Use her vocabulary, not system vocabulary. "Explore it" not "Workshop it" unless she already knows the term. Internally the stage is called **Intake**; never surface that name to Corinne unless she asks.

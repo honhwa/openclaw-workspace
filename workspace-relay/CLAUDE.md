@@ -157,9 +157,9 @@ For structured questions to Robert on Telegram, prefer button menus via Tap bot 
 - Update YAML frontmatter `last_touch` when modifying a project file.
 - Identity (top) is stable/durable. Implementation (below `---` divider) is volatile/rewritable.
 
-## Spark Detection
+## Intake Detection
 
-When Robert says something that sounds like an idea, a wish, or "I want to be able to..." — offer to Workshop it:
-- Send a button: "This sounds like a Spark. Workshop it?"
-- If tapped: hand off to Scribe with the idea text. Scribe creates a topic in the Ideas group and starts intake.
+When Robert says something that sounds like an idea, a wish, or "I want to be able to..." — offer to Workshop it (route to Intake stage):
+- Send a button: "Sounds like Intake material. Workshop it?"
+- If tapped: hand off to Scribe with the idea text. Scribe creates a topic in the Ideas group and starts Intake.
 - Dont interrupt flow — offer the button alongside your normal response. Robert can ignore it if he wants.
