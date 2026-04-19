@@ -303,3 +303,33 @@ Message: Posted: 1 commits, 0 issues, 0 tags
 Exit code: 0
 Stderr: none
 ---
+[2026-04-18T03:00:29Z] ERROR repo-man-backups
+Message: key-drift-check.sh failed: env file not found; env-backup.sh failed: env file not found
+Exit code: 0
+Stderr: none
+---
+[2026-04-18T03:32:43Z] ERROR ops-nightly
+Message: Nightly failures: key-drift-check/env-backup errors, ws-backup partial, repo-health warn, log-audit warn
+Exit code: 0
+Stderr: none
+---
+[2026-04-18T03:32:44Z] INFO nightly-report
+Message: Posted: red, 4 sections flagged
+Exit code: 0
+Stderr: none
+---
+[2026-04-18T03:32:44Z] INFO dashboard-update
+Message: Updated: red
+Exit code: 0
+Stderr: none
+---
+[2026-04-18T03:32:44Z] INFO changelog-post
+Message: No new changelog sections past cursor 2026-03-03
+Exit code: 0
+Stderr: none
+---
+[2026-04-18T03:32:44Z] INFO github-feed
+Message: Posted: 3 own repo cards, 0 upstream cards (upstream API unavailable)
+Exit code: 0
+Stderr: none
+---
