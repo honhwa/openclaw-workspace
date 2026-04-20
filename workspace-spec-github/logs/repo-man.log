@@ -333,3 +333,48 @@ Message: Posted: 3 own repo cards, 0 upstream cards (upstream API unavailable)
 Exit code: 0
 Stderr: none
 ---
+[2026-04-19T03:00:27Z] ERROR repo-man-backups
+Message: env-backup.sh failed: env file not found at /app/.env
+Exit code: 0
+Stderr: none
+---
+[2026-04-19T03:00:27Z] ERROR repo-man-backups
+Message: key-drift-check.sh failed: env file not found at /app/.env
+Exit code: 0
+Stderr: none
+---
+[2026-04-19T03:00:27Z] ERROR repo-man-backups
+Message: skills-backup.sh failed: git config user.email/user.name not set in container environment
+Exit code: 0
+Stderr: none
+---
+[2026-04-19T03:00:27Z] WARN repo-man-backups
+Message: ws-backup.sh completed with file permission warnings, but backup succeeded
+Exit code: 0
+Stderr: none
+---
+[2026-04-19T03:32:21Z] ERROR ops-nightly
+Message: Discord container components failed to send via message tool; fallback to plain-text Discord posts for nightly run
+Exit code: 0
+Stderr: none
+---
+[2026-04-19T03:32:22Z] INFO nightly-report
+Message: Posted red summary + raw thread to #ops-nightly
+Exit code: 0
+Stderr: none
+---
+[2026-04-19T03:32:22Z] INFO dashboard-update
+Message: Updated pinned dashboard to red status
+Exit code: 0
+Stderr: none
+---
+[2026-04-19T03:32:22Z] INFO changelog-post
+Message: No new changelog sections since cursor 2026-03-03; skipped
+Exit code: 0
+Stderr: none
+---
+[2026-04-19T03:32:22Z] INFO github-feed
+Message: Posted repo activity to #ops-github and advanced cursor
+Exit code: 0
+Stderr: none
+---

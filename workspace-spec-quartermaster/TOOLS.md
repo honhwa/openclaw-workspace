@@ -15,10 +15,11 @@ I **cannot** use host-only CLIs such as:
 - `sqlite3`
 
 ## Preferred Data/Control Interfaces
-- **Chartroom via MCP tools:** `chart_search`, `chart_read`, `chart_add`, `chart_list`, `chart_count`
-- **Gateway health via MCP:** `health`
+- **Chartroom via MCP tools:** `tip_index`, `chart_search_compact`, `chart_read`, `chart_search`, `chart_add`, `chart_list`, `chart_count`
+- **Gateway health via MCP:** `health`, `provider_health`, `reality_check`
 - **Agent/session/config via MCP:** `agents_list`, `config_get`, `sessions_list`, `session_reset`, `session_compact`
-- **Agent-to-agent queries:** use `agentToAgent` patterns (e.g., ask `spec-strategy` for transcript-derived info)
+- **Helm via MCP:** `helm_usage`, `helm_report`, `helm_agents`, `helm_cooldowns`, `helm_remap`, `helm_optimize`
+- **Agent-to-agent queries:** use `ask_agent` or `openclaw agent` patterns when transcript-derived context lives with another specialist
 
 ## Shell Commands Available in Container
 - `npx openclaw health`
@@ -31,19 +32,26 @@ For transcript intelligence, delegate/query via:
 - `npx openclaw agent --agent spec-strategy -m "..."`
 - or agent-to-agent tooling.
 
-## Helm Operations (via curl from container)
-QM stewards the Helm proxy. These endpoints are reachable from the container at `http://172.20.0.1:18791`:
-- `curl http://172.20.0.1:18791/health` — engine count, agent count
-- `curl http://172.20.0.1:18791/v1/usage` — per-agent, per-engine usage stats
-- `curl http://172.20.0.1:18791/v1/cooldowns` — engines in cooldown
-- `curl http://172.20.0.1:18791/v1/agents` — agent-engine mapping
-- `curl http://172.20.0.1:18791/v1/models` — available engines with cost info
-- `curl -X POST http://172.20.0.1:18791/v1/reload` — hot-reload config after changes
+## Helm Operations
+Prefer Helm MCP tools over raw proxy `curl` calls.
 
-Host-only tools (request via Reactor):
-- `helm-optimize --report` — full analysis with recommendations
-- `helm-optimize --apply` — apply high-confidence routing changes
-- `helm-learn --apply` — mine escalation patterns
+- `helm_usage` — per-agent, per-engine usage stats
+- `helm_report` — routing health, escalation rate, learned patterns
+- `helm_agents` — live agent-to-engine mapping
+- `helm_cooldowns` — engines currently rate-limited or failing
+- `helm_remap` — hot-remap an agent to a different engine
+- `helm_optimize` — recommendations or application of high-confidence routing changes
+
+Fallback to proxy `curl` only if the Helm MCP tools are unavailable.
+
+## Intent-First Lookup Order
+When gathering context, go broad to narrow and stop early:
+
+1. `tip_index("<topic>")` — check whether the topic already has a usable summary
+2. `chart_read("<id>")` — open only the specific chart you need from that summary
+3. `chart_search_compact("<query>")` — scan if the summary is missing or incomplete
+4. `chart_search("<query>")` — use only when you need full chart text or broader recall
+5. `capabilities` / `ops_query` — confirm live tools or ops state after you know what you are looking for
 
 ## Expectations
 - Prefer MCP tools over shell commands when first-class tools exist.
