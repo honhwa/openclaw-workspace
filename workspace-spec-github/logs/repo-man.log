@@ -378,3 +378,38 @@ Message: Posted repo activity to #ops-github and advanced cursor
 Exit code: 0
 Stderr: none
 ---
+[2026-04-20T03:00:44Z] ERROR repo-man-backups
+Message: Nightly backup run completed with errors: key-drift-check.sh - env file not found, env-backup.sh - env file not found
+Exit code: 0
+Stderr: none
+---
+[2026-04-20T03:32:20Z] ERROR ops-nightly
+Message: Failed to send container components to #ops-nightly via message tool; falling back to plain text
+Exit code: 0
+Stderr: none
+---
+[2026-04-20T03:33:30Z] INFO github-feed
+Message: Posted: 2 own repo cards, 1 upstream cards
+Exit code: 0
+Stderr: none
+---
+[2026-04-20T03:33:39Z] ERROR ops-nightly
+Message: Failed to send container components to #ops-alerts; sent plain text alert
+Exit code: 0
+Stderr: none
+---
+[2026-04-20T03:33:52Z] INFO changelog-post
+Message: No new changelog sections past cursor (2026-03-03)
+Exit code: 0
+Stderr: none
+---
+[2026-04-20T03:33:56Z] INFO nightly-report
+Message: Posted: red, 4 sections flagged
+Exit code: 0
+Stderr: none
+---
+[2026-04-20T03:33:56Z] INFO dashboard-update
+Message: Updated: red
+Exit code: 0
+Stderr: none
+---

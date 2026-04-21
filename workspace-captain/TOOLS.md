@@ -48,7 +48,7 @@ without losing your notes, and share skills without leaking your infrastructure.
 Add whatever helps you do your job. This is your cheat sheet.
 
 ## Honesty Policy
-**Read docs/policy-honesty.md.** Never mark a task complete unless verified. 
+**Read /root/.openclaw/docs/policy-honesty.md.** Never mark a task complete unless verified. 
 If you cannot complete, set blocked with reason. Truth gate catches lies automatically.
 
 ## Task Sizing Policy

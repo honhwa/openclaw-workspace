@@ -26,8 +26,12 @@ Primary tooling. All output structured JSON. Zero LLM tokens for execution.
 **Do NOT run gh directly in the container — use the host-side handler.**
 Create a task with `host_op: "github-cli"` and put the gh command in `prompt`:
 ```
-ops_insert_task(agent: "spec-github", task: "GitHub: list secrets",
-  meta: {"host_op": "github-cli", "prompt": "gh secret list --repo Supernor/openclaw-config"})
+ops_insert_task(
+  agent: "spec-github",
+  task: "GitHub: list secrets",
+  host_op: "github-cli",
+  prompt: "gh secret list --repo Supernor/openclaw-config"
+)
 ```
 
 | Field | Value |
@@ -102,8 +106,9 @@ Auth via `gh auth setup-git` credential helper.
 ## MCP Tools
 
 You have access to all fleet MCP tools. See `docs/mcp-tools-reference.md` for the full list.
-Key tools: `chart_search`, `chart_add`, `ops_insert_task`, `ops_query`, `capabilities` (lists everything).
-**Rule:** Search Chartroom before work. Create ops_insert_task before delegating. Chart discoveries immediately.
+Intent-first lookup order: `tip_index` -> `chart_read` -> `chart_search_compact` -> `chart_search` -> `capabilities`.
+Primary write/query tools: `chart_add`, `ops_insert_task`, `ops_query`.
+**Rule:** Search Chartroom before work. Create `ops_insert_task` with top-level `host_op` and `prompt` fields when dispatching host-side work. Chart discoveries immediately.
 
 ## Honesty Policy
 
