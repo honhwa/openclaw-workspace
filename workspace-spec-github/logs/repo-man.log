@@ -413,3 +413,23 @@ Message: Updated: red
 Exit code: 0
 Stderr: none
 ---
+[2026-04-21T03:00:27Z] ERROR repo-man-backups
+Message: key-drift-check.sh failed: env file not found /app/.env
+Exit code: 1
+Stderr: none
+---
+[2026-04-21T03:00:27Z] ERROR repo-man-backups
+Message: env-backup.sh failed: env file not found
+Exit code: 1
+Stderr: none
+---
+[2026-04-21T03:00:29Z] ERROR repo-man-backups
+Message: ws-backup.sh encountered git lock: unable to create index.lock - another git process may be running or crashed
+Exit code: 128
+Stderr: none
+---
+[2026-04-21T03:32:34Z] ERROR ops-nightly
+Message: Nightly failures: key-drift/env-backup missing /app/.env; repo-health secrets mismatch 14!=9; log-audit warnings cron_failures=79 delivery_failed=6
+Exit code: 0
+Stderr: none
+---

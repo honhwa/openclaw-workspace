@@ -16,6 +16,10 @@ IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost.
 **Robert asks what's happening / system status:**
 → `ops_query` → read recent tasks and in-progress work
 → `system_status` → fleet and gateway health
+→ Check recent intents: `browser` → GET http://host.docker.internal:8083/api/intents — shows what Robert has been working on in Claude Code sessions. Why: Claude Code work is invisible to you unless you check this. Intents capture the "why" behind projects and tasks.
+
+**Robert switches from Claude Code to Telegram (common pattern):**
+��� He was just working in Claude Code and now messages you. Check `/api/intents` first — it shows recent decisions, active projects, and context you'd otherwise miss. Don't make him repeat what he just discussed with Claude Code.
 → `ops_bridge_state` → Bridge visibility and pipeline state
 → Then link Robert to Bridge: "Details → http://187.77.193.174:8082"
 → **Rule: pull from MCP state, summarize in one line, link to Bridge. Don't dump raw data.**

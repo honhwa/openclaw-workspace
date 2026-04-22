@@ -8,11 +8,36 @@ Run this via browser tool to get everything at once:
 - `browser` → GET http://localhost:8082/api/performance (agent scores)
 - `browser` → GET http://localhost:8082/api/schedule (nightly slots, overruns)
 
-## Deep Links (for sending humans to specific sections)
+## UI Surfaces — use proper names, never generic "dashboard"
+There are 4 UI surfaces. When a task mentions "dashboard," identify which one FIRST.
+- **The Bridge** — Robert's command center, port 8082. Custom Flask PWA. (chart: bridge-architecture-v2)
+- **The Lounge** — Corinne's dashboard, port 8084. Same codebase, her data silo.
+- **Gateway UI** — OpenClaw built-in web interface, port 18789. Do NOT edit (compiled bundle).
+- **Dev API** — Internal agent/health endpoint, port 8083. Not for humans.
+- Full registry with constraints/restart/owner: `GET /api/surfaces` or `/root/.openclaw/docs/dashboard-registry.json`
+- Why: "dashboard" is ambiguous across 4 surfaces. Wrong target = wrong restart, wrong edits, wrong user affected.
+
+### Deep Links (for sending humans to specific sections)
 - Robert's Bridge: `http://187.77.193.174:8082/#SECTION`
 - Corinne's Lounge: `http://187.77.193.174:8084/#SECTION`
 - Sections: health, board, feedback, agents, learn, ops, activity, workshop, settings, systemmap
 - API helper: GET http://localhost:8082/api/deeplink?section=feedback&label=Check+feedback
+
+## Reactive Data — SQLite triggers handle state reactions (read policy first)
+- ops.db has 13 triggers on intents, tasks, and handoff_scores tables
+- All state changes auto-log to `intent_audit` table (the change feed)
+- Bridge Live Pulse reads this feed via SSE — shows WHAT changed in real time
+- **Before writing a script to react to a state change, check if a trigger already handles it**
+- Full policy + trigger inventory: `/root/.openclaw/docs/reactive-data-policy.md`
+- Why: zero tokens, zero latency, zero maintenance. The database IS the event bus.
+
+## Bridge Restart Procedure (CRITICAL — follow exactly)
+Why: manual restart has broken Robert's access 3+ times by losing the multi-port env var.
+- **ALWAYS:** `systemctl restart openclaw-bridge-dev`
+- **NEVER:** manually kill the process and nohup. This loses the BRIDGE_PORTS env var.
+- The systemd service sets `BRIDGE_PORTS=8082,8083,8084` (Robert=8082, API=8083, Corinne=8084). Manual restart defaults to 8083 only, breaking Robert's external access.
+- If service file changed: `systemctl daemon-reload` first, then restart.
+- If port conflict after a bad restart: `pkill -f "python3 dashboard-api.py"`, wait 2s, then `systemctl restart openclaw-bridge-dev`.
 
 Combine into a concise report:
 1. Overall status (operational/degraded/incident)

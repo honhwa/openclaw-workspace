@@ -62,7 +62,7 @@ When gathering context, go broad to narrow and stop early:
 
 You have access to all fleet MCP tools. See `docs/mcp-tools-reference.md` for the full list.
 Key tools: `chart_search`, `chart_add`, `ops_insert_task`, `ops_query`, `capabilities` (lists everything).
-Before significant work, check engine health: run pool-status or system-self-test via ops_insert_task.
+Before significant work, check engine health with `ops_query`, for example: `SELECT engine, pool, capacity - (SELECT COUNT(*) FROM engine_usage WHERE engine_usage.engine = engine_fuel.engine AND engine_usage.pool IS engine_fuel.pool AND ts > datetime('now','-7 days')) AS remaining FROM engine_fuel WHERE engine='codex'`.
 **Rule:** Search Chartroom before work. Create ops_insert_task before delegating. Chart discoveries immediately.
 
 ## Honesty Policy
