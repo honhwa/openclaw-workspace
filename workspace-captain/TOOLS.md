@@ -8,9 +8,9 @@ IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost.
 |------|--------|
 | `ops_insert_task` | Create tasks in ops.db for ops.db tasks like screenshots or host-side execution |
 | `tip_index` | Check whether a topic already has summarized tips before deeper Chartroom reads |
-| `chart_search` | Search Chartroom for context and operational insights after `tip_index` when you need more detail |
+| `chart_search` | Use targeted semantic search when you already need full chart text, usually after `tip_index` and `chart_search_compact` |
 | `chart_add` | Add Chartroom entries for new operational context |
-| `chart_search_compact` | Faster Chartroom search with summaries |
+| `chart_search_compact` | Preferred follow-up to `tip_index` for broad Chartroom scanning before reading full charts |
 | `system_status` | Fleet health: Gateway, disk, memory, Ollama |
 | `ops_query` | Read-only SQL against ops.db (tasks, incidents, health_snapshots) |
 | `ops_bridge_state` | Check Bridge UI state and pipeline health |

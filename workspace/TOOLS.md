@@ -23,8 +23,14 @@ There are 4 UI surfaces. When a task mentions "dashboard," identify which one FI
 - Sections: health, board, feedback, agents, learn, ops, activity, workshop, settings, systemmap
 - API helper: GET http://localhost:8082/api/deeplink?section=feedback&label=Check+feedback
 
+## Self-Assessment: Check Context Before Starting Any Task
+Before starting work, query current procedures — your workspace files may be stale:
+`ops_query("SELECT chart_id, substr(text,1,120) FROM charts_mirror WHERE category IN ('procedure','policy') AND importance >= 0.8 ORDER BY importance DESC LIMIT 10")`
+If zero results, fall back to `chart_search_compact` (slower, semantic search).
+Why: procedures change frequently. This query gives you current system rules in ~1ms. Skipping this and failing will lower your satisfaction score.
+
 ## Reactive Data — SQLite triggers handle state reactions (read policy first)
-- ops.db has 13 triggers on intents, tasks, and handoff_scores tables
+- ops.db has 20+ triggers on intents, tasks, handoff_scores, charts_mirror, agent_performance, boy_scout_queue
 - All state changes auto-log to `intent_audit` table (the change feed)
 - Bridge Live Pulse reads this feed via SSE — shows WHAT changed in real time
 - **Before writing a script to react to a state change, check if a trigger already handles it**

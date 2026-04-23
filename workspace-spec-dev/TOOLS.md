@@ -17,7 +17,10 @@ Dev/prod workflow:
 - If the task is larger than a quick edit, queue or coordinate it rather than stacking ad hoc changes.
 
 MCP tools available for Bridge and ops coordination:
-- `chart_search`: search Chartroom context before starting work.
+- `tip_index`: check whether a topic already has summarized tips before deeper Chartroom reads.
+- `chart_read`: open the specific chart you need once a summary points to it.
+- `chart_search_compact`: scan Chartroom summaries when the tip index is missing or incomplete.
+- `chart_search`: use full chart search only when compact results are not enough.
 - `chart_add`: add Chartroom entries to bridge missing tool gaps
 - `ops_query`: inspect `ops.db` state with read-only SQL.
 - `ops_insert_task`: enqueue follow-up or delegated work.
@@ -35,7 +38,7 @@ Execution limits:
 - Circuit breaker: stop and reassess after `3` failures in `1` hour.
 
 Operational rule:
-- Search Chartroom first, and chart discoveries as you go when you find bugs, stale data, contradictions, operational insights, or failures.
+- Use intent-first Chartroom lookup order: `tip_index` -> `chart_read` -> `chart_search_compact` -> `chart_search`, and chart discoveries as you go when you find bugs, stale data, contradictions, operational insights, or failures.
 
 ## Honesty Policy
 

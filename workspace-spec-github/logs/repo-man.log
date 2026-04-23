@@ -433,3 +433,38 @@ Message: Nightly failures: key-drift/env-backup missing /app/.env; repo-health s
 Exit code: 0
 Stderr: none
 ---
+[2026-04-22T03:00:51Z] ERROR repo-man-backups
+Message: Nightly backup run encountered errors: key-drift-check and env-backup scripts failed due to missing /app/.env file. Investigate missing env file and restore before next run.
+Exit code: 0
+Stderr: none
+---
+[2026-04-22T03:33:59Z] INFO nightly-report
+Message: Posted: red, 4 sections flagged
+Exit code: 0
+Stderr: none
+---
+[2026-04-22T03:33:59Z] INFO dashboard-update
+Message: Updated: red
+Exit code: 0
+Stderr: none
+---
+[2026-04-22T03:33:59Z] INFO github-feed
+Message: Posted: 3 own repo cards, 0 upstream cards
+Exit code: 0
+Stderr: none
+---
+[2026-04-22T03:33:59Z] INFO changelog-post
+Message: Posted: none (no new sections past cursor 2026-03-03)
+Exit code: 0
+Stderr: none
+---
+[2026-04-22T03:33:59Z] ERROR ops-nightly
+Message: Discord container components send failed; posted fallback plain text messages
+Exit code: 0
+Stderr: none
+---
+[2026-04-23T03:00:06Z] ERROR repo-man-backups
+Message: key-drift-check.sh failed: env file not found /app/.env (exit 1)
+Exit code: 0
+Stderr: none
+---
