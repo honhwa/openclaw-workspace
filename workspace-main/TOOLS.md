@@ -14,7 +14,7 @@ IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost.
 | `workspace_freshness` | File ages per agent workspace |
 | `issue_log` | File a new issue |
 | `issue_list` | List open issues |
-| `chart_search` | Search Chartroom for context |
+| `tip_index` | Check whether a topic already has curated tips before broader search |
 | `chart_add` | Add entries to Chartroom |
 | `chart_read` | Read Chartroom entries |
 | `chart_list` | List Chartroom entries |
@@ -30,7 +30,8 @@ IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost.
 | `ops_query` | Read-only SQL against ops.db (tasks, incidents, health_snapshots) |
 | `ops_bridge_state` | Check Bridge UI state and pipeline health |
 | `capabilities` | List all available MCP tools |
-| `chart_search_compact` | Faster search with summaries |
+| `chart_search_compact` | Scan Chartroom summaries after `tip_index` when you need drill-down |
+| `chart_search` | Use targeted full-text recall only after compact search is insufficient |
 
 ## Environment
 - Container: `openclaw-openclaw-gateway-1` (user: node)

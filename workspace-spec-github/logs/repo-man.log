@@ -468,3 +468,8 @@ Message: key-drift-check.sh failed: env file not found /app/.env (exit 1)
 Exit code: 0
 Stderr: none
 ---
+[2026-04-23T03:00:24Z] ERROR repo-man-backups
+Message: env-backup.sh failed: env file not found .env.template (exit 1)
+Exit code: 0
+Stderr: none
+---
