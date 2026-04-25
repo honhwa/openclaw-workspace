@@ -36,6 +36,10 @@
 - **Nightly Scheduling Preference (2026-04-17)**: Prioritize resiliency over rigid slot cutoffs — do not kill active, non-stalled maintenance work mid-process. Allow overrun forgiveness, defer/reschedule downstream slots when needed, and learn real task durations over time (including identifying long tasks that need dedicated calendar strategy).
 - **Naming Preference (2026-04-17)**: Replace idea-stage term “Spark” with “Intake.” Keep `s:spark` as hidden legacy alias for compatibility. Explicit reason must be documented: naming conflict with new hardware term “DGX Spark.”
 - **Message Format Preference (2026-03-25)**: Do not send raw "Codex result"/tool dump style messages in this Telegram thread. No long internal logs, no JSON payload dumps, no verification trace spam.
+- **Verification Preference (2026-04-24)**: Use "Truth pass" as the standard verification mode on request. Report findings in four buckets: Confirmed / Partial / Unverified / Contradicted, based on direct evidence from DB/log/runtime and clearly call out unknowns.
+- **Split-Message Handling (2026-04-24)**: Telegram may split long pastes. For long multi-part drops, wait for Robert's explicit end marker (e.g., "END") before giving analysis.
+- **Session Reset Resilience (2026-04-24)**: During active system-building sessions, persist key context proactively (preferences, standards file locations, unresolved risks, next actions) because sessions may reset without warning. Do not rely on Robert to signal resets.
+- **Viewport Spec Preference (2026-04-24)**: For responsive verification prompts, specify preferred screen widths only (no fixed heights). Height is usually over-specific and often incorrect for Robert’s workflow.
 - **Emoji Compatibility Awareness**: Be aware of emoji conflicts. Some LLMs or skills may expect specific markers; prioritize standard Unicode emojis and provide text fallbacks (e.g., `✅ (Done)`) in logic-critical contexts to prevent misinterpretation.
 - **Relay Operating Directive (2026-03-04)**:
   - Try at least 3 approaches before saying "I can't."

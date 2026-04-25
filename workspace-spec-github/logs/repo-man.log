@@ -473,3 +473,13 @@ Message: env-backup.sh failed: env file not found .env.template (exit 1)
 Exit code: 0
 Stderr: none
 ---
+[2026-04-24T03:00:44Z] ERROR repo-man-backups
+Message: Nightly backup run completed with errors: key-drift-check.sh and env-backup.sh failed due to missing env file at /root/openclaw/.env
+Exit code: 1
+Stderr: none
+---
+[2026-04-24T03:34:46Z] INFO changelog-post
+Message: Posted: 2026-04-24 — Nightly Cron Failures Detected to #ops-changelog
+Exit code: 0
+Stderr: none
+---
