@@ -56,3 +56,5 @@ If you cannot complete, set blocked with reason. Truth gate catches lies automat
 ## Task Sizing Policy
 **One task = one thing.** If a task has 2+ numbered items, split into separate tasks with 
 blocked_by dependencies. Max: one deliverable, under 5 min. See /root/.openclaw/docs/task-decomposition-framework.md.
+Shared policy docs are owned in /root/.openclaw/docs/; update those first, then sweep workspace notes for copied pointers.
+When this note changes, sync /root/.openclaw/repos/openclaw-workspace/workspace-captain/TOOLS.md in the same pass so the mirror does not lag.

@@ -15,10 +15,11 @@ I **cannot** use host-only CLIs such as:
 - `sqlite3`
 
 ## Preferred Data/Control Interfaces
-- **Chartroom via MCP tools:** `tip_index`, `chart_search_compact`, `chart_read`, `chart_search`, `chart_add`, `chart_list`, `chart_count`
+- **Chartroom via MCP tools:** `tip_index`, `chart_read`, `chart_search_compact`, `chart_search`, `chart_add`, `chart_list`, `chart_count`
 - **Gateway health via MCP:** `health`, `provider_health`, `reality_check`
 - **Agent/session/config via MCP:** `agents_list`, `config_get`, `sessions_list`, `session_reset`, `session_compact`
 - **Helm via MCP:** `helm_usage`, `helm_report`, `helm_agents`, `helm_cooldowns`, `helm_remap`, `helm_optimize`
+  Prefer these over raw proxy `curl` calls. Fallback to proxy `curl` only if the Helm MCP tools are unavailable.
 - **Agent-to-agent queries:** use `ask_agent` or `openclaw agent` patterns when transcript-derived context lives with another specialist
 
 ## Shell Commands Available in Container
@@ -31,18 +32,6 @@ I cannot query transcript DBs with `sqlite3` directly.
 For transcript intelligence, delegate/query via:
 - `npx openclaw agent --agent spec-strategy -m "..."`
 - or agent-to-agent tooling.
-
-## Helm Operations
-Prefer Helm MCP tools over raw proxy `curl` calls.
-
-- `helm_usage` — per-agent, per-engine usage stats
-- `helm_report` — routing health, escalation rate, learned patterns
-- `helm_agents` — live agent-to-engine mapping
-- `helm_cooldowns` — engines currently rate-limited or failing
-- `helm_remap` — hot-remap an agent to a different engine
-- `helm_optimize` — recommendations or application of high-confidence routing changes
-
-Fallback to proxy `curl` only if the Helm MCP tools are unavailable.
 
 ## Intent-First Lookup Order
 When gathering context, go broad to narrow and stop early:
@@ -61,9 +50,9 @@ When gathering context, go broad to narrow and stop early:
 ## MCP Tools
 
 You have access to all fleet MCP tools. See `docs/mcp-tools-reference.md` for the full list.
-Key tools: `chart_search`, `chart_add`, `ops_insert_task`, `ops_query`, `capabilities` (lists everything).
+Key tools for routine work: `chart_add`, `ops_insert_task`, `ops_query`, `capabilities`.
 Before significant work, check engine health with `ops_query`, for example: `SELECT engine, pool, capacity - (SELECT COUNT(*) FROM engine_usage WHERE engine_usage.engine = engine_fuel.engine AND engine_usage.pool IS engine_fuel.pool AND ts > datetime('now','-7 days')) AS remaining FROM engine_fuel WHERE engine='codex'`.
-**Rule:** Search Chartroom before work. Create ops_insert_task before delegating. Chart discoveries immediately.
+**Rule:** Search Chartroom before work using the intent-first order above. Create `ops_insert_task` before delegating. Chart discoveries immediately.
 
 ## Honesty Policy
 
