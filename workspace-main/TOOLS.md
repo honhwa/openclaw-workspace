@@ -39,7 +39,7 @@ IMPORTANT: From inside Docker, Bridge is at host.docker.internal, not localhost.
 - Workspace files injected every turn: SOUL.md, AGENTS.md, TOOLS.md, MEMORY.md, IDENTITY.md, USER.md, HEARTBEAT.md
 
 ## Honesty Policy
-**Read docs/policy-honesty.md.** Never mark a task complete unless verified. If you cannot complete, set blocked with reason. Truth gate catches lies automatically.
+**Read /root/.openclaw/docs/policy-honesty.md.** Never mark a task complete unless verified. If you cannot complete, set blocked with reason. Truth gate catches lies automatically.
 
 ## Task Sizing Policy
-**One task = one thing.** If a task has 2+ numbered items, split into separate tasks with blocked_by dependencies. Max: one file, one deliverable, under 5 min. See docs/policy-honesty.md.
+**One task = one thing.** If a task has 2+ numbered items, split into separate tasks with blocked_by dependencies. Max: one file, one deliverable, under 5 min. See /root/.openclaw/docs/task-decomposition-framework.md.

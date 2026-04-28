@@ -238,3 +238,43 @@ Message: key-drift-check.sh failed: env file not found at /root/openclaw/.env (e
 Exit code: 0
 Stderr: none
 ---
+[2026-04-27T03:00:45Z] ERROR repo-man-backups
+Message: env-backup.sh failed: env file not found (exit code 1)
+Exit code: 0
+Stderr: none
+---
+[2026-04-27T03:33:39Z] ERROR ops-nightly
+Message: key-drift-check.sh failed: /root/openclaw/.env missing
+Exit code: 0
+Stderr: none
+---
+[2026-04-27T03:33:40Z] ERROR ops-nightly
+Message: env-backup.sh failed: /root/openclaw/.env missing
+Exit code: 0
+Stderr: none
+---
+[2026-04-27T03:33:41Z] ERROR ops-nightly
+Message: dashboard pin edit failed: Unknown Message for messageId 1484756343343812689
+Exit code: 0
+Stderr: none
+---
+[2026-04-27T03:33:42Z] INFO nightly-report
+Message: Posted: red, 4 sections flagged
+Exit code: 0
+Stderr: none
+---
+[2026-04-27T03:33:42Z] INFO dashboard-update
+Message: Updated: red (new pinned message 1498165077680066711 due to stale pin id)
+Exit code: 0
+Stderr: none
+---
+[2026-04-27T03:33:42Z] INFO changelog-post
+Message: No new entries past cursor 2026-04-24
+Exit code: 0
+Stderr: none
+---
+[2026-04-27T03:33:42Z] INFO github-feed
+Message: Posted: 2 own repo cards, 0 upstream cards
+Exit code: 0
+Stderr: none
+---
