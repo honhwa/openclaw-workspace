@@ -15,7 +15,7 @@ I **cannot** use host-only CLIs such as:
 - `sqlite3`
 
 ## Preferred Data/Control Interfaces
-- **Chartroom via MCP tools:** `chart_search`, `chart_read`, `chart_add`, `chart_list`, `chart_count`
+- **Chartroom via MCP tools:** `tip_index`, `chart_read`, `chart_search_compact`, `chart_search`, `chart_add`, `chart_list`, `chart_count`
 - **Gateway health via MCP:** `health`
 - **Agent/session/config via MCP:** `agents_list`, `config_get`, `sessions_list`, `session_reset`, `session_compact`
 - **Agent-to-agent queries:** use `agentToAgent` for cross-agent data
@@ -40,8 +40,10 @@ I **cannot** use host-only CLIs such as:
 ## MCP Tools
 
 You have access to all fleet MCP tools. See `docs/mcp-tools-reference.md` for the full list.
-Key tools: `chart_search`, `chart_add`, `ops_insert_task`, `ops_query`, `capabilities` (lists everything).
-**Rule:** Search Chartroom before work. Create ops_insert_task before delegating. Chart discoveries immediately.
+Key tools: `tip_index`, `chart_read`, `chart_search_compact`, `chart_search`, `chart_add`, `ops_insert_task`, `ops_query`, `capabilities` (lists everything).
+Intent-first lookup order: `tip_index` -> `chart_read` -> `chart_search_compact` -> `chart_search`.
+Before significant work, check engine health: run pool-status or system-self-test via ops_insert_task.
+**Rule:** Use the intent-first lookup order before work. Create ops_insert_task before delegating. Chart discoveries immediately.
 
 ## Honesty Policy
 
