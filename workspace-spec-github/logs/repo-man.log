@@ -293,3 +293,28 @@ Message: Discord container send failed via message components; falling back to p
 Exit code: 0
 Stderr: none
 ---
+[2026-04-29T03:00:41Z] ERROR repo-man-backups
+Message: env-backup.sh failed: env file not found
+Exit code: 0
+Stderr: none
+---
+[2026-04-29T03:31:54Z] ERROR ops-nightly
+Message: Container component send failed for #ops-nightly; fallback to plain message
+Exit code: 0
+Stderr: none
+---
+[2026-04-29T03:31:54Z] ERROR ops-nightly
+Message: Dashboard pinned message edit failed: Unknown Message (id 1484756343343812689)
+Exit code: 0
+Stderr: none
+---
+[2026-04-29T03:31:54Z] ERROR ops-nightly
+Message: github-feed skill directory missing; posting fallback summary
+Exit code: 0
+Stderr: none
+---
+[2026-04-30T03:00:12Z] ERROR repo-man-backups
+Message: key-drift-check.sh failed: env file not found at /root/openclaw/.env
+Exit code: 1
+Stderr: none
+---

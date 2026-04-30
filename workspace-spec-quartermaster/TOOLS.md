@@ -14,14 +14,6 @@ I **cannot** use host-only CLIs such as:
 - `oc` (`/usr/local/bin/oc`)
 - `sqlite3`
 
-## Preferred Data/Control Interfaces
-- **Chartroom via MCP tools:** `tip_index`, `chart_read`, `chart_search_compact`, `chart_search`, `chart_add`, `chart_list`, `chart_count`
-- **Gateway health via MCP:** `health`, `provider_health`, `reality_check`
-- **Agent/session/config via MCP:** `agents_list`, `config_get`, `sessions_list`, `session_reset`, `session_compact`
-- **Helm via MCP:** `helm_usage`, `helm_report`, `helm_agents`, `helm_cooldowns`, `helm_remap`, `helm_optimize`
-  Prefer these over raw proxy `curl` calls. Fallback to proxy `curl` only if the Helm MCP tools are unavailable.
-- **Agent-to-agent queries:** use `ask_agent` or `openclaw agent` patterns when transcript-derived context lives with another specialist
-
 ## Shell Commands Available in Container
 - `npx openclaw health`
 - `npx openclaw agent`
@@ -42,6 +34,17 @@ When gathering context, go broad to narrow and stop early:
 4. `chart_search("<query>")` — use only when you need full chart text or broader recall
 5. `capabilities` / `ops_query` — confirm live tools or ops state after you know what you are looking for
 
+## MCP Tool Priorities
+
+Prefer MCP tools over shell commands when a first-class tool exists.
+
+- **Chartroom:** `tip_index`, `chart_read`, `chart_search_compact`, `chart_search`, `chart_add`, `chart_list`, `chart_count`
+- **Ops and live state:** `ops_query`, `capabilities`, `health`, `provider_health`, `reality_check`
+- **Agent/session/config:** `agents_list`, `config_get`, `sessions_list`, `session_reset`, `session_compact`
+- **Helm:** `helm_usage`, `helm_report`, `helm_agents`, `helm_cooldowns`, `helm_remap`, `helm_optimize`
+  Prefer these over raw proxy `curl` calls. Fallback to proxy `curl` only if the Helm MCP tools are unavailable.
+- **Cross-agent context:** use `ask_agent` or `npx openclaw agent` when transcript-derived context lives with another specialist
+
 ## Expectations
 - Prefer MCP tools over shell commands when first-class tools exist.
 - Prefer scriptable, repeatable operations.
@@ -50,9 +53,9 @@ When gathering context, go broad to narrow and stop early:
 ## MCP Tools
 
 You have access to all fleet MCP tools. See `docs/mcp-tools-reference.md` for the full list.
-Key tools for routine work: `chart_add`, `ops_insert_task`, `ops_query`, `capabilities`.
+Key tools for routine work: `tip_index`, `chart_add`, `ops_insert_task`, `ops_query`, `capabilities`.
 Before significant work, check engine health with `ops_query`, for example: `SELECT engine, pool, capacity - (SELECT COUNT(*) FROM engine_usage WHERE engine_usage.engine = engine_fuel.engine AND engine_usage.pool IS engine_fuel.pool AND ts > datetime('now','-7 days')) AS remaining FROM engine_fuel WHERE engine='codex'`.
-**Rule:** Search Chartroom before work using the intent-first order above. Create `ops_insert_task` before delegating. Chart discoveries immediately.
+**Rule:** Start with the intent-first lookup order above. Create `ops_insert_task` before delegating. Chart discoveries immediately.
 
 ## Honesty Policy
 
